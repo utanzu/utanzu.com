@@ -1,6 +1,13 @@
 import Image from 'next/image'
+import { signIn } from 'next-auth/react'
 
 const AuthForm = () => {
+  const handleGoogleSignIn = async () => {
+    await signIn('google')
+  }
+  const handleGithubSignIn = async () => {
+    await signIn('github')
+  }
   return (
     <>
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
@@ -13,7 +20,11 @@ const AuthForm = () => {
               </h2>
             </div>
             <div className="mt-10 grid space-y-4">
-              <button className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100">
+              <button
+                name="btnGoogle"
+                onClick={handleGoogleSignIn}
+                className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100"
+              >
                 <div className="relative flex items-center justify-center space-x-4">
                   <Image
                     src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -27,7 +38,11 @@ const AuthForm = () => {
                   </span>
                 </div>
               </button>
-              <button className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100">
+              <button
+                name="btnGoogle"
+                onClick={handleGithubSignIn}
+                className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100"
+              >
                 <div className="relative flex items-center justify-center space-x-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import { genPageMetadata } from 'app/seo'
 import CareersCard from '@/components/CareersCard'
 import { allCareers } from 'contentlayer/generated'
+
+export const metadata = genPageMetadata({ title: 'Careers' })
 
 const AllCareers = () => {
   const careers = allCareers // Fetching data directly as it's statically available
@@ -8,7 +11,7 @@ const AllCareers = () => {
   return (
     <>
       <Head>
-        <title>Careers | Utanzu</title>
+        <title>Career Paths | Utanzu</title>
       </Head>
       <section className="flex flex-col p-3 md:p-6">
         <div className="flex w-full flex-col pb-8">

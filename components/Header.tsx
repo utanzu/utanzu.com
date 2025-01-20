@@ -4,6 +4,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { NavOptions } from './NavOptions'
+import Avatar from './Avatar'
 
 const Header = () => {
   return (
@@ -31,6 +32,7 @@ const Header = () => {
       </div>
       <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
         <NavOptions />
+        <Avatar />
         <ThemeSwitch />
         <MobileNav />
       </div>

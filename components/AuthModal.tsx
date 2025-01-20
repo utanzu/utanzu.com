@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import AuthForm from './AuthForm'
 
-// ReactModal.setAppElement('app')
-
 type ModalProps = {
   isOpen: boolean
   onRequestClose: () => void

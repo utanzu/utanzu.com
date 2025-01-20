@@ -1,20 +1,7 @@
-'use client'
 import Link from '@/components/Link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import AuthModal from '../components/AuthModal'
 
 export default function Main() {
-  const [modalOpen, setModalOpen] = useState(false)
-
-  function closeModal() {
-    setModalOpen(false)
-  }
-
-  function OpenAuthModal() {
-    setModalOpen(true)
-  }
-
   return (
     <>
       <div className="mx-2 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
@@ -35,12 +22,12 @@ export default function Main() {
             Unlock your potential with a community that guides you through every step of your
             cybersecurity journey, from learning to earning.
           </h3>
-          <button
-            onClick={OpenAuthModal}
+          <Link
+            href="/careers"
             className="block rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
           >
-            Start learning - it&apos;s free
-          </button>
+            Get started - it&apos;s free
+          </Link>
         </div>
       </div>
       <div className="mx-2 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
@@ -79,7 +66,6 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <AuthModal isOpen={modalOpen} onRequestClose={closeModal} />
     </>
   )
 }
