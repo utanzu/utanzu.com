@@ -12,6 +12,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { Providers } from './providers'
+import NextBreadcrumb from '@/components/NextBreadcrumb'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -102,7 +103,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SectionContainer>
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
-                <main className="mb-auto">{children}</main>
+                <main className="mb-auto">
+                  <NextBreadcrumb
+                    homeElement={'Home'}
+                    separator={<span> | </span>}
+                    activeClasses="text-primary-500"
+                    containerClasses="flex py-2 bg-white dark:bg-gray-900"
+                    listClasses="hover:underline mx-2 font-bold text-sm"
+                    capitalizeLinks
+                  />
+                  {children}
+                </main>
               </SearchProvider>
               <Footer />
             </SectionContainer>
