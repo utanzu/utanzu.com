@@ -160,13 +160,26 @@ export const Careers = defineDocumentType(() => ({
     icon: { type: 'string', required: true },
     date: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
-    lastmod: { type: 'date' },
-    draft: { type: 'boolean' },
     summary: { type: 'string' },
-    images: { type: 'json' },
-    authors: { type: 'list', of: { type: 'string' } },
-    layout: { type: 'string' },
-    bibliography: { type: 'string' },
+    image: { type: 'string' },
+  },
+  computedFields,
+}))
+
+export const Courses = defineDocumentType(() => ({
+  name: 'Course',
+  filePathPattern: 'courses/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    image: { type: 'string', required: true },
+    level: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    topics: { type: 'list', of: { type: 'string' }, default: [] },
+    duration: { type: 'number', default: 0 },
+    summary: { type: 'string' },
     canonicalUrl: { type: 'string' },
   },
   computedFields,
@@ -174,7 +187,7 @@ export const Careers = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Careers],
+  documentTypes: [Blog, Authors, Careers, Courses],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -207,8 +220,10 @@ export default makeSource({
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
     const { allCareers } = await importData()
+    const { allCourses } = await importData()
     createTagCount(allBlogs)
     createTagCount(allCareers)
+    createTagCount(allCourses)
     createSearchIndex(allBlogs)
   },
 })
