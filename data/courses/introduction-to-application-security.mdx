@@ -3,69 +3,81 @@ title: 'Introduction to Application Security'
 category: 'Application Security'
 image: '/static/images/careers/introduction-to-application-security.jpg'
 level: 'Beginner'
-date: '2024-02-21'
-topics: ['OWASP Top 10', 'Common Threats and Vulnerabilities', 'DevSecOps']
-duration: 10
-summary: 'Introduction to securing of software and applications from vulnerabilities.'
+date: '2025-01-21'
+topics:
+  [
+    'Application Security Basics',
+    'Security Principles',
+    'Common Threats and Vulnerabilities',
+    'Secure Development Practices',
+    'Application Security Testing',
+  ]
+duration: 8
+summary: 'A foundational course that introduces the basic concepts of application security, common threats, and secure development practices.'
 ---
 
-## Overview of Application Security
+# Introduction to Application Security
 
-Application security refers to the measures and practices implemented throughout the lifecycle of an application to protect it from threats and vulnerabilities. It encompasses strategies for securing software from development to deployment and maintenance, ensuring the confidentiality, integrity, and availability of data.
+## Course Overview
 
-### Importance of Securing Applications
+This course provides a beginner-friendly introduction to application security. It covers fundamental concepts, common security threats, and best practices for securing applications during development.
 
-With the increasing reliance on digital platforms, securing applications is more critical than ever. A single vulnerability can lead to significant data breaches, financial losses, and damage to an organization's reputation. Ensuring robust application security protects users, data, and businesses from potential threats.
+## Course Structure
 
-## Common Threats and Vulnerabilities
+### Module 1: Understanding Application Security
 
-### 1. SQL Injection
+- **Lesson 1.1: What is Application Security?**
+  - Definition and importance
+  - Overview of the application security landscape
+- **Lesson 1.2: Key Security Principles**
+  - Confidentiality, Integrity, Availability
+  - Least privilege and defense in depth
 
-- `Description`: Attackers manipulate SQL queries to gain unauthorized access to databases.
-- `Impact`: Can lead to data breaches, data corruption, or loss.
-- `Prevention`: Use prepared statements and parameterized queries.
+### Module 2: Common Threats and Vulnerabilities
 
-### 2. Cross-Site Scripting (XSS)
+- **Lesson 2.1: Understanding Threats**
+  - Overview of common threats
+  - Examples of real-world attacks
+- **Lesson 2.2: Identifying Vulnerabilities**
+  - Common vulnerabilities in applications
+  - OWASP Top 10 overview
 
-- `Description`: Malicious scripts are injected into trusted websites.
-- `Impact`: Can steal sensitive data like cookies or session tokens.
-- `Prevention`: Implement input validation and output encoding.
+### Module 3: Secure Development Practices
 
-### 3. Cross-Site Request Forgery (CSRF)
+- **Lesson 3.1: Secure Coding Guidelines**
+  - Importance of secure coding
+  - Best practices and standards
+- **Lesson 3.2: Security by Design**
+  - Incorporating security in the SDLC
+  - Threat modeling and secure design principles
 
-- `Description`: Tricks users into executing unwanted actions on web applications where they are authenticated.
-- `Impact`: Unauthorized actions like changing user details or financial transactions.
-- `Prevention`: Use CSRF tokens and verify HTTP requests.
+### Module 4: Application Security Testing
 
-### 4. Broken Authentication
+- **Lesson 4.1: Types of Security Testing**
+  - Static Application Security Testing (SAST)
+  - Dynamic Application Security Testing (DAST)
+  - Penetration testing and code reviews
+- **Lesson 4.2: Implementing Security Testing**
+  - Tools and techniques for effective testing
+  - Continuous integration and automated testing
 
-- `Description`: Weak authentication mechanisms allow attackers to compromise user accounts.
-- `Impact`: Unauthorized access to sensitive data and functions.
-- `Prevention`: Implement multi-factor authentication (MFA) and secure password policies.
+### Module 5: Incident Response and Monitoring
 
-### 5. Sensitive Data Exposure
+- **Lesson 5.1: Incident Response Basics**
+  - Preparing for security incidents
+  - Incident response lifecycle
+- **Lesson 5.2: Monitoring and Logging**
+  - Importance of monitoring in security
+  - Best practices for logging and monitoring
 
-- `Description`: Inadequate protection of sensitive data in transit or storage.
-- `Impact`: Data breaches and non-compliance with regulations like GDPR.
-- `Prevention`: Use encryption for data at rest and in transit, and secure API endpoints.
+## Course Conclusion
 
-## Best Practices for Application Security
+- Summary of key concepts
+- Final assessment and certification details
+- Resources for further study
 
-1. Adopt a Security-First Mindset
-   Integrate security into every stage of the software development lifecycle (SDLC).
+## Resources
 
-2. Regular Security Testing
-   Perform regular vulnerability assessments, penetration testing, and code reviews.
-
-3. Implement Secure Coding Standards
-   Follow industry best practices and guidelines for secure coding.
-
-4. Continuous Monitoring and Incident Response
-   Monitor applications for unusual activity and have a response plan for security incidents.
-
-5. Educate and Train Developers
-   Regularly train developers on the latest security threats and secure development practices.
-
-## Conclusion
-
-Application security is a critical component of modern software development. By understanding common threats and implementing best practices, developers can create more secure applications, protecting both users and organizations from potential harm.
+- Recommended reading and tools
+- Community forums and support
+- Further learning opportunities and certifications
