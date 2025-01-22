@@ -93,7 +93,7 @@ const CourseSearch = ({ courses }) => {
           My Learning
         </Link>
       </div>
-      <div className="grid-cols-3 gap-x-6 gap-y-10 space-y-10 md:grid md:space-y-0">
+      <div className="grid-cols-4 gap-x-4 gap-y-10 space-y-10 md:grid md:space-y-0">
         {filteredCourses.map((d) => (
           <CoursesCard
             key={d.title}

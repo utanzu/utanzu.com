@@ -177,16 +177,29 @@ export const Courses = defineDocumentType(() => ({
     level: { type: 'string', required: true },
     date: { type: 'date', required: true },
     topics: { type: 'list', of: { type: 'string' }, default: [] },
-    duration: { type: 'number', default: 0 },
-    summary: { type: 'string' },
-    canonicalUrl: { type: 'string' },
+    summary: { type: 'string', required: true },
+  },
+  computedFields,
+}))
+
+export const Items = defineDocumentType(() => ({
+  name: 'Item',
+  filePathPattern: 'items/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    topic: { type: 'string', required: true },
+    course: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    duration: { type: 'number', required: true },
+    date: { type: 'date', required: true },
   },
   computedFields,
 }))
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Careers, Courses],
+  documentTypes: [Blog, Authors, Careers, Courses, Items],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -220,9 +233,11 @@ export default makeSource({
     const { allBlogs } = await importData()
     const { allCareers } = await importData()
     const { allCourses } = await importData()
+    const { allItems } = await importData()
     createTagCount(allBlogs)
     createTagCount(allCareers)
     createTagCount(allCourses)
+    createTagCount(allItems)
     createSearchIndex(allBlogs)
   },
 })

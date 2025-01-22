@@ -1,7 +1,6 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import type { Career } from 'contentlayer/generated'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import PageHeading from '@/components/PageHeading'
 import PageSection from '@/components/PageSection'
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
   content: CoreContent<Career>
 }
 
-export default function PageLayout({ children, content }: Props) {
+export default function CareerLayout({ children, content }: Props) {
   const { title = '', image = '', tags } = content
 
   return (

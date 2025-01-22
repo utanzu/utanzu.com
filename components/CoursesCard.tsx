@@ -20,16 +20,8 @@ const CoursesCard = ({ title, category, image, level, topics, duration, summary,
               {title}
             </h5>
           </Link>
-          <p className="mb-3 overflow-hidden text-ellipsis whitespace-nowrap">
-            <span className="text-sm font-semibold text-gray-800 dark:text-gray-300">Topics: </span>
-            {topics.map((t, index) => (
-              <span
-                key={index}
-                className="mr-2 text-xs font-normal text-gray-700 dark:text-gray-400"
-              >
-                {t.split(' ').join('_')}
-              </span>
-            ))}
+          <p className="mb-3 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-gray-900 dark:text-gray-200">
+            {summary}
           </p>
           <div className="mb-1 flex justify-between">
             <span className="text-xs font-medium text-primary-700 dark:text-white">Completion</span>

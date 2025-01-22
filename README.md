@@ -8,6 +8,7 @@ This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://gith
 
 To run a development environment locally, run:
 
+- `corepack enable` to run yarn
 - `yarn install` to install dependencies
 - `yarn dev` to run the local development version
 
