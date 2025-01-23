@@ -1,0 +1,7 @@
+Welcome to the first topic of our course on Application Security! In this session, we’ll dive into the basics of application security, its significance, and key concepts. 
+Let’s begin by answering the question: What is Application Security?
+
+Application security, often referred to as AppSec, encompasses the measures and practices designed to protect software applications from security threats. 
+It involves identifying, addressing, and preventing vulnerabilities to ensure that applications remain secure against unauthorized access, data breaches, and other cyber threats.
+
+In the next topic, we’ll explore why application security is so important and how it impacts the safety and reliability of modern software systems.

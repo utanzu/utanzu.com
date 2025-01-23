@@ -1,9 +1,11 @@
 // @ts-check
 const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
+const withMT = require('@material-tailwind/react/utils/withMT')
 
 /** @type {import("tailwindcss/types").Config } */
 
+//module.exports = withMT({
 module.exports = {
   content: [
     './node_modules/pliny/**/*.{js,ts,tsx}',

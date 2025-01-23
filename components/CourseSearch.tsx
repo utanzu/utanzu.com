@@ -22,12 +22,22 @@ const CourseSearch = ({ courses }) => {
 
     // Further filter by search term
     if (searchTerm) {
-      filtered = filtered.filter(
-        (course) =>
-          course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          course.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          course.topics.some((topic) => topic.toLowerCase().includes(searchTerm.toLowerCase()))
-      )
+      const lowerCaseSearchTerm = searchTerm.toLowerCase()
+
+      filtered = filtered.filter((course) => {
+        const matchesTitle = course.title.toLowerCase().includes(lowerCaseSearchTerm)
+        const matchesCategory = course.category.toLowerCase().includes(lowerCaseSearchTerm)
+
+        const matchesTopics = course.topics.some((topic) => {
+          const matchesTopicTitle = topic.title.toLowerCase().includes(lowerCaseSearchTerm)
+          const matchesSubtopics = topic.subtopics.some((subtopic) =>
+            subtopic.toLowerCase().includes(lowerCaseSearchTerm)
+          )
+          return matchesTopicTitle || matchesSubtopics
+        })
+
+        return matchesTitle || matchesCategory || matchesTopics
+      })
     }
 
     setFilteredCourses(filtered)
