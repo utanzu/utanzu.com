@@ -1,0 +1,9 @@
+The Principle of Least Privilege is an important concept in application security. It means giving users or systems only the access they need to do their job - no more, no less. This helps protect sensitive information and reduces security risks.
+
+For example, a junior employee might need access to specific files but shouldn’t be able to edit sensitive databases. On the other hand, a database administrator may need special access to manage databases but doesn’t need to view payroll information.
+
+By following this principle, we limit the damage that can happen if someone makes a mistake or if their account is hacked. It also reduces the chances of unauthorized access to sensitive systems.
+
+In our next session, we’ll look at 'Secure by Design' and how it makes security a priority right from the start. 
+
+Let's meet there!
