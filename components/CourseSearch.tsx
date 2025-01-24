@@ -3,12 +3,24 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from '@/components/Link'
 import CoursesCard from '@/components/CoursesCard'
+import { useAuth } from 'app/hooks/useAuth'
+import AuthModal from '../components/AuthModal'
 
 const CourseSearch = ({ courses }) => {
+  const { user } = useAuth()
   const searchParams = useSearchParams()
   const category = searchParams.get('category')
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredCourses, setFilteredCourses] = useState([])
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
+  const openAuthModal = () => {
+    setModalOpen(true)
+  }
 
   useEffect(() => {
     let filtered = courses
@@ -115,9 +127,12 @@ const CourseSearch = ({ courses }) => {
             duration={d.duration}
             summary={d.summary}
             path={d.path}
+            user={user}
+            openAuthModal={openAuthModal}
           />
         ))}
       </div>
+      <AuthModal isOpen={modalOpen} onRequestClose={closeModal} />
     </>
   )
 }

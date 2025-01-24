@@ -15,8 +15,8 @@ const AuthForm = () => {
           <div className="p-8">
             <div className="items-center space-y-4">
               <h2 className="mb-8 text-cyan-900 dark:text-gray-200">
-                Choose your preferred sign-in method below to become a valued member of our
-                community
+                Sign in to unlock a personalized experience. Choose your preferred sign-in method
+                below to get started.
               </h2>
             </div>
             <div className="mt-10 grid space-y-4">

@@ -19,6 +19,7 @@ const AuthModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       appElement={
         typeof window === 'undefined' ? undefined : document?.getElementById('root') || undefined
       }
+      ariaHideApp={false}
     >
       <div className="relative -mb-10 flex justify-end">
         <FontAwesomeIcon
