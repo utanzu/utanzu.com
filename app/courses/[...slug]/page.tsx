@@ -2,6 +2,9 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { components } from '@/components/MDXComponents'
 import { allCourses } from 'contentlayer/generated'
 import CourseLayout from '@/layouts/CourseLayout'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../../lib/auth'
+import { redirect } from 'next/navigation'
 
 // Generate static paths
 export async function generateStaticParams() {
@@ -17,6 +20,11 @@ export default async function CoursePage({ params }) {
   const { slug } = await params
   const courseSlug = slug.join('/')
   const course = await getCourseData(courseSlug)
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    redirect('/courses')
+  }
 
   if (!course) {
     return <div>Career not found</div>

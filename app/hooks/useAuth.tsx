@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export function useAuth() {
   const [user, setUser] = useState<null | {
@@ -11,12 +11,12 @@ export function useAuth() {
     image?: string
   }>(null)
   const [loading, setLoading] = useState(true)
+  const hasFetched = useRef(false)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const session = await getSession()
-        //console.log(session?.user);
         if (session?.user) {
           setUser({
             id: session?.user?.id,
@@ -34,7 +34,10 @@ export function useAuth() {
       }
     }
 
-    fetchData()
+    if (!hasFetched.current) {
+      fetchData()
+      hasFetched.current = true
+    }
   }, [])
 
   return { user, loading }

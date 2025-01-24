@@ -13,6 +13,7 @@ const CourseSearch = ({ courses }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredCourses, setFilteredCourses] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
+  const [courseProgress, setCourseProgress] = useState([])
 
   const closeModal = () => {
     setModalOpen(false)
@@ -22,6 +23,27 @@ const CourseSearch = ({ courses }) => {
     setModalOpen(true)
   }
 
+  // Fetch course progress based on user
+  useEffect(() => {
+    if (!user) return // Don't fetch if no user
+
+    const fetchCourseProgress = async () => {
+      try {
+        const response = await fetch(`/api/v1/courses/${user.id}/progress`)
+        if (!response.ok) {
+          throw new Error('Failed to fetch course progress')
+        }
+        const data = await response.json()
+        setCourseProgress(data)
+      } catch (error) {
+        console.error('Error fetching course progress:', error)
+      }
+    }
+
+    fetchCourseProgress()
+  }, [user])
+
+  // Filter courses based on search term and category
   useEffect(() => {
     let filtered = courses
 
@@ -116,21 +138,30 @@ const CourseSearch = ({ courses }) => {
         </Link>
       </div>
       <div className="grid-cols-4 gap-x-4 gap-y-10 space-y-10 md:grid md:space-y-0">
-        {filteredCourses.map((d) => (
-          <CoursesCard
-            key={d.title}
-            title={d.title}
-            category={d.category}
-            image={d.image}
-            level={d.level}
-            topics={d.topics}
-            duration={d.duration}
-            summary={d.summary}
-            path={d.path}
-            user={user}
-            openAuthModal={openAuthModal}
-          />
-        ))}
+        {filteredCourses.map((course) => {
+          const progress = courseProgress.find((progress) => progress.title === course.title)
+          const percentage = progress?.subtopicCount
+            ? Math.round((progress.subtopicCount / course.modules) * 100) // Round to nearest whole number
+            : 0
+
+          return (
+            <CoursesCard
+              key={course.title}
+              title={course.title}
+              category={course.category}
+              image={course.image}
+              level={course.level}
+              topics={course.topics}
+              modules={course.modules}
+              summary={course.summary}
+              path={course.path}
+              user={user}
+              openAuthModal={openAuthModal}
+              subtopicCount={progress?.subtopicCount || 0}
+              percentage={percentage}
+            />
+          )
+        })}
       </div>
       <AuthModal isOpen={modalOpen} onRequestClose={closeModal} />
     </>

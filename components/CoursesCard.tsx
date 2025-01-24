@@ -3,7 +3,6 @@ import Image from './Image'
 import Link from './Link'
 import { Button } from '@headlessui/react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 
 const CoursesCard = ({
   title,
@@ -11,11 +10,13 @@ const CoursesCard = ({
   image,
   level,
   topics,
-  duration,
+  modules,
   summary,
   path,
   user,
   openAuthModal,
+  subtopicCount,
+  percentage,
 }) => {
   const router = useRouter()
   const handleStartCourse = (e) => {
@@ -49,10 +50,12 @@ const CoursesCard = ({
           </p>
           <div className="mb-1 flex justify-between">
             <span className="text-xs font-medium text-primary-700 dark:text-white">Completion</span>
-            <span className="text-xs font-medium text-primary-700 dark:text-white">35%</span>
+            <span className="text-xs font-medium text-primary-700 dark:text-white">
+              {percentage}%
+            </span>
           </div>
           <div className="mb-4 h-1 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-            <div className="h-1 rounded-full bg-secondary-600" style={{ width: '35%' }}></div>
+            <div className="h-1 rounded-full bg-secondary-600" style={{ width: percentage }}></div>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-700 dark:text-primary-600">

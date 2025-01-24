@@ -176,6 +176,7 @@ export const Courses = defineDocumentType(() => ({
     image: { type: 'string', required: true },
     level: { type: 'string', required: true },
     date: { type: 'date', required: true },
+    modules: { type: 'number', required: true },
     topics: { type: 'list', of: { type: 'string' }, default: [] },
     summary: { type: 'string', required: true },
   },

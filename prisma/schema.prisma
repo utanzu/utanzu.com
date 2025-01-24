@@ -21,11 +21,11 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
-  sessions      Session[]
   approved      Int       @default(0)
   role          Int       @default(0)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  Course        Course[]
 
   @@map(name: "users")
 }
@@ -52,27 +52,17 @@ model Account {
   @@map("accounts")
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model Course {
+  id        Int      @id @default(autoincrement())
+  ipAddress String?
+  title     String?
+  topic     String?
+  subtopic  String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@index([userId])
-  @@map("sessions")
-}
-
-model VerificationToken {
-  id         String   @id @default(cuid())
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+  @@unique([subtopic, userId]) // Compound unique constraint
+  @@map(name: "courses")
 }
