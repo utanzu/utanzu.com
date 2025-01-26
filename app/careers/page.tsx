@@ -24,7 +24,7 @@ const AllCareers = () => {
             Here, we highlight a few to help you plan your path and build a successful career in
             your chosen field.
           </h5>
-          <div className="grid-cols-2 gap-x-6 gap-y-10 space-y-10 md:grid md:space-y-0">
+          <div className="grid-cols-3 gap-x-4 gap-y-10 space-y-10 md:grid md:space-y-0">
             {careers.map((career) => (
               <CareersCard career={career} key={career.path} />
             ))}

@@ -29,7 +29,7 @@ const CareersCard = ({ career }: { career: CoreContent<Career> }) => {
           className="absolute -top-5 left-4 z-10 h-12 w-12 text-gray-900 dark:text-white"
         />
         <div className="relative w-full px-4 pb-6 pt-6">
-          <h3 className="mt-4 text-xl font-semibold leading-7">
+          <h3 className="mt-4 overflow-hidden truncate whitespace-nowrap text-2xl font-semibold leading-7">
             <GrowingUnderline>{title}</GrowingUnderline>
           </h3>
           <p className="mt-1.5 line-clamp-2 text-zinc-600 dark:text-zinc-400">{summary}</p>
