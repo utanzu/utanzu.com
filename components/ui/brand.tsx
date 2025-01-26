@@ -51,6 +51,9 @@ import ISO from 'icons/iso.svg'
 import Kali from 'icons/kali.svg'
 import Shield from 'icons/shield.svg'
 import Crowdstrike from 'icons/crowdstrike.svg'
+import CloudWatch from 'icons/cloudwatch.svg'
+import IAM from 'icons/iam.svg'
+import Ansible from 'icons/ansible.svg'
 
 export const BrandsMap: Record<
   string,
@@ -59,6 +62,15 @@ export const BrandsMap: Record<
     url?: string
   }
 > = {
+  Ansible: {
+    Icon: Ansible,
+  },
+  IAM: {
+    Icon: IAM,
+  },
+  CloudWatch: {
+    Icon: CloudWatch,
+  },
   Crowdstrike: {
     Icon: Crowdstrike,
   },
