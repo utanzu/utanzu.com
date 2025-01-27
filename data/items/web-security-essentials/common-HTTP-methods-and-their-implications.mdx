@@ -1,0 +1,54 @@
+---
+title: 'Common HTTP Methods and their Security Implications'
+topic: 'HTTP and Web Basics'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 5
+---
+
+<CourseContent
+  title="Common HTTP Methods and Their Security Implications"
+  summary="By understanding the purpose and security risks of the key HTTP methods, you can build more secure web applications and protect against common vulnerabilities such as unauthorized data modification or disclosure."
+/>
+
+HTTP methods define the type of action the client wants to perform on a resource. Each method has different characteristics and security implications, especially when used improperly.
+
+### Key HTTP Methods:
+
+**`GET`**:
+
+- **Purpose**: Retrieves data from the server.
+- **Security Implications**: GET requests should be safe and idempotent, meaning they shouldn't change data on the server. Sensitive data, such as passwords or credit card numbers, should never be included in a GET request because they can be exposed in browser history, logs, or in URLs.
+
+**`POST`**:
+
+- **Purpose**: Sends data to the server, often to create or update a resource.
+- **Security Implications**: POST requests should be used for actions that change server-side data (e.g., submitting a form). These requests should always be encrypted with HTTPS to protect sensitive data. Improper handling of POST requests can lead to issues like cross-site scripting (XSS) or injection attacks.
+
+**`PUT`**:
+
+- **Purpose**: Updates a specific resource on the server.
+- **Security Implications**: PUT requests can modify existing data, so they should be restricted to authenticated users. If improperly configured, attackers might overwrite data or replace it with malicious content.
+
+**`DELETE`**:
+
+- **Purpose**: Deletes a resource on the server.
+- **Security Implications**: DELETE requests are dangerous if not properly protected. Attackers could delete important resources, so strict authentication and authorization checks must be in place. Additionally, using a confirmation step before executing a DELETE request is a good practice.
+
+**`PATCH`**:
+
+- **Purpose**: Partially updates a resource.
+- **Security Implications**: Similar to PUT, but only modifies the specified fields. It should be used with caution and proper access control, as incorrect patching can expose or corrupt sensitive data.
+
+**`OPTIONS`**:
+
+- **Purpose**: Retrieves the supported HTTP methods for a resource.
+- **Security Implications**: OPTIONS is often used in Cross-Origin Resource Sharing (CORS) settings. While it is not inherently dangerous, it can be exploited in certain attack vectors, especially if CORS is misconfigured.
+
+### Summary:
+
+- **GET**: Should only retrieve data and not change server state. Sensitive information should never be passed in a GET request.
+- **POST**: Used for submitting data to the server. Always ensure sensitive data is transmitted securely.
+- **PUT** and **PATCH**: Used for updating resources. Authentication and authorization are essential to protect data integrity.
+- **DELETE**: Should be protected against unauthorized access to prevent the loss of important data.
+- **OPTIONS**: Used for CORS and checking available methods. Ensure proper CORS configurations to prevent security issues.

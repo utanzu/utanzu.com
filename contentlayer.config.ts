@@ -193,7 +193,6 @@ export const Items = defineDocumentType(() => ({
     course: { type: 'string', required: true },
     category: { type: 'string', required: true },
     duration: { type: 'number', required: true },
-    date: { type: 'date', required: true },
   },
   computedFields,
 }))

@@ -1,0 +1,40 @@
+---
+title: 'Understanding Requests and Responses'
+topic: 'HTTP and Web Basics'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 4
+---
+
+<CourseVideo
+  title="Understanding Requests and Responses"
+  src="https://www.youtube.com/embed/-Zea7GB2OwA"
+/>
+
+HTTP requests and responses are the core mechanisms for communication between web clients (browsers) and servers. They allow clients to request resources (like web pages) and servers to send back the appropriate data.
+
+### Key Concepts:
+
+**`Request`**: When you enter a URL in your browser or click a link, the browser sends an HTTP request to the server. This request includes:
+
+- **Method**: The action being requested, such as GET (to retrieve data) or POST (to submit data).
+- **URL**: The specific resource you're asking for, such as `/home` or `/login`.
+- **Headers**: Additional information like user-agent (browser type), language preferences, and cookies.
+- **Body**: Some requests, like POST, also contain data sent to the server (such as form inputs).
+
+**`Response`**: After receiving the request, the server processes it and sends back an HTTP response, which includes:
+
+- **Status Code**: Indicates whether the request was successful (e.g., 200 OK), or if there was an error (e.g., 404 Not Found).
+- **Headers**: Provide additional information about the response, such as content type, length, and caching instructions.
+- **Body**: The actual data being returned, like the HTML content of a webpage, an image, or a JSON response.
+
+**`Request-Response Cycle`**: The process of sending a request and receiving a response is called the request-response cycle. It is the basic interaction model on the web.
+
+### Summary:
+
+- HTTP requests are made by the client to ask for resources from a server.
+- Requests contain information like the method (GET, POST), URL, headers, and sometimes data in the body.
+- HTTP responses are sent by the server, containing a status code (success or error), headers, and the requested data.
+- The request-response cycle is the foundation of web communication, and understanding it helps in building secure and efficient web applications.
+
+By understanding how requests and responses work, you'll gain insights into web application communication and the areas where security vulnerabilities can occur, such as information leakage or unauthorized data access.

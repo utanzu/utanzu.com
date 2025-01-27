@@ -8,6 +8,8 @@ import { allItems as items } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { components } from '@/components/MDXComponents'
 import { useAuth } from 'app/hooks/useAuth'
+import CourseVideo from './CourseVideo'
+import CourseContent from './CourseContent'
 
 interface Props {
   title: string
@@ -127,10 +129,34 @@ export default function CoursePageSection({
           return
         }
         const data = await response.json()
-        console.log(`Success: ${data.message}`)
+        //console.log(`Success: ${data.message}`)
       } catch (error) {
         console.error(`Network Error: ${error.message}`)
       }
+    }
+  }
+
+  const handleNextSubtopic = () => {
+    if (!selectedSubtopic) return
+
+    const allSubtopics = topics.flatMap((topic) => topic.subtopics)
+    const currentIndex = allSubtopics.indexOf(selectedSubtopic)
+
+    if (currentIndex !== -1 && currentIndex < allSubtopics.length - 1) {
+      const nextSubtopic = allSubtopics[currentIndex + 1]
+      handleSubtopicClick(nextSubtopic)
+    }
+  }
+
+  const handlePreviousSubtopic = () => {
+    if (!selectedSubtopic) return
+
+    const allSubtopics = topics.flatMap((topic) => topic.subtopics)
+    const currentIndex = allSubtopics.indexOf(selectedSubtopic)
+
+    if (currentIndex > 0) {
+      const previousSubtopic = allSubtopics[currentIndex - 1]
+      handleSubtopicClick(previousSubtopic)
     }
   }
 
@@ -141,7 +167,7 @@ export default function CoursePageSection({
           {/* Sidebar on the right */}
           <aside
             className={`transition-all duration-300 ${
-              isSidebarCollapsed ? 'w-16' : 'w-64'
+              isSidebarCollapsed ? 'w-16' : 'w-80'
             } overflow-hidden md:block`}
           >
             <div className="relative rounded-md bg-white p-4 dark:bg-gray-900">
@@ -210,9 +236,28 @@ export default function CoursePageSection({
                 <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
                   {selectedSubtopic}
                 </h3>
-                <div className="prose flex max-w-full flex-col gap-4 dark:prose-dark">
+                <div className="prose flex max-w-full flex-col dark:prose-dark">
                   {subtopicContent && (
-                    <MDXLayoutRenderer code={subtopicContent} components={components} />
+                    <MDXLayoutRenderer
+                      code={subtopicContent}
+                      components={{
+                        ...components,
+                        CourseVideo: (props) => (
+                          <CourseVideo
+                            {...props}
+                            onNext={handleNextSubtopic}
+                            onPrevious={handlePreviousSubtopic}
+                          />
+                        ),
+                        CourseContent: (props) => (
+                          <CourseContent
+                            {...props}
+                            onNext={handleNextSubtopic}
+                            onPrevious={handlePreviousSubtopic}
+                          />
+                        ),
+                      }}
+                    />
                   )}
                 </div>
               </>
