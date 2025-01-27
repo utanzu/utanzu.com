@@ -44,7 +44,7 @@ export default function PageSection({ title, image, tags, children }: Props) {
             </p>
             <Link
               href={`/courses?category=${title}`}
-              className="my-6 w-1/3 rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+              className="my-6 w-1/2 rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white sm:w-1/3"
             >
               Go to Courses
             </Link>

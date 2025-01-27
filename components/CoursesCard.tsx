@@ -42,7 +42,7 @@ const CoursesCard = ({
           priority
         />
         <div className="px-3 pb-3">
-          <h5 className="mb-2 truncate text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
             {title}
           </h5>
           <p className="mb-3 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-gray-900 dark:text-gray-200">
@@ -65,7 +65,7 @@ const CoursesCard = ({
               onClick={handleStartCourse}
               className="rounded-full bg-primary-500 px-4 py-2 text-center text-xs font-medium text-white hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800"
             >
-              START COURSE
+              {percentage > 0 ? 'RESUME' : 'START COURSE'}
             </Button>
           </div>
         </div>

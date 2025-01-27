@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons'
 import PageHeading from '@/components/PageHeading'
 import { allItems as items } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
@@ -29,8 +31,8 @@ export default function CoursePageSection({
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null)
   const [subtopicContent, setSubtopicContent] = useState<string | null>(null)
   const [checkedSubtopics, setCheckedSubtopics] = useState<Record<string, boolean>>({})
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false)
 
-  // Optimize getUserCourses to run once user data is available
   const getUserCourses = useCallback(
     async (id: string) => {
       try {
@@ -42,12 +44,9 @@ export default function CoursePageSection({
         }
 
         const data = await response.json()
-        // Extract the completed subtopics from the response data
         const completedSubtopics = data.map((course) => course.subtopic)
 
-        // Match the user's completed courses and set checkedSubtopics
         const newCheckedState: Record<string, boolean> = {}
-
         topics.forEach((topic) => {
           topic.subtopics.forEach((subtopic) => {
             newCheckedState[subtopic] = completedSubtopics.includes(subtopic)
@@ -62,10 +61,9 @@ export default function CoursePageSection({
     [topics]
   )
 
-  // Initialize the first topic, subtopic, and its content on component mount
   useEffect(() => {
     if (!loading && user && user.id) {
-      getUserCourses(user.id) // Get user's completed courses
+      getUserCourses(user.id)
     }
   }, [loading, user, getUserCourses])
 
@@ -76,7 +74,6 @@ export default function CoursePageSection({
       setExpandedTopic(firstTopic.title)
       setSelectedSubtopic(firstSubtopic)
 
-      // Fetch the content of the first subtopic
       const matchedItem = items.find((item) => item.title === firstSubtopic)
       setSubtopicContent(
         matchedItem ? matchedItem.body.code : 'Content not found for the selected subtopic.'
@@ -84,16 +81,13 @@ export default function CoursePageSection({
     }
   }, [topics])
 
-  // Handle topic toggle (accordion functionality)
   const handleTopicToggle = (topic: string) => {
     setExpandedTopic((prev) => (prev === topic ? null : topic))
   }
 
-  // Handle subtopic click and fetch its content
   const handleSubtopicClick = (subtopic: string) => {
     setSelectedSubtopic(subtopic)
 
-    // Only update content if different from current
     const matchedItem = items.find((item) => item.title === subtopic)
     const newContent = matchedItem
       ? matchedItem.body.code
@@ -103,11 +97,9 @@ export default function CoursePageSection({
     }
   }
 
-  // Handle checkbox state for subtopics
   const handleCheckboxChange = (subtopic: string) => {
     setCheckedSubtopics((prevState) => {
       const newState = { ...prevState, [subtopic]: !prevState[subtopic] }
-      // Save the learning progress when checkbox is checked/unchecked
       saveLearningProgress(title, expandedTopic, subtopic)
       return newState
     })
@@ -145,64 +137,80 @@ export default function CoursePageSection({
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
-        <div className="flex flex-col gap-6 py-6 md:flex-row">
-          {/* Sidebar */}
-          <aside className="w-full rounded-md bg-gray-100 p-4 dark:bg-gray-800 md:w-1/4">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Course Content
-            </h2>
-            <ul className="space-y-2">
-              {topics.map((topic) => (
-                <li key={topic.title}>
-                  <button
-                    onClick={() => handleTopicToggle(topic.title)}
-                    className={`flex w-full items-center justify-between rounded-sm px-4 py-2 text-left text-sm font-medium transition-colors ${
-                      expandedTopic === topic.title
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-primary-200 hover:text-white dark:bg-gray-700 dark:text-gray-200'
-                    }`}
-                  >
-                    {topic.title}
-                    <span className="ml-2">{expandedTopic === topic.title ? '↑' : '↓'}</span>
-                  </button>
-
-                  {expandedTopic === topic.title && (
-                    <ul className="mt-2 space-y-1 pl-6">
-                      {topic.subtopics.map((subtopic) => (
-                        <li key={subtopic} className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            checked={checkedSubtopics[subtopic] || false}
-                            onChange={() => handleCheckboxChange(subtopic)}
-                            className="border-gray-300bg-white h-5 w-5 rounded-sm checked:border-primary-700 checked:bg-primary-700 dark:border-gray-600 dark:bg-gray-700 dark:checked:border-secondary-600 checked:dark:bg-secondary-500 dark:checked:bg-secondary-400"
-                          />
-                          <button
-                            onClick={() => handleSubtopicClick(subtopic)}
-                            className={`w-full rounded-sm px-4 py-1 text-left text-sm transition-colors ${
-                              selectedSubtopic === subtopic
-                                ? 'bg-gray-400 font-semibold text-white'
-                                : 'hover:bg-gray-300 dark:hover:bg-gray-600'
-                            }`}
-                          >
-                            {subtopic}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
+        <div className="flex flex-col gap-6 py-6 md:flex-row-reverse">
+          {/* Sidebar on the right */}
+          <aside
+            className={`transition-all duration-300 ${
+              isSidebarCollapsed ? 'w-16' : 'w-64'
+            } overflow-hidden md:block`}
+          >
+            <div className="relative rounded-md bg-white p-4 dark:bg-gray-900">
+              <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <button
+                  onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+                  className="mr-2 rounded-full p-1 text-white"
+                >
+                  <FontAwesomeIcon
+                    className="text-primary-600 dark:text-primary-400"
+                    icon={isSidebarCollapsed ? faChevronCircleLeft : faChevronCircleRight}
+                    size="xl"
+                  />
+                </button>
+                {isSidebarCollapsed ? '' : 'Course Content'}
+              </h2>
+              {!isSidebarCollapsed && (
+                <ul className="space-y-2">
+                  {topics.map((topic) => (
+                    <li key={topic.title}>
+                      <button
+                        onClick={() => handleTopicToggle(topic.title)}
+                        className={`flex w-full items-center justify-between rounded-sm px-4 py-2 text-left text-sm font-medium transition-colors ${
+                          expandedTopic === topic.title
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-gray-200 text-gray-700 hover:bg-primary-200 hover:text-white dark:bg-gray-700 dark:text-gray-200'
+                        }`}
+                      >
+                        {topic.title}
+                      </button>
+                      {expandedTopic === topic.title && (
+                        <ul className="mt-2 space-y-1 pl-6">
+                          {topic.subtopics.map((subtopic) => (
+                            <li key={subtopic} className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                checked={checkedSubtopics[subtopic] || false}
+                                onChange={() => handleCheckboxChange(subtopic)}
+                                className="h-5 w-5 rounded-sm border-gray-300 checked:border-primary-700 checked:bg-primary-700 dark:border-gray-600 dark:bg-gray-700 dark:checked:border-secondary-600"
+                              />
+                              <button
+                                onClick={() => handleSubtopicClick(subtopic)}
+                                className={`w-full rounded-sm px-4 py-1 text-left text-sm transition-colors ${
+                                  selectedSubtopic === subtopic
+                                    ? 'bg-gray-400 font-semibold text-white'
+                                    : 'hover:bg-gray-300 dark:hover:bg-gray-600'
+                                }`}
+                              >
+                                {subtopic}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </aside>
 
-          {/* Content Section */}
-          <main className="w-full rounded-md bg-white px-6 shadow-md dark:bg-gray-900 md:w-3/4">
+          {/* Content Section on the left */}
+          <main className="flex-1 rounded-md bg-white px-6 shadow-md dark:bg-gray-900">
             {selectedSubtopic && (
               <>
                 <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
                   {selectedSubtopic}
                 </h3>
-                <div className="prose max-w-full dark:prose-dark">
+                <div className="prose flex max-w-full flex-col gap-4 dark:prose-dark">
                   {subtopicContent && (
                     <MDXLayoutRenderer code={subtopicContent} components={components} />
                   )}

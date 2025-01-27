@@ -15,7 +15,7 @@ const ContentSecurityPolicy = `
   media-src ${isDev ? "'self' http://localhost:3000" : '*.s3.amazonaws.com'};
   connect-src *;
   font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.app https://www.youtube.com https://youtube.com;
 `
 
 const securityHeaders = [
