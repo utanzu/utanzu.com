@@ -1,0 +1,27 @@
+---
+title: 'SQL Injection – Impact and Prevention'
+topic: 'Common Web Vulnerabilities'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 9
+---
+
+<CourseVideo title="SQL Injection Explained" src="https://www.youtube.com/embed/8XVHftQskxk" />
+
+SQL Injection is a code injection technique that allows attackers to interfere with the queries an application makes to its database.
+
+### Impact:
+
+- **Unauthorized Data Access**: Attackers can retrieve, modify, or delete data.
+- **Authentication Bypass**: Gain unauthorized access to systems.
+- **Data Corruption**: Alter or delete data, leading to data integrity issues.
+
+### Prevention:
+
+- **Use Prepared Statements**: Ensure that SQL queries are predefined and parameterized.
+- **Input Validation**: Rigorously validate and sanitize all user inputs.
+- **Least Privilege Principle**: Limit database user permissions to the minimum necessary.
+
+Implementing these practices helps protect applications from SQL Injection attacks.
+
+_Source: [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)_

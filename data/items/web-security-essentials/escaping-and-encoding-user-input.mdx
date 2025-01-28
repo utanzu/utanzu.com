@@ -1,0 +1,24 @@
+---
+title: 'Escaping and Encoding User Input'
+topic: 'Input Validation and Output Encoding'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 13
+---
+
+<CourseVideo
+  title="Escaping and Encoding User Input"
+  src="https://www.youtube.com/embed/y_8Armux_EY"
+/>
+
+Escaping and encoding are vital techniques used to safely handle user data in web applications. By transforming special characters into harmless equivalents, you prevent malicious input from being interpreted as code. This is especially important when dynamically generating HTML, URLs, or SQL queries.
+
+## Types of Encoding
+
+- **HTML Encoding**: Convert symbols like `<`, `>`, `&` into safe representations.
+- **URL Encoding**: Protect parameters passed through URLs.
+- **JavaScript Encoding**: Escape characters that might break scripts or cause injection.
+
+### Best Practices
+
+Implement a consistent encoding strategy across all application layers. Libraries and frameworks often provide built-in methods, so use them instead of writing your own. Combining encoding with strict input validation creates a robust defense against various injection attacks.

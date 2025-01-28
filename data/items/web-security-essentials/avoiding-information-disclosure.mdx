@@ -1,0 +1,24 @@
+---
+title: 'Avoiding Information Disclosure'
+topic: 'Secure Data Handling'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 7
+---
+
+<CourseVideo
+  title="Avoiding Information Disclosure"
+  src="https://www.youtube.com/embed/c6m3suXYPQM"
+/>
+
+Information disclosure happens when an application inadvertently reveals internal details, such as stack traces, server configurations, or sensitive data. Attackers can use these details to craft specific exploits or gain deeper access to systems. Controlling what the application exposes is vital for maintaining security.
+
+## Techniques
+
+- **Disable Verbose Error Messages**: Generic messages help avoid leaking environment details.
+- **Restrict Directory Listings**: Prevent unauthorized viewing of file structures.
+- **Mask Sensitive Data**: Limit the display of confidential information (e.g., partial credit card numbers).
+
+### Summary
+
+Regular security assessments can uncover unintentional disclosures. Implementing strict access controls and sanitizing logs or output will greatly reduce the risk of revealing helpful hints to attackers.

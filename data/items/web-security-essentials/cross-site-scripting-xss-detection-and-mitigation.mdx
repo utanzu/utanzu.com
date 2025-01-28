@@ -1,0 +1,30 @@
+---
+title: 'Cross-Site Scripting (XSS) – Detection and Mitigation'
+topic: 'Common Web Vulnerabilities'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 8
+---
+
+<CourseVideo
+  title="Understanding and Preventing XSS Attacks"
+  src="https://www.youtube.com/embed/z4LhLJnmoZ0"
+/>
+
+Cross-Site Scripting (XSS) is a vulnerability that allows attackers to inject malicious scripts into web pages viewed by others.
+
+### Types of XSS:
+
+- **Stored XSS**: Malicious script is permanently stored on the target server.
+- **Reflected XSS**: Script is reflected off a web server, such as in an error message or search result.
+- **DOM-Based XSS**: Vulnerability exists in client-side code rather than server-side.
+
+### Detection and Mitigation:
+
+- **Input Validation**: Ensure all user inputs are validated and sanitized.
+- **Output Encoding**: Encode data before rendering it on the web page.
+- **Content Security Policy (CSP)**: Implement CSP to restrict sources from which scripts can be executed.
+
+Regularly testing applications for XSS vulnerabilities and applying these mitigation strategies can significantly enhance security.
+
+_Source: [Cross Site Scripting Prevention Cheat Sheet - OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)_

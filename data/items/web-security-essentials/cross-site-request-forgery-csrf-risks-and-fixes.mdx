@@ -1,0 +1,30 @@
+---
+title: 'Cross-Site Request Forgery (CSRF) – Risks and Fixes'
+topic: 'Common Web Vulnerabilities'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 7
+---
+
+<CourseVideo
+  title="CSRF Attack Explained"
+  src="https://www.youtube.com/embed/GwWUr0MC87w"
+/>
+
+CSRF is an attack that tricks the victim into submitting a malicious request. It exploits the trust that a web application has in the user's browser.
+
+### Risks:
+
+- **Unauthorized Actions**: Perform actions on behalf of authenticated users without their consent.
+- **Data Modification**: Change user settings or data.
+- **Privilege Escalation**: Perform actions with the user's privileges.
+
+### Fixes:
+
+- **Anti-CSRF Tokens**: Implement tokens that are unique to each session and included in requests.
+- **SameSite Cookie Attribute**: Use this attribute to prevent browsers from sending cookies along with cross-site requests.
+- **Re-authentication**: Require users to re-authenticate before performing sensitive actions.
+
+By applying these fixes, applications can defend against CSRF attacks.
+
+*Source: [OWASP Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)*

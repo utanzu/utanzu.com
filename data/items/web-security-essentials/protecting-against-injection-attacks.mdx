@@ -1,0 +1,24 @@
+---
+title: 'Protecting Against Injection Attacks'
+topic: 'Input Validation and Output Encoding'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 9
+---
+
+<CourseVideo
+  title="Protecting Against Injection Attacks"
+  src="https://www.youtube.com/embed/dbXmk38jRBw"
+/>
+
+Injection attacks occur when untrusted input is sent to an interpreter as part of a command or query. Common examples include SQL, OS command, or LDAP injection. Attackers can manipulate queries and access restricted data or execute unauthorized commands.
+
+## Key Defense Strategies
+
+1. **Use Prepared Statements**: Bind variables within queries.
+2. **Parameterize Queries**: Separate query logic from user-supplied data.
+3. **Escape Dangerous Characters**: Convert special characters to safe forms.
+
+### Final Thoughts
+
+Staying vigilant about the data flowing into your application is crucial. By combining parameterization, escaping, and rigorous validation, you can significantly lower the threat of injection attacks.

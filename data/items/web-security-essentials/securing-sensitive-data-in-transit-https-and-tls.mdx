@@ -1,0 +1,22 @@
+---
+title: 'Securing Sensitive Data in Transit (HTTPS and TLS)'
+topic: 'Secure Data Handling'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 7
+---
+
+<CourseVideo
+  title="Securing Sensitive Data in Transit (HTTPS and TLS)"
+  src="https://www.youtube.com/embed/j9QmMEWmcfo"
+/>
+
+HTTPS and TLS ensure that data transmitted between a client and server remains confidential and tamper-proof. By encrypting traffic, attackers cannot easily intercept or modify sensitive information like passwords or credit card numbers. Using modern TLS configurations is essential to avoid weak cipher suites.
+
+## Best Practices
+
+- **Enforce HTTPS**: Redirect all HTTP requests to HTTPS.
+- **Use Strong Ciphers**: Disable outdated protocols like SSLv3.
+- **Implement HSTS**: Prevent accidental HTTP connections.
+
+Regularly review SSL/TLS certificates to ensure they are valid and secure. Keeping your encryption updated prevents eavesdroppers from exploiting outdated methods.

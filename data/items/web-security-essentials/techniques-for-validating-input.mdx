@@ -1,0 +1,22 @@
+---
+title: 'Techniques for Validating Input'
+topic: 'Input Validation and Output Encoding'
+course: 'Web Application Security Essentials'
+category: 'Application Security'
+duration: 3
+---
+
+<CourseVideo
+  title="Techniques for Validating Input"
+  src="https://www.youtube.com/embed/XZRnzhYttRk"
+/>
+
+Effective input validation techniques involve a combination of whitelisting and blacklisting approaches. Whitelisting allows only known-good data patterns, while blacklisting tries to filter out malicious patterns. It's generally recommended to rely more on whitelisting for stricter control.
+
+### Common Validation Techniques
+
+1. **Regular Expressions**: Check for patterns like email formats or numeric-only inputs.
+2. **Length and Range Checks**: Ensure values fit expected minimum and maximum ranges.
+3. **Type Checking**: Enforce data types (e.g., integers, strings, dates).
+
+By applying robust validation on both client and server side, you can greatly reduce the risk of exploiting flaws. Always ensure error messages do not reveal excessive detail that could be used by attackers.
