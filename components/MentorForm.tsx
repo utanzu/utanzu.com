@@ -17,6 +17,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   const [description, setDescription] = useState('')
   const [selectedExpertise, setSelectedExpertise] = useState([])
   const [profileImage, setProfileImage] = useState<File | null>(null)
+  const [profileImageUrl, setProfileImageUrl] = useState(user.image || '') // Set URL if exists
 
   // Define expertise options
   const expertiseOptions = [
@@ -59,7 +60,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
     },
   ]
 
-  const handleExpertiseChange = (selectedOptions: any) => {
+  const handleExpertiseChange = (selectedOptions) => {
     if (selectedOptions.length <= 3) {
       setSelectedExpertise(selectedOptions)
     }
@@ -69,7 +70,12 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      setProfileImage(file)
+      // Replace spaces in filename with underscores and prepend user ID
+      const sanitizedFileName = file.name.replace(/\s+/g, '_')
+      const renamedFile = new File([file], `${user.id}_${sanitizedFileName}`, { type: file.type })
+
+      setProfileImage(renamedFile) // Store as a file
+      setProfileImageUrl('') // Clear the URL when a new file is selected
     }
   }
 
@@ -79,18 +85,21 @@ const MentorForm: React.FC<Props> = ({ user }) => {
 
     // Prepare form data
     const formData = new FormData()
-    formData.append('id', user.id)
     formData.append('fullName', fullName)
     formData.append('email', email)
     formData.append('title', title)
     formData.append('linkedin', linkedin)
     formData.append('description', description)
     formData.append('expertise', JSON.stringify(selectedExpertise.map((e) => e.value))) // Convert to JSON
-    if (profileImage) {
-      formData.append('profileImage', profileImage)
+
+    // Append profile image - either a file or a URL
+    if (profileImage instanceof File) {
+      formData.append('profileImage', profileImage) // Upload file
+    } else if (profileImageUrl) {
+      formData.append('profileImageUrl', profileImageUrl) // Send existing URL
     }
 
-    //console.log(formData.get('profileImage'))
+    //console.log('FormData entries:', Array.from(formData.entries())) // Debugging
 
     try {
       const response = await fetch('/api/v1/mentors/new', {
@@ -112,9 +121,6 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   return (
     <>
       <form className="grid grid-cols-1 gap-4 sm:grid-cols-2" onSubmit={handleSubmit}>
-        {/* Hidden ID */}
-        <input type="text" id="id" defaultValue={user.id} hidden readOnly />
-
         {/* Profile Image Upload */}
         <div className="col-span-1 flex flex-col items-center sm:col-span-2">
           <p className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -159,6 +165,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             placeholder="Jane Doe"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            required
             className="rounded-md border border-gray-300 p-2 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
@@ -177,6 +184,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             placeholder="jane@example.com"
             value={user.email}
             onChange={(e) => setEmail(e.target.value)}
+            required
             className="rounded-md border border-gray-300 p-2 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
@@ -195,6 +203,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             placeholder="Security Architect"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
             className="rounded-md border border-gray-300 p-2 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
@@ -213,6 +222,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             placeholder="https://www.linkedin.com/in/your-profile"
             value={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
+            required
             className="rounded-md border border-gray-300 p-2 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
@@ -285,6 +295,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             placeholder="Briefly describe your experience, background, and mentorship approach..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
             className="rounded-md border border-gray-300 p-2 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
