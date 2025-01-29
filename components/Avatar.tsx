@@ -50,7 +50,11 @@ const Avatar = () => {
           Sign In
         </Button>
       )}
-      <AuthModal isOpen={modalOpen} onRequestClose={closeModal} />
+      <AuthModal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        message="Sign in to unlock a personalized experience. Select your preferred sign-in method below to get started."
+      />
     </>
   )
 }

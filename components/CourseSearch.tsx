@@ -163,7 +163,11 @@ const CourseSearch = ({ courses }) => {
           )
         })}
       </div>
-      <AuthModal isOpen={modalOpen} onRequestClose={closeModal} />
+      <AuthModal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        message="Sign in to start learning. Select your preferred sign-in method below to get started."
+      />
     </>
   )
 }

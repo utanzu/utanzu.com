@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import { signIn } from 'next-auth/react'
 
-const AuthForm = () => {
+type ModalProps = {
+  message: string
+}
+
+const AuthForm: React.FC<ModalProps> = ({ message }) => {
   const handleGoogleSignIn = async () => {
     await signIn('google')
   }
@@ -14,10 +18,7 @@ const AuthForm = () => {
         <section className="flex flex-col gap-1">
           <div className="p-8">
             <div className="items-center space-y-4">
-              <h2 className="mb-8 text-cyan-900 dark:text-gray-200">
-                Sign in to unlock a personalized experience. Choose your preferred sign-in method
-                below to get started.
-              </h2>
+              <h2 className="mb-8 text-cyan-900 dark:text-gray-200">{message}</h2>
             </div>
             <div className="mt-10 grid space-y-4">
               <button

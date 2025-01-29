@@ -26,6 +26,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   Course        Course[]
+  Mentor        Mentor[]
 
   @@map(name: "users")
 }
@@ -65,4 +66,23 @@ model Course {
 
   @@unique([subtopic, userId]) // Compound unique constraint
   @@map(name: "courses")
+}
+
+model Mentor {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  ipAddress    String?
+  fullName     String?
+  email        String?
+  title        String?
+  linkedin     String?
+  description  String?  @db.LongText
+  expertise    String?
+  profileImage String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId])
+  @@map(name: "mentors")
 }
