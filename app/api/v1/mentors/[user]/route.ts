@@ -41,6 +41,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
             where: { userId: userId },
             select: {
                 id: true,
+                userId: true,
                 fullName: true,
                 email: true,
                 title: true,

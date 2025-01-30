@@ -1,26 +1,77 @@
-import Image from 'next/image'
+'use client'
+import { useState } from 'react'
 import { Link } from './ui/link'
+import Toast from './Toast'
 
 type Props = {
   mentor
   user
 }
 
-const MenteeForm: React.FC<Props> = ({ mentor, user }) => {
+const MenteeForm: React.FC<Props> = ({ mentor }) => {
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+
+  // State variables
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+
+  // Handle form submission
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+
+    // Prepare form data
+    const formData = new FormData()
+    formData.append('mentor', mentor.userId)
+    formData.append('title', title)
+    formData.append('request', message)
+
+    console.log('FormData entries:', Array.from(formData.entries())) // Debugging
+
+    try {
+      const response = await fetch('/api/v1/mentorship/new', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const responseData = await response.json()
+
+      if (response.status === 200 || response.status === 201) {
+        setToast({
+          type: 'success',
+          message:
+            responseData.message ||
+            'Your mentorship connection has been sent successfully. Keep checking for a response.',
+        })
+        // Reload after 2 seconds
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
+      } else {
+        setToast({
+          type: 'error',
+          message: responseData.message || 'Failed to submit application. Please try again.',
+        })
+      }
+    } catch (error) {
+      console.error('Error submitting application:', error)
+      setToast({ type: 'error', message: 'Something went wrong. Please try again.' })
+    }
+  }
+
   return (
     <>
-      <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+      {toast && <Toast type={toast.type} message={toast.message} />}
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit} id="mentorshipRegForm">
         <section className="flex flex-col gap-1">
-          <div className="p-8">
+          <div className="px-4 py-4">
             <div className="items-center space-y-4">
               <h2 className="mb-8 text-cyan-900 dark:text-gray-200">
-                Send a mentorship request to {mentor?.name}. Remember, first impressions matter—make
-                it count!
+                Send a mentorship connection request to {mentor?.fullName}. Remember, first
+                impressions matter—make it count!
               </h2>
             </div>
             <div className="mt-4 grid space-y-4">
-              <input type="text" id="user" value={user.id} hidden readOnly required />
-              <input type="text" id="mentor" value={mentor.id} hidden readOnly required />
+              <input type="text" id="mentor_id" value={mentor.id} hidden readOnly required />
               <div className="mb-4">
                 <label
                   htmlFor="email"
@@ -31,6 +82,8 @@ const MenteeForm: React.FC<Props> = ({ mentor, user }) => {
                 <input
                   type="text"
                   id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   className="shadow-xs dark:shadow-xs-light block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-300 dark:focus:ring-primary-300"
                   placeholder="Request for Mentorship"
                   required
@@ -45,6 +98,8 @@ const MenteeForm: React.FC<Props> = ({ mentor, user }) => {
                 </label>
                 <textarea
                   id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   rows={4}
                   maxLength={500}
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-300 dark:focus:ring-primary-300"
@@ -76,7 +131,7 @@ const MenteeForm: React.FC<Props> = ({ mentor, user }) => {
               </div>
               <button
                 type="submit"
-                className="max-w-max rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-max rounded-full bg-primary-700 px-5 py-2 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Send request
               </button>

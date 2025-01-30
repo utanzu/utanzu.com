@@ -10,58 +10,63 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faLightbulb, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import MentorForm from './MentorForm'
 
-const mentors = [
-  {
-    name: 'John Doe',
-    title: 'Cybersecurity Expert',
-    expertise: ['Network Security', 'Threat Analysis', 'Penetration Testing'],
-    image: '/static/images/avatar.png',
-    description:
-      'Experienced cybersecurity professional with 10+ years in network security and threat analysis.',
-    linkedin: 'https://www.linkedin.com/in/johndoe',
-    email: 'johndoe@example.com',
-  },
-  {
-    name: 'Jane Smith',
-    title: 'Ethical Hacker',
-    expertise: ['Web Application Security', 'Penetration Testing'],
-    image: '/static/images/avatar.png',
-    description:
-      'Certified ethical hacker specializing in web application security and penetration testing.',
-    linkedin: 'https://www.linkedin.com/in/janesmith',
-    email: 'janesmith@example.com',
-  },
-  {
-    name: 'Ali Khan',
-    title: 'Cloud Security Engineer',
-    expertise: ['AWS Security', 'IAM Policies'],
-    image: '/static/images/avatar.png',
-    description:
-      'Cloud security engineer focused on securing AWS environments and implementing robust IAM policies.',
-    linkedin: 'https://www.linkedin.com/in/alikhan',
-    email: 'alikhan@example.com',
-  },
-]
-
 const MentorshipPageSection = () => {
+  interface Mentor {
+    id: string
+    userId: string
+    fullName: string
+    title: string
+    linkedin: string
+    description: string
+    expertise: string
+    profileImage: string
+  }
+
   const [activeTab, setActiveTab] = useState('get-mentor')
   const [searchTerm, setSearchTerm] = useState('')
-  const [filteredMentors, setFilteredMentors] = useState(mentors)
+  const [mentors, setMentors] = useState<Mentor[]>([])
+  const [filteredMentors, setFilteredMentors] = useState<Mentor[]>(mentors)
+  const [loadingMentors, setLoadingMentors] = useState(true)
+  const [fetchError, setFetchError] = useState(null)
   const router = useRouter()
   const { loading, user } = useAuth()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [isMentor, setIsMentor] = useState<boolean | null>(null)
   const [checkingMentorStatus, setCheckingMentorStatus] = useState(true)
 
+  // Fetch all mentors from API
+  useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const response = await fetch(`/api/v1/mentors`)
+        if (!response.ok) throw new Error('Failed to fetch mentors')
+
+        const data = await response.json()
+        //console.log(data.mentors)
+        setMentors(data.mentors) // Expecting mentors array in response
+        setFilteredMentors(data.mentors) // Default to showing all
+      } catch (error) {
+        console.error('Error fetching mentors:', error)
+        setFetchError(error.message)
+      } finally {
+        setLoadingMentors(false)
+      }
+    }
+
+    fetchMentors()
+  }, [])
+
+  // Search functionality
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase()
     setSearchTerm(value)
+
     setFilteredMentors(
       mentors.filter(
         (mentor) =>
-          mentor.name.toLowerCase().includes(value) ||
+          mentor.fullName.toLowerCase().includes(value) ||
           mentor.title.toLowerCase().includes(value) ||
-          mentor.expertise.some((skill) => skill.toLowerCase().includes(value))
+          mentor.expertise.toLowerCase().includes(value) // Assuming expertise is a comma-separated string
       )
     )
   }

@@ -4,18 +4,20 @@ import Image from '@/components/Image'
 import { Link } from '@/components/ui/link'
 import { Button } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import MenteeModal from './MenteeModal'
+import MentorModal from './MentorModal'
 
 type Mentor = {
-  image: string
-  name: string
+  id: string
+  userId: string
+  fullName: string
   title: string
-  expertise: string[]
-  description: string
   linkedin: string
-  email: string
+  description: string
+  expertise: string
+  profileImage: string
 }
 
 type Props = {
@@ -26,7 +28,9 @@ type Props = {
 
 const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
   const [menteeModalOpen, setMenteeModalOpen] = useState(false)
-  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null) // Store selected mentor
+  const [selectedMentor, setSelectedMentor] = useState<Mentor[]>([])
+  const [viewedMentor, setViewedMentor] = useState<Mentor | null>(null)
+  const [mentorModalOpen, setMentorModalOpen] = useState(false)
 
   const openMenteeModal = (mentor) => {
     setSelectedMentor(mentor)
@@ -37,6 +41,15 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
     setMenteeModalOpen(false)
   }
 
+  const closeMentorModal = () => {
+    setMentorModalOpen(false)
+  }
+
+  const openMentorModal = (mentor: Mentor) => {
+    setViewedMentor(mentor)
+    setMentorModalOpen(true)
+  }
+
   const handleConnectMentor = (mentor) => (e) => {
     e.preventDefault()
     if (!user) {
@@ -44,6 +57,11 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
     } else {
       openMenteeModal(mentor)
     }
+  }
+
+  const handleViewMentor = (mentor) => (e) => {
+    e.preventDefault()
+    openMentorModal(mentor)
   }
 
   return (
@@ -59,13 +77,13 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
               <Image
                 width={80}
                 height={80}
-                src={mentor.image}
-                alt={mentor.name}
+                src={mentor.profileImage}
+                alt={mentor.fullName}
                 className="h-20 w-20 rounded-full border border-gray-300 object-cover shadow-md dark:border-gray-600"
               />
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {mentor.name}
+                  {mentor.fullName}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">{mentor.title}</p>
               </div>
@@ -73,25 +91,25 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
 
             {/* Expertise Badges */}
             <div className="mt-4 flex flex-wrap gap-2">
-              {mentor.expertise.map((skill, i) => (
+              {mentor.expertise.split(',').map((skill, i) => (
                 <span
                   key={i}
                   className="rounded-full bg-primary-100 px-3 py-1 text-xs font-medium text-primary-600 dark:bg-gray-600 dark:text-white"
                 >
-                  {skill}
+                  {skill.trim()}
                 </span>
               ))}
             </div>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{mentor.description}</p>
+            {/* <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{mentor.description}</p> */}
 
             {/* Connect Button & Icons */}
             <div className="mt-auto flex items-center gap-4 pt-4">
               {/* Connect Button with Arrow Icon */}
               <Button
                 onClick={handleConnectMentor(mentor)}
-                className="inline-flex items-center justify-center rounded-full bg-gray-600 px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:bg-primary-700"
+                className="inline-flex items-center justify-center rounded-full bg-secondary-700 px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:bg-primary-700"
               >
                 Connect
                 <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
@@ -107,13 +125,13 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </Link>
 
-              {/* Email Icon */}
-              <Link
-                href={`mailto:${mentor.email}`}
+              {/* View Icon */}
+              <Button
+                onClick={handleViewMentor(mentor)}
                 className="text-gray-500 transition-colors duration-300 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
               >
-                <FontAwesomeIcon icon={faEnvelope} />
-              </Link>
+                <FontAwesomeIcon icon={faEye} />
+              </Button>
             </div>
           </div>
         ))}
@@ -123,6 +141,11 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
         onRequestClose={closeMenteeModal}
         mentor={selectedMentor}
         user={user}
+      />
+      <MentorModal
+        isOpenMentor={mentorModalOpen}
+        onRequestCloseMentor={closeMentorModal}
+        mentor={viewedMentor!}
       />
     </>
   )

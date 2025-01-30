@@ -14,19 +14,23 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  username      String?   @unique
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  accounts      Account[]
-  approved      Int       @default(0)
-  role          Int       @default(0)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  Course        Course[]
-  Mentor        Mentor[]
+  id                  String       @id @default(cuid())
+  name                String?
+  username            String?      @unique
+  email               String?      @unique
+  emailVerified       DateTime?    @map("email_verified")
+  image               String?
+  accounts            Account[]
+  approved            Int          @default(0)
+  role                Int          @default(0)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  Course              Course[]
+  Mentor              Mentor[]
+  mentorshipsAsMentor Mentorship[] @relation(name: "MentorRelation")
+  mentorshipsAsMentee Mentorship[] @relation(name: "MenteeRelation")
+  Mentorship          Mentorship?  @relation(fields: [mentorshipId], references: [id])
+  mentorshipId        Int?
 
   @@map(name: "users")
 }
@@ -73,16 +77,41 @@ model Mentor {
   userId       String
   user         User     @relation(fields: [userId], references: [id])
   ipAddress    String?
-  fullName     String?
-  email        String?
-  title        String?
-  linkedin     String?
-  description  String?  @db.LongText
-  expertise    String?
+  fullName     String
+  email        String
+  title        String
+  linkedin     String
+  description  String   @db.LongText
+  expertise    String
   profileImage String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   @@unique([userId])
   @@map(name: "mentors")
+}
+
+model Mentorship {
+  id        Int              @id @default(autoincrement())
+  mentorId  String
+  menteeId  String
+  mentor    User             @relation(name: "MentorRelation", fields: [mentorId], references: [id])
+  mentee    User             @relation(name: "MenteeRelation", fields: [menteeId], references: [id])
+  ipAddress String?
+  title     String
+  message   String           @db.LongText
+  status    MentorshipStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  User      User[]
+
+  @@unique([mentorId, menteeId])
+  @@map(name: "mentorships")
+}
+
+enum MentorshipStatus {
+  PENDING
+  REJECTED
+  ONGOING
+  COMPLETED
 }

@@ -2,7 +2,6 @@ import ReactModal from 'react-modal'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
-import AuthForm from './AuthForm'
 import MenteeForm from './MenteeForm'
 
 type ModalProps = {
@@ -34,16 +33,14 @@ const MenteeModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, mentor, use
       <div className="flex flex-col space-y-4 py-2">
         <div className="flex items-center gap-4">
           <Image
-            alt={mentor?.name || 'Mentor'}
-            src={mentor?.image || '/static/images/avatar.png'}
+            alt={mentor?.fullName || 'Mentor'}
+            src={mentor?.profileImage || '/static/images/avatar.png'}
             width={80}
             height={80}
-            className="rounded-xl"
+            className="rounded-full"
           />
           <div className="flex flex-col">
-            <h2 className="mb-2 text-2xl font-bold text-cyan-900 dark:text-white">
-              Connect with <span className="text-primary-400">{mentor?.name}</span>
-            </h2>
+            <h2 className="mb-2 text-xl font-bold text-primary-400">{mentor?.fullName}</h2>
             <p className="text-sm text-gray-600 dark:text-gray-300">{mentor?.title}</p>
           </div>
         </div>
