@@ -3,6 +3,8 @@ import Image from '@/components/Image'
 import { Button } from '@headlessui/react'
 import { useState } from 'react'
 import Select from 'react-select'
+import Toast from './Toast'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   user
@@ -18,6 +20,8 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   const [selectedExpertise, setSelectedExpertise] = useState([])
   const [profileImage, setProfileImage] = useState<File | null>(null)
   const [profileImageUrl, setProfileImageUrl] = useState(user.image || '') // Set URL if exists
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const router = useRouter()
 
   // Define expertise options
   const expertiseOptions = [
@@ -107,20 +111,37 @@ const MentorForm: React.FC<Props> = ({ user }) => {
         body: formData,
       })
 
-      if (response.ok) {
-        alert('Mentor application submitted successfully!')
+      const responseData = await response.json()
+
+      if (response.status === 200 || response.status === 201) {
+        setToast({
+          type: 'success',
+          message: responseData.message || 'You have been added successfully. Welcome!',
+        })
+        // Redirect to /mentorship after 2 seconds
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
       } else {
-        alert('Failed to submit application. Please try again.')
+        setToast({
+          type: 'error',
+          message: responseData.message || 'Failed to submit application. Please try again.',
+        })
       }
     } catch (error) {
       console.error('Error submitting application:', error)
-      alert('Something went wrong. Please try again.')
+      setToast({ type: 'error', message: 'Something went wrong. Please try again.' })
     }
   }
 
   return (
     <>
-      <form className="grid grid-cols-1 gap-4 sm:grid-cols-2" onSubmit={handleSubmit}>
+      {toast && <Toast type={toast.type} message={toast.message} />}
+      <form
+        id="mentorRegForm"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+        onSubmit={handleSubmit}
+      >
         {/* Profile Image Upload */}
         <div className="col-span-1 flex flex-col items-center sm:col-span-2">
           <p className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">

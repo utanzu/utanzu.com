@@ -65,6 +65,18 @@ export const POST = async (req: NextRequest) => {
             );
         }
 
+        // 🔹 Check if the user is already registered as a mentor
+        const existingMentor = await prisma.mentor.findUnique({
+            where: { userId },
+        });
+
+        if (existingMentor) {
+            return new NextResponse(
+                JSON.stringify({ message: "User is already registered as a mentor." }),
+                { status: 200, headers: { "Content-Type": "application/json" } }
+            );
+        }
+
         let profileImage: string | null = null;
 
         // Handle file upload OR use existing image URL
@@ -109,7 +121,7 @@ export const POST = async (req: NextRequest) => {
 
         // Return the saved mentor details
         return new NextResponse(
-            JSON.stringify({ message: "Mentor successfully saved.", mentor: addedMentor }),
+            JSON.stringify({ message: "Your mentorship profile has been successfully saved.", mentor: addedMentor }),
             { status: 201, headers: { "Content-Type": "application/json" } }
         );
     } catch (error) {

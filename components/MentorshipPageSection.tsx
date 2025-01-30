@@ -1,7 +1,7 @@
 'use client'
 import Image from '@/components/Image'
 import { Button } from '@headlessui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from 'app/hooks/useAuth'
 import AuthModal from '../components/AuthModal'
@@ -50,6 +50,8 @@ const MentorshipPageSection = () => {
   const router = useRouter()
   const { loading, user } = useAuth()
   const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [isMentor, setIsMentor] = useState<boolean | null>(null)
+  const [checkingMentorStatus, setCheckingMentorStatus] = useState(true)
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase()
@@ -63,6 +65,37 @@ const MentorshipPageSection = () => {
       )
     )
   }
+
+  // Fetch mentor status when user is logged in
+  useEffect(() => {
+    const checkMentorStatus = async () => {
+      if (!user) return setCheckingMentorStatus(false)
+
+      try {
+        const response = await fetch(`/api/v1/mentors/${user.id}`)
+
+        if (response.status === 200) {
+          setIsMentor(true)
+        } else if (response.status === 404) {
+          setIsMentor(false)
+        } else {
+          console.error('Unexpected error checking mentor status')
+          setIsMentor(false)
+        }
+      } catch (error) {
+        console.error('Error fetching mentor status:', error)
+        setIsMentor(false)
+      } finally {
+        setCheckingMentorStatus(false)
+      }
+    }
+
+    if (user) {
+      checkMentorStatus()
+    } else {
+      setCheckingMentorStatus(false)
+    }
+  }, [user])
 
   const openAuthModal = () => {
     setAuthModalOpen(true)
@@ -202,13 +235,28 @@ const MentorshipPageSection = () => {
                 </ul>
               </section>
               {/* Mentor Sign-up Form */}
-              {user ? (
-                <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                  <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
-                    Become a Mentor Today
-                  </h3>
-                  <MentorForm user={user} />
-                </section>
+              {checkingMentorStatus ? (
+                <p className="text-center text-gray-600 dark:text-gray-300">
+                  Checking mentorship status...
+                </p>
+              ) : user ? (
+                isMentor ? (
+                  <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+                      You are already a mentor! 🎉
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Thank you for mentoring! Your profile is already registered.
+                    </p>
+                  </section>
+                ) : (
+                  <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+                      Become a Mentor Today
+                    </h3>
+                    <MentorForm user={user} />
+                  </section>
+                )
               ) : (
                 <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                   <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
