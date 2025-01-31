@@ -4,7 +4,7 @@ import Image from '@/components/Image'
 import { Link } from '@/components/ui/link'
 import { Button } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faEye, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import MenteeModal from './MenteeModal'
 import MentorModal from './MentorModal'
@@ -18,6 +18,7 @@ type Mentor = {
   description: string
   expertise: string
   profileImage: string
+  isConnected?: boolean
 }
 
 type Props = {
@@ -79,13 +80,13 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
                 height={80}
                 src={mentor.profileImage}
                 alt={mentor.fullName}
-                className="h-20 w-20 rounded-full border border-gray-300 object-cover shadow-md dark:border-gray-600"
+                className="h-20 w-20 rounded-full border border-gray-200 object-cover shadow-md dark:border-gray-600"
               />
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {mentor.fullName}
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{mentor.title}</p>
+                <p className="text-sm text-gray-700 dark:text-primary-400">{mentor.title}</p>
               </div>
             </div>
 
@@ -94,7 +95,7 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
               {mentor.expertise.split(',').map((skill, i) => (
                 <span
                   key={i}
-                  className="rounded-full bg-primary-100 px-3 py-1 text-xs font-medium text-primary-600 dark:bg-gray-600 dark:text-white"
+                  className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-primary-500 dark:bg-gray-600 dark:text-white"
                 >
                   {skill.trim()}
                 </span>
@@ -102,18 +103,34 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
             </div>
 
             {/* Description */}
-            {/* <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{mentor.description}</p> */}
+            <p className="mt-3 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-gray-600 dark:text-gray-300">
+              {mentor.description}
+            </p>
 
             {/* Connect Button & Icons */}
             <div className="mt-auto flex items-center gap-4 pt-4">
               {/* Connect Button with Arrow Icon */}
-              <Button
-                onClick={handleConnectMentor(mentor)}
-                className="inline-flex items-center justify-center rounded-full bg-secondary-700 px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:bg-primary-700"
-              >
-                Connect
-                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-              </Button>
+              {user?.id !== mentor.userId && (
+                <Button
+                  onClick={mentor.isConnected ? undefined : handleConnectMentor(mentor)}
+                  disabled={mentor.isConnected}
+                  className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 ${
+                    mentor.isConnected
+                      ? 'cursor-not-allowed bg-gray-400 text-white' // Connected state
+                      : 'bg-secondary-700 text-white hover:bg-primary-700' // Connect state
+                  }`}
+                >
+                  {mentor.isConnected ? (
+                    <>
+                      Connected <FontAwesomeIcon icon={faCheckCircle} className="ml-2" />
+                    </>
+                  ) : (
+                    <>
+                      Connect <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+                    </>
+                  )}
+                </Button>
+              )}
 
               {/* LinkedIn Icon */}
               <Link

@@ -57,7 +57,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
         if (!mentorProfile) {
             return NextResponse.json(
                 { error: "Mentor profile not found." },
-                { status: 404 }
+                { status: 202 }
             );
         }
 

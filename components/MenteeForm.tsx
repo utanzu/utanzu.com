@@ -65,7 +65,7 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
         <section className="flex flex-col gap-1">
           <div className="px-4 py-4">
             <div className="items-center space-y-4">
-              <h2 className="mb-8 text-cyan-900 dark:text-gray-200">
+              <h2 className="mb-8 text-gray-700 dark:text-gray-200">
                 Send a mentorship connection request to {mentor?.fullName}. Remember, first
                 impressions matter—make it count!
               </h2>
@@ -131,7 +131,7 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
               </div>
               <button
                 type="submit"
-                className="w-max rounded-full bg-primary-700 px-5 py-2 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-max rounded-full bg-primary-600 px-5 py-2 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Send request
               </button>

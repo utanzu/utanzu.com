@@ -118,10 +118,10 @@ const MentorForm: React.FC<Props> = ({ user }) => {
           type: 'success',
           message: responseData.message || 'You have been added successfully. Welcome!',
         })
-        // Redirect to /mentorship after 2 seconds
+        // Redirect to /mentorship after 1 second
         setTimeout(() => {
           window.location.reload()
-        }, 2000)
+        }, 1000)
       } else {
         setToast({
           type: 'error',

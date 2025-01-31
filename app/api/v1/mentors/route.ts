@@ -27,7 +27,6 @@ export const GET = async (req: NextRequest) => {
         const mentors = await prisma.mentor.findMany({
             where: whereClause,
             select: {
-                id: true,
                 userId: true,
                 fullName: true,
                 title: true,
@@ -35,7 +34,6 @@ export const GET = async (req: NextRequest) => {
                 description: true,
                 expertise: true,
                 profileImage: true,
-                createdAt: true,
             },
             orderBy: { createdAt: "desc" },
             skip: (validPage - 1) * validLimit,

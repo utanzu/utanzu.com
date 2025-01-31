@@ -7,7 +7,7 @@ import { useAuth } from 'app/hooks/useAuth'
 import AuthModal from '../components/AuthModal'
 import MentorCard from './MentorCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faLightbulb, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faLightbulb, faEnvelope, faHandshake } from '@fortawesome/free-solid-svg-icons'
 import MentorForm from './MentorForm'
 
 const MentorshipPageSection = () => {
@@ -20,6 +20,7 @@ const MentorshipPageSection = () => {
     description: string
     expertise: string
     profileImage: string
+    isConnected?: boolean
   }
 
   const [activeTab, setActiveTab] = useState('get-mentor')
@@ -56,6 +57,43 @@ const MentorshipPageSection = () => {
     fetchMentors()
   }, [])
 
+  // Fetch user's mentorship connections and mark connected mentors
+  useEffect(() => {
+    const checkUserMentors = async () => {
+      if (!user) return
+
+      try {
+        const response = await fetch(`/api/v1/mentorship/${user.id}/mentors`)
+        if (!response.ok) return
+
+        const { mentors: connectedMentors } = await response.json()
+
+        if (connectedMentors.length > 0) {
+          const connectedMentorIds = new Set(connectedMentors.map((m) => m.mentorId))
+
+          setMentors((prevMentors) =>
+            prevMentors.map((mentor) => ({
+              ...mentor,
+              isConnected: connectedMentorIds.has(mentor.userId),
+            }))
+          )
+          setFilteredMentors((prevFiltered) =>
+            prevFiltered.map((mentor) => ({
+              ...mentor,
+              isConnected: connectedMentorIds.has(mentor.userId),
+            }))
+          )
+        }
+      } catch (error) {
+        console.error('Error checking mentorship connections:', error)
+      }
+    }
+
+    if (user) {
+      checkUserMentors()
+    }
+  }, [user])
+
   // Search functionality
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase()
@@ -84,11 +122,11 @@ const MentorshipPageSection = () => {
         } else if (response.status === 404) {
           setIsMentor(false)
         } else {
-          console.error('Unexpected error checking mentor status')
+          //console.error('Unexpected error checking mentor status')
           setIsMentor(false)
         }
       } catch (error) {
-        console.error('Error fetching mentor status:', error)
+        //console.error('Error fetching mentor status:', error)
         setIsMentor(false)
       } finally {
         setCheckingMentorStatus(false)
@@ -110,6 +148,14 @@ const MentorshipPageSection = () => {
     setAuthModalOpen(false)
   }
 
+  // Function to dynamically apply active class
+  const getTabClass = (tabName: string) =>
+    `flex w-max items-center rounded-lg p-2 transition-all duration-300 ${
+      activeTab === tabName
+        ? 'bg-gray-600 dark:bg-gray-700 text-white' // Active background
+        : 'hover:bg-gray-100 dark:hover:bg-gray-500' // Default hover
+    }`
+
   return (
     <>
       <div className="flex flex-col md:flex-row">
@@ -119,7 +165,7 @@ const MentorshipPageSection = () => {
             <li>
               <Button
                 onClick={() => setActiveTab('get-mentor')}
-                className="group flex max-w-max items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                className={getTabClass('get-mentor')}
               >
                 <FontAwesomeIcon icon={faUserPlus} className="text-gray-400" />
                 <span className="ms-3 flex-1 whitespace-nowrap">Get a Mentor</span>
@@ -128,7 +174,7 @@ const MentorshipPageSection = () => {
             <li>
               <Button
                 onClick={() => setActiveTab('become-mentor')}
-                className="flex max-w-max items-center rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={getTabClass('become-mentor')}
               >
                 <FontAwesomeIcon icon={faLightbulb} className="text-gray-400" />
                 <span className="ms-3 flex-1 whitespace-nowrap">Become a Mentor</span>
@@ -136,9 +182,15 @@ const MentorshipPageSection = () => {
             </li>
             <li>
               <Button
-                onClick={() => setActiveTab('resources')}
-                className="flex max-w-max items-center rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => setActiveTab('connections')}
+                className={getTabClass('connections')}
               >
+                <FontAwesomeIcon icon={faHandshake} className="text-gray-400" />
+                <span className="ms-3 flex-1 whitespace-nowrap">Connections</span>
+              </Button>
+            </li>
+            <li>
+              <Button onClick={() => setActiveTab('messages')} className={getTabClass('messages')}>
                 <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
                 <span className="ms-3 flex-1 whitespace-nowrap">Messages</span>
               </Button>
@@ -148,22 +200,22 @@ const MentorshipPageSection = () => {
 
         {/* Responsive Top Menu for Small Screens */}
         <nav className="mb-2 flex flex-wrap justify-center gap-2 rounded-md bg-gray-50 p-2 dark:bg-gray-800 md:hidden">
-          <Button
-            onClick={() => setActiveTab('get-mentor')}
-            className="rounded-lg px-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-          >
+          <Button onClick={() => setActiveTab('get-mentor')} className={getTabClass('get-mentor')}>
             Mentee
           </Button>
           <Button
             onClick={() => setActiveTab('become-mentor')}
-            className="rounded-lg px-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+            className={getTabClass('become-mentor')}
           >
             Mentor
           </Button>
           <Button
-            onClick={() => setActiveTab('resources')}
-            className="rounded-lg px-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+            onClick={() => setActiveTab('connections')}
+            className={getTabClass('connections')}
           >
+            Connections
+          </Button>
+          <Button onClick={() => setActiveTab('messages')} className={getTabClass('messages')}>
             Messages
           </Button>
         </nav>
@@ -194,7 +246,7 @@ const MentorshipPageSection = () => {
                 <div className="flex flex-col items-start space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
                   <div className="max-w-xl">
                     <h2 className="mb-2 text-2xl font-bold text-secondary-600">Become a Mentor</h2>
-                    <p className="text-sm sm:text-base">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 sm:text-base">
                       Share your expertise, guide aspiring cybersecurity professionals, and make a
                       lasting impact on the next generation of security leaders.
                     </p>
@@ -281,7 +333,7 @@ const MentorshipPageSection = () => {
             </div>
           )}
 
-          {activeTab === 'resources' && <p>Resources content...</p>}
+          {activeTab === 'messages' && <p>Resources content...</p>}
         </div>
       </div>
       <AuthModal
