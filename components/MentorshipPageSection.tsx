@@ -9,6 +9,7 @@ import MentorCard from './MentorCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faLightbulb, faEnvelope, faHandshake } from '@fortawesome/free-solid-svg-icons'
 import MentorForm from './MentorForm'
+import MentorConnections from './MentorConnections'
 
 const MentorshipPageSection = () => {
   interface Mentor {
@@ -180,21 +181,28 @@ const MentorshipPageSection = () => {
                 <span className="ms-3 flex-1 whitespace-nowrap">Become a Mentor</span>
               </Button>
             </li>
-            <li>
-              <Button
-                onClick={() => setActiveTab('connections')}
-                className={getTabClass('connections')}
-              >
-                <FontAwesomeIcon icon={faHandshake} className="text-gray-400" />
-                <span className="ms-3 flex-1 whitespace-nowrap">Connections</span>
-              </Button>
-            </li>
-            <li>
-              <Button onClick={() => setActiveTab('messages')} className={getTabClass('messages')}>
-                <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
-                <span className="ms-3 flex-1 whitespace-nowrap">Messages</span>
-              </Button>
-            </li>
+            {user && (
+              <>
+                <li>
+                  <Button
+                    onClick={() => setActiveTab('connections')}
+                    className={getTabClass('connections')}
+                  >
+                    <FontAwesomeIcon icon={faHandshake} className="text-gray-400" />
+                    <span className="ms-3 flex-1 whitespace-nowrap">Connections</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    onClick={() => setActiveTab('messages')}
+                    className={getTabClass('messages')}
+                  >
+                    <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
+                    <span className="ms-3 flex-1 whitespace-nowrap">Messages</span>
+                  </Button>
+                </li>
+              </>
+            )}
           </ul>
         </aside>
 
@@ -209,15 +217,19 @@ const MentorshipPageSection = () => {
           >
             Mentor
           </Button>
-          <Button
-            onClick={() => setActiveTab('connections')}
-            className={getTabClass('connections')}
-          >
-            Connections
-          </Button>
-          <Button onClick={() => setActiveTab('messages')} className={getTabClass('messages')}>
-            Messages
-          </Button>
+          {user && (
+            <>
+              <Button
+                onClick={() => setActiveTab('connections')}
+                className={getTabClass('connections')}
+              >
+                Connections
+              </Button>
+              <Button onClick={() => setActiveTab('messages')} className={getTabClass('messages')}>
+                Messages
+              </Button>
+            </>
+          )}
         </nav>
 
         {/* Main Content */}
@@ -240,7 +252,7 @@ const MentorshipPageSection = () => {
             </>
           )}
           {activeTab === 'become-mentor' && (
-            <div className="space-y-10">
+            <div className="space-y-5">
               {/* Hero / Intro Section */}
               <section className="relative overflow-hidden p-2 text-white shadow-lg">
                 <div className="flex flex-col items-start space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
@@ -263,28 +275,28 @@ const MentorshipPageSection = () => {
               </section>
               {/* Benefits of Becoming a Mentor */}
               <section className="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-                <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-primary-500">
+                <h3 className="mb-4 text-xl font-semibold text-gray-700 dark:text-primary-500">
                   Why Mentor with Us?
                 </h3>
                 <ul className="ml-4 list-disc space-y-2 text-sm text-gray-600 dark:text-gray-300">
                   <li>
-                    <strong className="text-gray-800 dark:text-gray-100">
+                    <strong className="text-gray-700 dark:text-gray-100">
                       Professional Growth:
                     </strong>{' '}
                     Hone your leadership and coaching skills by guiding others.
                   </li>
                   <li>
-                    <strong className="text-gray-800 dark:text-gray-100">
+                    <strong className="text-gray-700 dark:text-gray-100">
                       Networking Opportunities:
                     </strong>{' '}
                     Connect with industry peers and emerging talent.
                   </li>
                   <li>
-                    <strong className="text-gray-800 dark:text-gray-100">Community Impact:</strong>{' '}
+                    <strong className="text-gray-700 dark:text-gray-100">Community Impact:</strong>{' '}
                     Give back to the cybersecurity community and help shape its future.
                   </li>
                   <li>
-                    <strong className="text-gray-800 dark:text-gray-100">
+                    <strong className="text-gray-700 dark:text-gray-100">
                       Continuous Learning:
                     </strong>{' '}
                     Stay on top of trends and fresh perspectives from your mentees.
@@ -332,6 +344,8 @@ const MentorshipPageSection = () => {
               )}
             </div>
           )}
+
+          {activeTab === 'connections' && <MentorConnections user={user} />}
 
           {activeTab === 'messages' && <p>Resources content...</p>}
         </div>

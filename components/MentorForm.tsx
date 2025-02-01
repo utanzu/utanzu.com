@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Select from 'react-select'
 import Toast from './Toast'
 import { useRouter } from 'next/navigation'
+import { useTheme } from 'next-themes'
 
 type Props = {
   user
@@ -22,6 +23,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   const [profileImageUrl, setProfileImageUrl] = useState(user.image || '') // Set URL if exists
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const router = useRouter()
+  const { theme } = useTheme()
 
   // Define expertise options
   const expertiseOptions = [
@@ -132,6 +134,70 @@ const MentorForm: React.FC<Props> = ({ user }) => {
       console.error('Error submitting application:', error)
       setToast({ type: 'error', message: 'Something went wrong. Please try again.' })
     }
+  }
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor:
+        theme === 'dark' || theme === 'system'
+          ? state.isFocused
+            ? '#424242'
+            : '#616161'
+          : state.isFocused
+            ? '#FFFFFF'
+            : '#F3F4F6',
+      borderColor:
+        theme === 'dark' || theme === 'system'
+          ? state.isFocused
+            ? '#FF7518'
+            : '#A9A9A9'
+          : state.isFocused
+            ? '#3B82F6'
+            : '#D1D5DB',
+      color: theme === 'dark' || theme === 'system' ? '#E5E7EB' : '#1F2937',
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: theme === 'dark' || theme === 'system' ? '#808080' : '#FFFFFF',
+      color: theme === 'dark' || theme === 'system' ? '#E5E7EB' : '#1F2937',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor:
+        theme === 'dark' || theme === 'system'
+          ? state.isFocused
+            ? '#FF7518'
+            : '#808080'
+          : state.isFocused
+            ? '#E5E7EB'
+            : '#FFFFFF',
+      color:
+        theme === 'dark' || theme === 'system'
+          ? state.isFocused
+            ? '#FFFFFF'
+            : '#E5E7EB'
+          : state.isFocused
+            ? '#1F2937'
+            : '#4B5563',
+      cursor: 'pointer',
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: theme === 'dark' || theme === 'system' ? '#FF7518' : '#3B82F6',
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: '#FFFFFF',
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: '#FFFFFF',
+      ':hover': {
+        backgroundColor: theme === 'dark' || theme === 'system' ? '#DC2626' : '#EF4444',
+        color: '#FFFFFF',
+      },
+    }),
   }
 
   return (
@@ -264,41 +330,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
             onChange={handleExpertiseChange}
             classNamePrefix="select"
             placeholder="Select up to 3 expertise areas"
-            styles={{
-              control: (provided, state) => ({
-                ...provided,
-                backgroundColor: state.isFocused ? '#424242' : '#616161', // Dark mode colors
-                borderColor: state.isFocused ? '#FF7518' : '#A9A9A9', // Border color in dark mode
-                color: '#E5E7EB', // Light text for dark mode
-              }),
-              menu: (provided) => ({
-                ...provided,
-                backgroundColor: '#808080', // Dark dropdown background
-                color: '#E5E7EB', // Light text for contrast
-              }),
-              option: (provided, state) => ({
-                ...provided,
-                backgroundColor: state.isFocused ? '#FF7518' : '#808080',
-                color: state.isFocused ? '#FFFFFF' : '#E5E7EB',
-                cursor: 'pointer',
-              }),
-              multiValue: (provided) => ({
-                ...provided,
-                backgroundColor: '#FF7518', // Tag background in dark mode
-              }),
-              multiValueLabel: (provided) => ({
-                ...provided,
-                color: '#FFFFFF', // Tag text color
-              }),
-              multiValueRemove: (provided) => ({
-                ...provided,
-                color: '#FFFFFF',
-                ':hover': {
-                  backgroundColor: '#DC2626', // Remove button hover color
-                  color: '#FFFFFF',
-                },
-              }),
-            }}
+            styles={customStyles}
           />
         </div>
 
