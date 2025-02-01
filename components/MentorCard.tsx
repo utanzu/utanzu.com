@@ -23,7 +23,9 @@ type Mentor = {
 
 type Props = {
   mentors: Mentor[]
-  user
+  user: {
+    id: string
+  }
   openAuthModal
 }
 

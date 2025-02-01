@@ -38,6 +38,14 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
                 mentor: {
                     select: {
                         id: true,
+                        fullName: true,
+                        profileImage: true,
+                        title: true,
+                    },
+                },
+                mentee: {
+                    select: {
+                        id: true,
                         name: true,
                         image: true,
                     },

@@ -14,23 +14,20 @@ datasource db {
 }
 
 model User {
-  id                  String       @id @default(cuid())
-  name                String?
-  username            String?      @unique
-  email               String?      @unique
-  emailVerified       DateTime?    @map("email_verified")
-  image               String?
-  accounts            Account[]
-  approved            Int          @default(0)
-  role                Int          @default(0)
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
-  Course              Course[]
-  Mentor              Mentor[]
-  mentorshipsAsMentor Mentorship[] @relation(name: "MentorRelation")
-  mentorshipsAsMentee Mentorship[] @relation(name: "MenteeRelation")
-  Mentorship          Mentorship?  @relation(fields: [mentorshipId], references: [id])
-  mentorshipId        Int?
+  id            String       @id @default(cuid())
+  name          String?
+  username      String?      @unique
+  email         String?      @unique
+  emailVerified DateTime?    @map("email_verified")
+  image         String?
+  accounts      Account[]
+  approved      Int          @default(0)
+  role          Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Course        Course[]
+  Mentor        Mentor[]
+  Mentorship    Mentorship[]
 
   @@map(name: "users")
 }
@@ -73,19 +70,20 @@ model Course {
 }
 
 model Mentor {
-  id           Int      @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
   ipAddress    String?
   fullName     String
   email        String
   title        String
   linkedin     String
-  description  String   @db.LongText
+  description  String       @db.LongText
   expertise    String
   profileImage String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  Mentorship   Mentorship[]
 
   @@unique([userId])
   @@map(name: "mentors")
@@ -95,15 +93,14 @@ model Mentorship {
   id        Int              @id @default(autoincrement())
   mentorId  String
   menteeId  String
-  mentor    User             @relation(name: "MentorRelation", fields: [mentorId], references: [id])
-  mentee    User             @relation(name: "MenteeRelation", fields: [menteeId], references: [id])
+  mentor    Mentor           @relation(fields: [mentorId], references: [userId])
+  mentee    User             @relation(fields: [menteeId], references: [id])
   ipAddress String?
   title     String
   message   String           @db.LongText
   status    MentorshipStatus @default(PENDING)
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
-  User      User[]
 
   @@unique([mentorId, menteeId])
   @@map(name: "mentorships")
