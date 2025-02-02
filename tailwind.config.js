@@ -35,6 +35,7 @@ module.exports = {
         primary: colors.orange,
         gray: colors.neutral,
         secondary: colors.emerald,
+        accent: colors.cyan,
       },
       zIndex: {
         60: '60',

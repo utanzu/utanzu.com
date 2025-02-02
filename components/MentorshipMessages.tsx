@@ -46,7 +46,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
         const data = await res.json()
         // Assume your API returns { messages: MessageType[] } including sender and receiver details.
         setMessages(data.messages)
-      } catch (error: any) {
+      } catch (error) {
         setToast({ type: 'error', message: error.message })
       } finally {
         setLoading(false)
@@ -122,7 +122,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
         const data2 = await res2.json()
         setMessages(data2.messages)
       }
-    } catch (error: any) {
+    } catch (error) {
       setToast({ type: 'error', message: error.message })
     }
   }
@@ -164,7 +164,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                   >
                     <FontAwesomeIcon
                       icon={selectedConversation === partnerId ? faMinus : faPlus}
-                      className="text-gray-600"
+                      className="text-gray-600 dark:text-gray-400"
                     />
                     <Image
                       width={40}
@@ -205,7 +205,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                               <div
                                 className={`max-w-md rounded-lg px-4 py-2 shadow ${
                                   isOutgoing
-                                    ? 'bg-primary-600 text-white'
+                                    ? 'bg-primary-700 text-white'
                                     : 'bg-gray-200 text-gray-800'
                                 }`}
                               >
@@ -246,7 +246,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                           ></textarea>
                           <button
                             onClick={handleNewMessage}
-                            className="rounded-full bg-primary-600 p-3 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="rounded-full bg-secondary-600 px-3 py-2 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
                           >
                             <FontAwesomeIcon icon={faPaperPlane} />
                           </button>
