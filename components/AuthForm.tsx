@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import { signIn } from 'next-auth/react'
+import { Link } from './ui/link'
+import { Button } from '@headlessui/react'
 
 type ModalProps = {
   message: string
@@ -21,7 +23,7 @@ const AuthForm: React.FC<ModalProps> = ({ message }) => {
               <h2 className="mb-8 text-cyan-900 dark:text-gray-200">{message}</h2>
             </div>
             <div className="mt-10 grid space-y-4">
-              <button
+              <Button
                 name="btnGoogle"
                 onClick={handleGoogleSignIn}
                 className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100"
@@ -38,8 +40,8 @@ const AuthForm: React.FC<ModalProps> = ({ message }) => {
                     Continue with Google
                   </span>
                 </div>
-              </button>
-              <button
+              </Button>
+              <Button
                 name="btnGoogle"
                 onClick={handleGithubSignIn}
                 className="group h-12 rounded-full border-2 border-gray-300 px-6 transition duration-300 hover:border-primary-400 focus:bg-primary-50 active:bg-primary-100"
@@ -57,18 +59,18 @@ const AuthForm: React.FC<ModalProps> = ({ message }) => {
                     Continue with Github
                   </span>
                 </div>
-              </button>
+              </Button>
             </div>
             <div className="mt-14 space-y-4 py-3 text-center text-gray-600 dark:text-gray-400">
               <p className="text-xs">
                 By proceeding, you agree to our{' '}
-                <a href="/privacy-policy/" className="underline">
+                <Link href="/terms/" className="underline">
                   Terms of Use
-                </a>{' '}
+                </Link>{' '}
                 and confirm you have read our{' '}
-                <a href="/privacy-policy/" className="underline">
-                  Privacy and Cookie Statement
-                </a>
+                <Link href="/privacy/" className="underline">
+                  Privacy and Cookie Policy
+                </Link>
                 .
               </p>
             </div>
