@@ -3818,6 +3818,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons-react@npm:^3.29.0":
+  version: 3.29.0
+  resolution: "@tabler/icons-react@npm:3.29.0"
+  dependencies:
+    "@tabler/icons": 3.29.0
+  peerDependencies:
+    react: ">= 16"
+  checksum: ec2f3966085488bee307146377fd2bc7467e274b24bb762a8b34fcda65abd76976471303231a8114d6eb0ab77c08a028bc54484138575b0d2ac993aa37e04bcb
+  languageName: node
+  linkType: hard
+
+"@tabler/icons@npm:3.29.0":
+  version: 3.29.0
+  resolution: "@tabler/icons@npm:3.29.0"
+  checksum: f2682d0938af51e001ad9a0e74b347333e3d649f5d4a8ad4daa512eebfd66799bb349067890b154f15cb8b233597800cff0223761ae4f2000d09404d0b12ce87
+  languageName: node
+  linkType: hard
+
 "@tailwindcss/forms@npm:^0.5.9":
   version: 0.5.10
   resolution: "@tailwindcss/forms@npm:0.5.10"
@@ -12846,6 +12864,7 @@ __metadata:
     "@next/bundle-analyzer": 15.1.4
     "@prisma/client": ^6.2.1
     "@svgr/webpack": ^8.0.1
+    "@tabler/icons-react": ^3.29.0
     "@tailwindcss/forms": ^0.5.9
     "@tailwindcss/typography": ^0.5.15
     "@types/mdx": ^2.0.12

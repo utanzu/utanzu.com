@@ -26,7 +26,7 @@ type Props = {
   user: {
     id: string
   }
-  openAuthModal
+  openAuthModal: () => void
 }
 
 const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
@@ -35,8 +35,8 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
   const [viewedMentor, setViewedMentor] = useState<Mentor | null>(null)
   const [mentorModalOpen, setMentorModalOpen] = useState(false)
 
-  const openMenteeModal = (mentor) => {
-    setSelectedMentor(mentor)
+  const openMenteeModal = (mentor: Mentor) => {
+    setSelectedMentor([mentor])
     setMenteeModalOpen(true)
   }
 
@@ -53,7 +53,7 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
     setMentorModalOpen(true)
   }
 
-  const handleConnectMentor = (mentor) => (e) => {
+  const handleConnectMentor = (mentor: Mentor) => (e: React.MouseEvent) => {
     e.preventDefault()
     if (!user) {
       openAuthModal()
@@ -62,7 +62,7 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
     }
   }
 
-  const handleViewMentor = (mentor) => (e) => {
+  const handleViewMentor = (mentor: Mentor) => (e: React.MouseEvent) => {
     e.preventDefault()
     openMentorModal(mentor)
   }
@@ -105,7 +105,7 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
             </div>
 
             {/* Description */}
-            <p className="mt-3 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-gray-600 dark:text-gray-300">
+            <p className="mt-3 line-clamp-2 text-xs text-gray-600 dark:text-gray-300">
               {mentor.description}
             </p>
 
@@ -118,8 +118,8 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
                   disabled={mentor.isConnected}
                   className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 ${
                     mentor.isConnected
-                      ? 'cursor-not-allowed bg-gray-400 text-white' // Connected state
-                      : 'bg-secondary-700 text-white hover:bg-primary-700' // Connect state
+                      ? 'cursor-not-allowed bg-gray-400 text-white'
+                      : 'bg-secondary-700 text-white hover:bg-primary-700'
                   }`}
                 >
                   {mentor.isConnected ? (
@@ -161,11 +161,13 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
         mentor={selectedMentor}
         user={user}
       />
-      <MentorModal
-        isOpenMentor={mentorModalOpen}
-        onRequestCloseMentor={closeMentorModal}
-        mentor={viewedMentor!}
-      />
+      {viewedMentor && (
+        <MentorModal
+          isOpenMentor={mentorModalOpen}
+          onRequestCloseMentor={closeMentorModal}
+          mentor={viewedMentor}
+        />
+      )}
     </>
   )
 }
