@@ -5,8 +5,7 @@ import { authOptions } from "../../../../../../lib/auth";
 import prisma from "../../../../../../lib/prisma";
 
 export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const userId = params.user;
-
+    const { user: userId } = await params;
     try {
         // Parallel execution: Get user session & mentors
         const [session, myMentors] = await Promise.all([

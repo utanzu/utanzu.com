@@ -4,11 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import MenteeForm from './MenteeForm'
 
+type Mentor = {
+  id: string
+  userId: string
+  fullName: string
+  title: string
+  linkedin: string
+  description: string
+  expertise: string
+  profileImage: string
+  isConnected?: boolean
+}
+
 type ModalProps = {
   isOpen: boolean
   onRequestClose: () => void
-  mentor
-  user
+  mentor: Mentor
+  user: {
+    id: string
+  }
 }
 
 const MenteeModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, mentor, user }) => {
@@ -33,15 +47,15 @@ const MenteeModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, mentor, use
       <div className="flex flex-col space-y-4 py-2">
         <div className="flex items-center gap-4">
           <Image
-            alt={mentor?.fullName || 'Mentor'}
-            src={mentor?.profileImage || '/static/images/avatar.png'}
+            alt={mentor.fullName}
+            src={mentor.profileImage || '/static/images/avatar.png'}
             width={80}
             height={80}
             className="rounded-full"
           />
           <div className="flex flex-col">
-            <h2 className="mb-2 text-xl font-bold text-primary-400">{mentor?.fullName}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">{mentor?.title}</p>
+            <h2 className="mb-2 text-xl font-bold text-primary-400">{mentor.fullName}</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">{mentor.title}</p>
           </div>
         </div>
       </div>

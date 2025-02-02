@@ -3,9 +3,23 @@ import { useState } from 'react'
 import { Link } from './ui/link'
 import Toast from './Toast'
 
+type Mentor = {
+  id: string
+  userId: string
+  fullName: string
+  title: string
+  linkedin: string
+  description: string
+  expertise: string
+  profileImage: string
+  isConnected?: boolean
+}
+
 type Props = {
-  mentor
-  user
+  mentor: Mentor
+  user: {
+    id: string
+  }
 }
 
 const MenteeForm: React.FC<Props> = ({ mentor }) => {
@@ -14,6 +28,7 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
   // State variables
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
+  const [termsAgreed, setTermsAgreed] = useState(false)
 
   // Handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
@@ -23,9 +38,9 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
     const formData = new FormData()
     formData.append('mentor', mentor.userId)
     formData.append('title', title)
-    formData.append('request', message)
+    formData.append('message', message)
 
-    console.log('FormData entries:', Array.from(formData.entries())) // Debugging
+    //console.log('FormData entries:', Array.from(formData.entries())) // Debugging
 
     try {
       const response = await fetch('/api/v1/mentorship/new', {
@@ -111,9 +126,8 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
                   <input
                     id="terms"
                     type="checkbox"
-                    value=""
                     className="focus:ring-3 h-4 w-4 rounded-sm border border-gray-300 bg-gray-50 focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800"
-                    required
+                    onChange={(e) => setTermsAgreed(e.target.checked)}
                   />
                 </div>
                 <label
@@ -122,7 +136,7 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
                 >
                   I agree with the{' '}
                   <Link
-                    href="/"
+                    href="/terms"
                     className="text-secondary-600 hover:underline dark:text-secondary-500"
                   >
                     terms and conditions
@@ -131,23 +145,15 @@ const MenteeForm: React.FC<Props> = ({ mentor }) => {
               </div>
               <button
                 type="submit"
-                className="w-max rounded-full bg-primary-600 px-5 py-2 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                disabled={!termsAgreed}
+                className={`w-max rounded-full px-5 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800 ${
+                  !termsAgreed
+                    ? 'cursor-not-allowed bg-gray-400'
+                    : 'bg-primary-600 hover:bg-primary-700'
+                }`}
               >
                 Send request
               </button>
-            </div>
-            <div className="mt-14 space-y-4 py-3 text-center text-gray-600 dark:text-gray-400">
-              <p className="text-xs">
-                By proceeding, you agree to our{' '}
-                <a href="/privacy-policy/" className="underline">
-                  Terms of Use
-                </a>{' '}
-                and confirm you have read our{' '}
-                <a href="/privacy-policy/" className="underline">
-                  Privacy and Cookie Statement
-                </a>
-                .
-              </p>
             </div>
           </div>
         </section>

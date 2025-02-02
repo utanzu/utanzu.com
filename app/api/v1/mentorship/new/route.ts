@@ -42,7 +42,7 @@ export const POST = async (req: NextRequest) => {
         // Extract values from FormData
         const mentor = formData.get("mentor") as string;
         const title = formData.get("title") as string;
-        const requestMessage = formData.get("request") as string;
+        const requestMessage = formData.get("message") as string;
 
         // Validate required fields
         if (!mentor || !title || !requestMessage) {
@@ -98,7 +98,7 @@ export const POST = async (req: NextRequest) => {
             );
         }
 
-        console.error('Internal Server Error:', error);
+        //console.error('Internal Server Error:', error);
         return NextResponse.json(
             { message: 'Internal Server Error', error: error.message },
             { status: 500 }

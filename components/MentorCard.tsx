@@ -31,12 +31,12 @@ type Props = {
 
 const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
   const [menteeModalOpen, setMenteeModalOpen] = useState(false)
-  const [selectedMentor, setSelectedMentor] = useState<Mentor[]>([])
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null)
   const [viewedMentor, setViewedMentor] = useState<Mentor | null>(null)
   const [mentorModalOpen, setMentorModalOpen] = useState(false)
 
   const openMenteeModal = (mentor: Mentor) => {
-    setSelectedMentor([mentor])
+    setSelectedMentor(mentor)
     setMenteeModalOpen(true)
   }
 
@@ -155,12 +155,14 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
           </div>
         ))}
       </div>
-      <MenteeModal
-        isOpen={menteeModalOpen}
-        onRequestClose={closeMenteeModal}
-        mentor={selectedMentor}
-        user={user}
-      />
+      {selectedMentor && (
+        <MenteeModal
+          isOpen={menteeModalOpen}
+          onRequestClose={closeMenteeModal}
+          mentor={selectedMentor}
+          user={user}
+        />
+      )}
       {viewedMentor && (
         <MentorModal
           isOpenMentor={mentorModalOpen}

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../../../../lib/prisma'
 
 export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const userId = params.user;
+    const { user: userId } = await params;
     try {
         // Fetch courses for the given user with only title and subtopic
         const courses = await prisma.course.findMany({

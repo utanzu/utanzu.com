@@ -5,6 +5,7 @@ import { authOptions } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 
 export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
+    const { user: userId } = await params;
     try {
         // Authenticate user
         const session = await getServerSession(authOptions);
