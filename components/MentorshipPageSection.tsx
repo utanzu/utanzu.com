@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faLightbulb, faEnvelope, faHandshake } from '@fortawesome/free-solid-svg-icons'
 import MentorForm from './MentorForm'
 import MentorConnections from './MentorConnections'
+import MentorshipMessages from './MentorshipMessages'
 
 const MentorshipPageSection = () => {
   interface Mentor {
@@ -347,7 +348,7 @@ const MentorshipPageSection = () => {
 
           {activeTab === 'connections' && <MentorConnections user={user} />}
 
-          {activeTab === 'messages' && <p>Resources content...</p>}
+          {activeTab === 'messages' && <MentorshipMessages user={user} />}
         </div>
       </div>
       <AuthModal

@@ -14,20 +14,22 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  name          String?
-  username      String?      @unique
-  email         String?      @unique
-  emailVerified DateTime?    @map("email_verified")
-  image         String?
-  accounts      Account[]
-  approved      Int          @default(0)
-  role          Int          @default(0)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  Course        Course[]
-  Mentor        Mentor[]
-  Mentorship    Mentorship[]
+  id               String       @id @default(cuid())
+  name             String?
+  username         String?      @unique
+  email            String?      @unique
+  emailVerified    DateTime?    @map("email_verified")
+  image            String?
+  accounts         Account[]
+  approved         Int          @default(0)
+  role             Int          @default(0)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  Course           Course[]
+  Mentor           Mentor[]
+  Mentorship       Mentorship[]
+  sentMessages     Message[]    @relation("SentMessages")
+  receivedMessages Message[]    @relation("ReceivedMessages")
 
   @@map(name: "users")
 }
@@ -101,6 +103,7 @@ model Mentorship {
   status    MentorshipStatus @default(PENDING)
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
+  Message   Message[]
 
   @@unique([mentorId, menteeId])
   @@map(name: "mentorships")
@@ -111,4 +114,21 @@ enum MentorshipStatus {
   REJECTED
   ONGOING
   COMPLETED
+}
+
+model Message {
+  id           Int        @id @default(autoincrement())
+  mentorshipId Int
+  mentorship   Mentorship @relation(fields: [mentorshipId], references: [id])
+  senderId     String
+  receiverId   String
+  sender       User       @relation("SentMessages", fields: [senderId], references: [id])
+  receiver     User       @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  ipAddress    String?
+  title        String
+  message      String     @db.LongText
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map(name: "messages")
 }
