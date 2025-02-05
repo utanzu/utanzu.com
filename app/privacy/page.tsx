@@ -18,7 +18,7 @@ const PrivacyPage = () => {
             <div className="pr-8 xl:pr-0">
               <Image
                 src="/static/images/avatar.png"
-                alt="Utanzu Community Avatar"
+                alt="Utanzu Cybersecurity Avatar"
                 width={192}
                 height={192}
                 className="h-30 w-30 rounded-full p-5"
@@ -26,7 +26,7 @@ const PrivacyPage = () => {
             </div>
             <div>
               <h3 className="pb-2 pt-4 text-3xl font-bold leading-8 tracking-tight xl:text-2xl">
-                Utanzu Community
+                Utanzu Cybersecurity
               </h3>
               <div className="text-lg text-gray-500 dark:text-gray-400 xl:text-base">
                 Join, Learn & Thrive
@@ -36,9 +36,9 @@ const PrivacyPage = () => {
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
             <h3>Introduction</h3>
             <p>
-              Welcome to Utanzu Community. Your privacy is important to us. This Privacy and Cookie
-              Policy explains how we collect, use, and protect your information when you visit our
-              website.
+              Welcome to Utanzu Cybersecurity Community. Your privacy is important to us. This
+              Privacy and Cookie Policy explains how we collect, use, and protect your information
+              when you visit our website.
             </p>
 
             <h3>Data Collection</h3>

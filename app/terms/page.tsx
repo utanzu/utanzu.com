@@ -25,7 +25,7 @@ const TermsPage = () => {
             </div>
             <div>
               <h3 className="pb-2 pt-4 text-3xl font-bold leading-8 tracking-tight xl:text-2xl">
-                Utanzu Community
+                Utanzu Cybersecurity
               </h3>
               <div className="text-lg text-gray-500 dark:text-gray-400 xl:text-base">
                 Join, Learn & Thrive
