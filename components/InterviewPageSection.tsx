@@ -129,28 +129,34 @@ const InterviewPageSection = () => {
   return (
     <>
       {!user && (
-        <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-          <p className="mb-3 text-base text-gray-600 dark:text-gray-300">
-            Please sign in to get started.
-          </p>
-          <Button
-            onClick={openAuthModal}
-            className="block rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
-          >
-            Sign In
-          </Button>
-          <h3 className="mb-3 mt-5 text-lg text-gray-900 dark:text-gray-100">Demo Video</h3>
-          <div className="relative h-0 overflow-hidden rounded-lg pb-[56.25%] shadow-lg">
-            <iframe
-              className="absolute left-0 top-0 h-full w-full"
-              src={`https://www.youtube.com/embed/VkJObemd7C4`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </section>
+        <>
+          <section className="rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <p className="mb-3 text-base text-gray-600 dark:text-gray-300">
+              Please sign in to get started.
+            </p>
+            <Button
+              onClick={openAuthModal}
+              className="block rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+            >
+              Sign In
+            </Button>
+          </section>
+          <section className="mt-5 rounded-sm bg-white dark:bg-gray-900">
+            <h3 className="mb-3 text-lg text-gray-900 dark:text-gray-100">How does this work?</h3>
+            <div className="relative h-0 overflow-hidden rounded-md pb-[40%] shadow-lg">
+              {' '}
+              {/* Reduced height */}
+              <iframe
+                className="absolute left-0 top-0 h-full w-full"
+                src={`https://www.youtube.com/embed/VkJObemd7C4`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </section>
+        </>
       )}
       {user && (
         <div className="mx-auto mt-4 max-w-[1000px] sm:mt-8">
