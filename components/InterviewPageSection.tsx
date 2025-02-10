@@ -4,6 +4,8 @@ import { IconDots, IconArrowRight } from '@tabler/icons-react'
 import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { useAuth } from 'app/hooks/useAuth'
 import AuthModal from '../components/AuthModal'
+import { faDownload, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 /**
  * Message type for our chat.
@@ -20,6 +22,7 @@ const InterviewPageSection = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [content, setContent] = useState<string>('')
   const [cvFile, setCvFile] = useState<File | null>(null)
+  const [fullScreenContent, setFullScreenContent] = useState<string | null>(null)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -52,6 +55,38 @@ const InterviewPageSection = () => {
     if (e.target.files && e.target.files.length > 0) {
       setCvFile(e.target.files[0])
     }
+  }
+
+  const formatResponse = (text: string) => {
+    return text
+      .split('\n\n') // Split by double newlines
+      .map((paragraph, index) => {
+        const match = paragraph.match(/^### (\d+)\. (.+)|\*\*Sample Answer:\*\*/)
+        if (match) {
+          if (match[1]) {
+            return (
+              <div key={index} className="ml-4 mt-4 dark:text-gray-700">
+                {paragraph.replace('### ', '').replace('**Sample Answer:** ', '')}
+              </div>
+            )
+          }
+        }
+        return (
+          <p key={index} className="mt-4 dark:text-gray-700">
+            {paragraph}
+          </p>
+        )
+      })
+  }
+
+  const handleDownload = (content: string) => {
+    const blob = new Blob([content], { type: 'text/plain' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = 'interview_questions.txt'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   // Handle sending the message.
@@ -96,15 +131,14 @@ const InterviewPageSection = () => {
         throw new Error('Failed to get AI response')
       }
       const data = await res.json()
-      const aiResponse = data.response // Expecting a JSON response with a "response" field.
-      // Replace the loading message with the actual AI response.
+      const aiResponse = data.response.response // Extract response from API
+
       setMessages((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = { role: 'assistant', content: aiResponse }
         return updated
       })
     } catch (error: any) {
-      // Replace the loading message with an error message.
       setMessages((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = {
@@ -182,7 +216,7 @@ const InterviewPageSection = () => {
           </div>
 
           {/* Chat Interface */}
-          <div className="flex flex-col rounded-lg border border-neutral-200 px-2 dark:border-neutral-700 sm:border sm:p-4">
+          <div className="flex flex-col">
             {/* Render messages */}
             {messages.map((message, index) => (
               <div key={index} className="my-1 sm:my-1.5">
@@ -192,26 +226,49 @@ const InterviewPageSection = () => {
                   <div
                     className={`flex items-center ${
                       message.role === 'assistant'
-                        ? 'bg-neutral-200 text-neutral-900'
-                        : 'bg-primary-500 text-white'
-                    } max-w-[67%] whitespace-pre-wrap rounded-2xl px-3 py-2`}
+                        ? 'bg-neutral-200 text-neutral-800'
+                        : 'bg-primary-200 text-gray-800'
+                    } max-w-[67%] whitespace-pre-wrap rounded-md px-3 py-2`}
                     style={{ overflowWrap: 'anywhere' }}
                   >
-                    {message.content ||
-                      (message.role === 'assistant' && loading && (
-                        <IconDots className="animate-pulse" />
-                      ))}
+                    {message.role === 'assistant' ? (
+                      <div className="relative w-full">
+                        {/* Buttons at Top-Right */}
+                        <div className="absolute right-2 top-2 flex space-x-3">
+                          <button
+                            onClick={() => handleDownload(message.content)}
+                            className="pb-5 text-gray-700 hover:text-black"
+                          >
+                            <FontAwesomeIcon icon={faDownload} size="lg" />
+                          </button>
+                          <button
+                            onClick={() => setFullScreenContent(message.content)}
+                            className="pb-5 text-gray-700 hover:text-black"
+                          >
+                            <FontAwesomeIcon icon={faExpand} size="lg" />
+                          </button>
+                        </div>
+
+                        {/* Formatted response with bottom padding to prevent overlap */}
+                        <div className="mt-8 pb-10">{formatResponse(message.content)}</div>
+                      </div>
+                    ) : (
+                      message.content
+                    )}
+                    {message.role === 'assistant' && loading && (
+                      <IconDots className="animate-pulse" />
+                    )}
                   </div>
                 </div>
               </div>
             ))}
 
             {/* New Message Input Area */}
-            <div className="mt-4 w-full sm:mt-8">
+            <div className="mt-1 w-full sm:mt-2">
               <div className="relative">
                 <textarea
                   ref={textareaRef}
-                  className="min-h-[44px] w-full rounded-lg border-2 border-neutral-200 py-2 pl-4 pr-12 focus:text-gray-700 focus:outline-none focus:ring-1 focus:ring-neutral-300 dark:border-neutral-700 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-neutral-600"
+                  className="min-h-[44px] w-full rounded-md border-2 border-neutral-200 py-2 pl-4 pr-12 focus:text-gray-700 focus:outline-none focus:ring-1 focus:ring-neutral-300 dark:border-neutral-700 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-neutral-600"
                   style={{ resize: 'none' }}
                   placeholder="Paste the job description here..."
                   value={content}
@@ -228,6 +285,28 @@ const InterviewPageSection = () => {
           </div>
         </div>
       )}
+
+      {/* Full-Screen Modal */}
+      {fullScreenContent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-5">
+          <div className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 shadow-lg">
+            {/* Close Button */}
+            <button
+              onClick={() => setFullScreenContent(null)}
+              className="absolute right-4 top-4 text-2xl text-gray-600 hover:text-black"
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+
+            {/* Modal Title */}
+            <h2 className="mb-4 text-xl font-bold text-gray-900">Expanded View</h2>
+
+            {/* Formatted Content */}
+            <div>{formatResponse(fullScreenContent)}</div>
+          </div>
+        </div>
+      )}
+
       <AuthModal
         isOpen={authModalOpen}
         onRequestClose={closeAuthModal}
