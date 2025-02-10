@@ -2,39 +2,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
-import { headers } from "next/headers";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 
-// Helper function to save the uploaded CV file.
-const saveFile = async (file: File): Promise<string> => {
-    const uploadDir = path.join(process.cwd(), "public/uploads/cvs");
-    // Ensure the directory exists.
-    await mkdir(uploadDir, { recursive: true });
-    const filePath = path.join(uploadDir, file.name);
-    const buffer = await file.arrayBuffer();
-    await writeFile(filePath, Buffer.from(buffer));
-    // Return the relative URL so it can be used later.
-    return `/uploads/cvs/${file.name}`;
-};
-
-// Dummy AI function to simulate generating interview questions based on the CV and job description.
-const generateInterviewQuestions = async (cvUrl: string, jobDescription: string): Promise<string> => {
-    // In your real application, call your AI service here (or use an SDK).
-    // For simulation, we resolve after a short delay.
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(
-                `Based on your CV at ${cvUrl} and the job description "${jobDescription}", here are some interview questions:
-1. Can you explain your background and experience as described in your CV?
-2. How do your skills match the requirements of this job?
-3. What challenges have you faced in your previous roles, and how did you overcome them?`
-            );
-        }, 2000);
-    });
-};
+// URL of your deployed FastAPI backend on Azure
+const FASTAPI_URL = process.env.FASTAPI_URL;
 
 export const POST = async (req: NextRequest) => {
+    if (!FASTAPI_URL) {
+        return NextResponse.json(
+            { error: "FASTAPI_URL is not set in the environment variables." },
+            { status: 500 }
+        );
+    }
     // Get the user session.
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -67,15 +45,32 @@ export const POST = async (req: NextRequest) => {
             );
         }
 
-        // Save the uploaded CV file and get its URL.
-        const cvUrl = await saveFile(cvFile);
+        // Prepare the FormData to send to FastAPI
+        const fastapiFormData = new FormData();
+        fastapiFormData.append("job_description", jobDescription);
+        fastapiFormData.append("cv", cvFile);
 
-        // Call your AI service (simulated here) to generate interview questions.
-        const aiResponse = await generateInterviewQuestions(cvUrl, jobDescription);
+        // Send the request to the FastAPI backend on Azure
+        const fastapiResponse = await fetch(FASTAPI_URL, {
+            method: "POST",
+            body: fastapiFormData,
+        });
+
+        // Check if the request was successful
+        if (!fastapiResponse.ok) {
+            const errorText = await fastapiResponse.text();
+            return NextResponse.json(
+                { error: "FastAPI Error", message: errorText },
+                { status: fastapiResponse.status }
+            );
+        }
+
+        // Parse FastAPI's response
+        const responseData = await fastapiResponse.json();
 
         // Return the AI response.
         return NextResponse.json(
-            { response: aiResponse },
+            { response: responseData },
             { status: 200, headers: { "Content-Type": "application/json" } }
         );
     } catch (error) {
