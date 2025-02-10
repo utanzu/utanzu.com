@@ -24,7 +24,7 @@ export default function Main() {
           </h3>
           <Link
             href="/careers"
-            className="block rounded border border-primary-500 bg-transparent px-4 py-1 text-sm font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+            className="block rounded border border-primary-500 bg-transparent px-4 py-2 font-semibold text-primary-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
           >
             Get started - it&apos;s free
           </Link>
@@ -39,7 +39,7 @@ export default function Main() {
             <div className="w-full pr-4 md:w-3/5">
               <p className="mt-4 leading-7 text-gray-500 dark:text-gray-400 md:text-xl">
                 By joining the
-                <span className="font-semibold text-primary-500"> Utanzu </span>
+                <span className="font-semibold text-primary-500"> Utanzu Cybersecurity </span>
                 community, you become part of a dynamic network dedicated to empowering the next
                 generation of cybersecurity experts, helping them branch out into new areas of
                 knowledge, mentorship, and professional success.
@@ -58,7 +58,7 @@ export default function Main() {
           <div className="flex justify-end text-base font-medium leading-6">
             <Link
               href="/about"
-              className="text-sm text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label="Read more"
             >
               Read more &rarr;

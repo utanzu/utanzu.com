@@ -1,10 +1,10 @@
 'use client'
 import { Button } from '@headlessui/react'
-import { IconDots, IconArrowRight } from '@tabler/icons-react'
+import { IconArrowRight } from '@tabler/icons-react'
 import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { useAuth } from 'app/hooks/useAuth'
 import AuthModal from '../components/AuthModal'
-import { faDownload, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faExpand, faTimes, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 /**
@@ -23,6 +23,7 @@ const InterviewPageSection = () => {
   const [content, setContent] = useState<string>('')
   const [cvFile, setCvFile] = useState<File | null>(null)
   const [fullScreenContent, setFullScreenContent] = useState<string | null>(null)
+  const [isResponseDisplayed, setIsResponseDisplayed] = useState<boolean>(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -110,6 +111,7 @@ const InterviewPageSection = () => {
     const loadingMessage: Message = { role: 'assistant', content: '' }
     setMessages((prev) => [...prev, loadingMessage])
     setLoading(true)
+    setIsResponseDisplayed(false)
     const jobDescription = content // Save current job description.
     setContent('') // Clear textarea.
 
@@ -138,7 +140,8 @@ const InterviewPageSection = () => {
         updated[updated.length - 1] = { role: 'assistant', content: aiResponse }
         return updated
       })
-    } catch (error: any) {
+      setIsResponseDisplayed(true)
+    } catch (error) {
       setMessages((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = {
@@ -211,7 +214,7 @@ const InterviewPageSection = () => {
               onChange={handleFileChange}
             />
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400" id="file_input_help">
-              Only PDF files are supported at the moment (Max. 5MB).
+              Only PDF files are supported at the moment (Max. 5MB). We don't save your documents.
             </p>
           </div>
 
@@ -234,29 +237,34 @@ const InterviewPageSection = () => {
                     {message.role === 'assistant' ? (
                       <div className="relative w-full">
                         {/* Buttons at Top-Right */}
-                        <div className="absolute right-2 top-2 flex space-x-3">
-                          <button
-                            onClick={() => handleDownload(message.content)}
-                            className="pb-5 text-gray-700 hover:text-black"
-                          >
-                            <FontAwesomeIcon icon={faDownload} size="lg" />
-                          </button>
-                          <button
-                            onClick={() => setFullScreenContent(message.content)}
-                            className="pb-5 text-gray-700 hover:text-black"
-                          >
-                            <FontAwesomeIcon icon={faExpand} size="lg" />
-                          </button>
-                        </div>
+                        {isResponseDisplayed && (
+                          <div className="absolute right-2 top-2 flex space-x-3">
+                            <button
+                              onClick={() => handleDownload(message.content)}
+                              className="text-gray-700 hover:text-black"
+                            >
+                              <FontAwesomeIcon icon={faDownload} size="lg" />
+                            </button>
+                            <button
+                              onClick={() => setFullScreenContent(message.content)}
+                              className="text-gray-700 hover:text-black"
+                            >
+                              <FontAwesomeIcon icon={faExpand} size="lg" />
+                            </button>
+                          </div>
+                        )}
 
                         {/* Formatted response with bottom padding to prevent overlap */}
-                        <div className="mt-8 pb-10">{formatResponse(message.content)}</div>
+                        <div className="py-4">{formatResponse(message.content)}</div>
                       </div>
                     ) : (
                       message.content
                     )}
                     {message.role === 'assistant' && loading && (
-                      <IconDots className="animate-pulse" />
+                      <FontAwesomeIcon
+                        icon={faSpinner}
+                        className="fa-spin-pulse text-3xl text-gray-700"
+                      />
                     )}
                   </div>
                 </div>
@@ -299,7 +307,7 @@ const InterviewPageSection = () => {
             </button>
 
             {/* Modal Title */}
-            <h2 className="mb-4 text-xl font-bold text-gray-900">Expanded View</h2>
+            <h2 className="mb-4 text-xl font-bold text-gray-900">Interview Questions</h2>
 
             {/* Formatted Content */}
             <div>{formatResponse(fullScreenContent)}</div>

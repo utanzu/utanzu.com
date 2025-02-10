@@ -30,6 +30,7 @@ model User {
   Mentorship       Mentorship[]
   sentMessages     Message[]    @relation("SentMessages")
   receivedMessages Message[]    @relation("ReceivedMessages")
+  Interview        Interview[]
 
   @@map(name: "users")
 }
@@ -131,4 +132,17 @@ model Message {
   updatedAt    DateTime   @updatedAt
 
   @@map(name: "messages")
+}
+
+model Interview {
+  id        Int      @id @default(autoincrement())
+  ipAddress String?
+  status    String
+  content   String   @db.LongText
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "interviews")
 }

@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
+import prisma from '../../../../../lib/prisma'
+import { headers } from "next/headers";
 
 // URL of your deployed FastAPI backend on Azure
 const FASTAPI_URL = process.env.FASTAPI_URL;
@@ -55,6 +57,16 @@ export const POST = async (req: NextRequest) => {
             method: "POST",
             body: fastapiFormData,
         });
+
+        // Create new record
+        const newInterview = await prisma.interview.create({
+            data: {
+                ipAddress: (await headers()).get("x-forwarded-for"),
+                status: fastapiResponse.status.toString(),
+                content: jobDescription.trim().slice(0, 200),
+                userId: userId,
+            },
+        })
 
         // Check if the request was successful
         if (!fastapiResponse.ok) {

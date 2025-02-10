@@ -22,7 +22,7 @@ export default function Footer() {
           <Link href="mailto:support@utanzu.com">Contact</Link>
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          Utanzu Cybersecurity Community. All rights reserved.
+          Utanzu Cybersecurity. All rights reserved.
         </div>
         <div className="mb-2 flex space-x-2 text-xs text-gray-500 dark:text-gray-400"></div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
