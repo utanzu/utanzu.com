@@ -4,14 +4,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../../lib/auth";
 import prisma from "../../../../../../lib/prisma";
 
-export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const { user: userId } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ user: string }> }) => {
+    const user = (await params).user
     try {
         // Parallel execution: Get user session & mentors
         const [session, myMentors] = await Promise.all([
             getServerSession(authOptions),
             prisma.mentorship.findMany({
-                where: { menteeId: userId },
+                where: { menteeId: user },
                 select: {
                     id: true,
                     mentorId: true,
@@ -31,7 +31,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
         }
 
         // Restrict access to only their own mentors
-        if (session.user.id !== userId) {
+        if (session.user.id !== user) {
             return NextResponse.json(
                 { error: "Forbidden: You can only access your own data." },
                 { status: 403 }

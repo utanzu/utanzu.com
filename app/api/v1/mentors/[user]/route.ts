@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 
-export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const { user: userId } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ user: string }> }) => {
+    const user = (await params).user
 
     // Get the user session
     const session = await getServerSession(authOptions);
@@ -28,7 +28,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
     }
 
     // Allow fetching only their own profile
-    if (sessionUserId !== userId) {
+    if (sessionUserId !== user) {
         return NextResponse.json(
             { error: "Forbidden: You can only access your own profile." },
             { status: 403 }
@@ -38,7 +38,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
     try {
         // Fetch mentor profile by userId
         const mentorProfile = await prisma.mentor.findUnique({
-            where: { userId: userId },
+            where: { userId: user },
             select: {
                 id: true,
                 userId: true,

@@ -4,8 +4,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 
-export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const { user: userId } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ user: string }> }) => {
+    const user = (await params).user
+
     try {
         // Authenticate user
         const session = await getServerSession(authOptions);
@@ -17,7 +18,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
         const sessionUserId = session.user?.id;
 
         // Restrict access to only their own mentorship connections
-        const requestedUserId = params.user;
+        const requestedUserId = user;
         if (sessionUserId !== requestedUserId) {
             return NextResponse.json({ error: "Forbidden: You can only access your own data." }, { status: 403 });
         }
