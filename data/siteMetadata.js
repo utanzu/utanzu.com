@@ -9,6 +9,7 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://utanzu.com',
+  analyticsURL: 'https://cloud.umami.is/share/lxeHzEqpClO3j6rx/utanzu.com',
   siteRepo: 'https://github.com/utanzu/utanzu.com',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/avatar.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
@@ -24,6 +25,7 @@ const siteMetadata = {
   // instagram: 'https://www.instagram.com',
   // medium: 'https://medium.com',
   // bluesky: 'https://bsky.app/',
+  stats: 'https://cloud.umami.is/share/lxeHzEqpClO3j6rx/utanzu.com',
   locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,

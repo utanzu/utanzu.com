@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import prisma from '../../../../../lib/prisma'
 
-export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const { user: userId } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ user: string }> }) => {
+    // const { user: userId } = await params;
+    const user = (await params).user
     try {
         const courses = await prisma.course.findMany({
             select: {
@@ -16,7 +17,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
                 createdAt: true,
             },
             where: {
-                userId: userId,
+                userId: user,
             },
             orderBy: { createdAt: 'desc' },
         })

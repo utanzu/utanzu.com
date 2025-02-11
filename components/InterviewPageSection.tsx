@@ -185,7 +185,7 @@ const InterviewPageSection = () => {
               {/* Reduced height */}
               <iframe
                 className="absolute left-0 top-0 h-full w-full"
-                src={`https://www.youtube.com/embed/VkJObemd7C4`}
+                src={`https://www.youtube.com/embed/PItGVnsDPuk`}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
