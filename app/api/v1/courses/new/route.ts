@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../../../lib/prisma'
 import { headers } from "next/headers";
+import { Prisma } from '@prisma/client'
 
 export const POST = async (req: NextRequest) => {
     try {
@@ -68,16 +69,19 @@ export const POST = async (req: NextRequest) => {
         )
     } catch (error) {
         // Handle unique constraint error (P2002)
-        if (error.code === 'P2002' && error.meta?.target.includes('subtopic_userId_unique')) {
-            return NextResponse.json(
-                { message: 'Subtopic already exists for this user.' },
-                { status: 200 }
-            );
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            // Handle unique constraint error (P2002)
+            if (error.code === 'P2002') {
+                return NextResponse.json(
+                    { message: 'Subtopic already exists for this user.' },
+                    { status: 200 }
+                );
+            }
         }
 
-        console.error('Internal Server Error:', error.message);
+        // console.error('Internal Server Error:', error.message);
         return NextResponse.json(
-            { message: 'Internal Server Error', error: error.message },
+            { message: 'Internal Server Error', error: (error as Error).message },
             { status: 500 }
         );
     }

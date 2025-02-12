@@ -130,7 +130,7 @@ const InterviewPageSection = () => {
       })
 
       if (!res.ok) {
-        throw new Error('Failed to get AI response')
+        throw new Error('Failed to get response. Check your CV and try again.')
       }
       const data = await res.json()
       const aiResponse = data.response.response // Extract response from API

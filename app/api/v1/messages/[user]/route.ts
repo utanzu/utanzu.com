@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 
-export const GET = async (req: NextRequest, { params }: { params: { user: string } }) => {
-    const { user: userId } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ user: string }> }) => {
+    const user = (await params).user
 
     // Get the user session
     const session = await getServerSession(authOptions);
@@ -28,7 +28,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
     }
 
     // Allow fetching only their own messages
-    if (sessionUserId !== userId) {
+    if (sessionUserId !== user) {
         return NextResponse.json(
             { error: "Forbidden: You can only access your own messages." },
             { status: 403 }
@@ -39,7 +39,7 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
         // Fetch all messages where the user is either the sender or the receiver.
         const userMessages = await prisma.message.findMany({
             where: {
-                OR: [{ senderId: userId }, { receiverId: userId }],
+                OR: [{ senderId: user }, { receiverId: user }],
             },
             include: {
                 sender: {
@@ -53,10 +53,10 @@ export const GET = async (req: NextRequest, { params }: { params: { user: string
         });
 
         return NextResponse.json({ messages: userMessages }, { status: 200 });
-    } catch (error: any) {
+    } catch (error) {
         console.error("Error fetching messages:", error);
         return NextResponse.json(
-            { error: "Internal Server Error", details: error.message },
+            { message: 'Internal Server Error', error: (error as Error).message },
             { status: 500 }
         );
     }

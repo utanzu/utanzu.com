@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
             headers: { 'Content-Type': 'application/json' },
         })
     } catch (error) {
-        console.error('Error fetching courses:', error)
+        //console.error('Error fetching courses:', error)
         return new NextResponse(JSON.stringify({ message: 'Internal Server Error' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },

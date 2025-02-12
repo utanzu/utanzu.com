@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { allBlogs } from 'contentlayer/generated'
+import { allCareers, allCourses } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
 
 export const dynamic = 'force-static'
@@ -7,17 +7,36 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
 
-  const blogRoutes = allBlogs
-    .filter((post) => !post.draft)
-    .map((post) => ({
-      url: `${siteUrl}/${post.path}`,
-      lastModified: post.lastmod || post.date,
+  // Generate career-specific routes
+  const careerRoutes = allCareers
+    .filter((career) => career.slug)
+    .map((career) => ({
+      url: `${siteUrl}/careers/${career.slug}`,
+      lastModified: career.date || new Date().toISOString().split('T')[0],
     }))
 
-  const routes = ['', 'blog', 'projects', 'tags'].map((route) => ({
+  // Generate course-specific routes
+  const courseRoutes = allCourses
+    .filter((course) => course.slug)
+    .map((course) => ({
+      url: `${siteUrl}/courses/${course.slug}`,
+      lastModified: course.date || new Date().toISOString().split('T')[0],
+    }))
+
+  // Define standard static routes
+  const staticRoutes = [
+    '',
+    'about',
+    'careers',
+    'courses',
+    'mentorship',
+    'interview',
+    'terms',
+    'privacy',
+  ].map((route) => ({
     url: `${siteUrl}/${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
+    lastModified: new Date().toISOString().split('T')[0], // Current date for static pages
   }))
 
-  return [...routes, ...blogRoutes]
+  return [...staticRoutes, ...careerRoutes, ...courseRoutes]
 }

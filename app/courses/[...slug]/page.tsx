@@ -12,11 +12,11 @@ export async function generateStaticParams() {
 }
 
 // Fetch data for the page
-async function getCourseData(slug) {
+async function getCourseData(slug: string) {
   return allCourses.find((p) => p.slug === slug)
 }
 
-export default async function CoursePage({ params }) {
+export default async function CoursePage({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
   const courseSlug = slug.join('/')
   const course = await getCourseData(courseSlug)

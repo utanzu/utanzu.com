@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { getServerSession, type NextAuthOptions } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
+import { type NextAuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import { uniqueUsernameGenerator, Config, adjectives, nouns } from 'unique-username-generator'
@@ -36,11 +37,11 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async session({ session, token }) {
             if (token && session.user) {
-                session.user.id = token.id ?? ''
+                session.user.id = token.id as string
                 session.user.name = token.name ?? ''
                 session.user.image = token.image ?? ''
                 session.user.username = token.username ?? ''
-                session.user.email = token.email ?? ''
+                session.user.email = token.email as string
                 session.user.role = token.role ?? ''
             }
             return session
@@ -48,28 +49,26 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 // Check if the user has a username
-                let existingUser = await prisma.user.findUnique({ where: { id: user.id } })
+                let existingUser = await prisma.user.findUnique({ where: { email: user.email } });
 
-                if (existingUser && !existingUser.username) {
-                    // Generate a random username
-                    const randomUsername: string = uniqueUsernameGenerator(config)
-
-                    // Save the username to the user
-                    await prisma.user.update({
-                        where: { id: user.id },
-                        data: { username: randomUsername },
-                    })
-
-                    token.username = randomUsername
-                } else {
-                    token.username = existingUser.username
+                if (!existingUser) {
+                    // If the user does not exist, create a new one
+                    existingUser = await prisma.user.create({
+                        data: {
+                            email: user.email,
+                            name: user.name,
+                            image: user.image,
+                            username: uniqueUsernameGenerator(config), // Generate a username
+                        },
+                    });
                 }
 
-                token.id = user.id
-                token.name = user.name
-                token.image = user.image
-                token.email = user.email
-                token.role = user.role
+                token.id = existingUser.id;
+                token.username = existingUser.username;
+                token.name = existingUser.name;
+                token.image = existingUser.image;
+                token.email = existingUser.email;
+                token.role = existingUser.role ?? 'user';
             }
             return token
         },

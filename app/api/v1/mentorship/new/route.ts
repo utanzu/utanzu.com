@@ -4,6 +4,7 @@ import prisma from '../../../../../lib/prisma'
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../../lib/auth";
 import { headers } from "next/headers";
+import { Prisma } from '@prisma/client'
 
 export const POST = async (req: NextRequest) => {
     // Get the user session
@@ -91,7 +92,7 @@ export const POST = async (req: NextRequest) => {
         );
     } catch (error) {
         // Handle unique constraint error (P2002)
-        if (error.code === 'P2002') {
+         if (error instanceof Prisma.PrismaClientKnownRequestError) {
             return NextResponse.json(
                 { message: 'You have already requested mentorship from this mentor.' },
                 { status: 200 }
@@ -100,7 +101,7 @@ export const POST = async (req: NextRequest) => {
 
         //console.error('Internal Server Error:', error);
         return NextResponse.json(
-            { message: 'Internal Server Error', error: error.message },
+            { message: 'Internal Server Error', error: (error as Error).message },
             { status: 500 }
         );
     }

@@ -9,11 +9,11 @@ export async function generateStaticParams() {
 }
 
 // Fetch data for the page
-async function getCareerData(slug) {
+async function getCareerData(slug: string) {
   return allCareers.find((p) => p.slug === slug)
 }
 
-export default async function CareerPage({ params }) {
+export default async function CareerPage({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
   const careerSlug = slug.join('/')
   const career = await getCareerData(careerSlug)

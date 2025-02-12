@@ -14,18 +14,21 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
             },
             where: {
                 userId: user,
+                title: { not: null },
             },
             orderBy: { createdAt: 'desc' },
         })
 
         // Group courses by title and count subtopics for each course
         const courseProgress = courses.reduce((acc, course) => {
+            if (!course.title || !course.subtopic) return acc;
+
             // Initialize course if it doesn't exist
             if (!acc[course.title]) {
                 acc[course.title] = {
                     title: course.title,
                     subtopicCount: 0,
-                    subtopics: new Set(),  // Use Set to avoid duplicate subtopics
+                    subtopics: new Set<string>(),  // Use Set to avoid duplicate subtopics
                 }
             }
 
@@ -47,7 +50,7 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
             headers: { 'Content-Type': 'application/json' },
         })
     } catch (error) {
-        console.error('Error fetching courses:', error)
+        //console.error('Error fetching courses:', error)
         return new NextResponse(JSON.stringify({ message: 'Internal Server Error' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },

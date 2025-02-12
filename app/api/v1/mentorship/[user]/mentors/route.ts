@@ -47,7 +47,7 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
     } catch (error) {
         //console.error("Error fetching mentor profile:", error);
         return NextResponse.json(
-            { error: "Internal Server Error", details: error.message },
+            { message: 'Internal Server Error', error: (error as Error).message },
             { status: 500 }
         );
     }
