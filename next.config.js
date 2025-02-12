@@ -9,11 +9,11 @@ const isDev = process.env.NODE_ENV === 'development'
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is us.umami.is;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src ${isDev ? "'self' http://localhost:3000" : '*.s3.amazonaws.com'};
-  connect-src *;
+  connect-src 'self' analytics.umami.is us.umami.is;
   font-src 'self';
   frame-src giscus.app https://www.youtube.com https://youtube.com;
 `
@@ -53,6 +53,10 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://us.umami.is;",
   },
 ]
 
