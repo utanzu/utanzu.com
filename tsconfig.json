@@ -30,6 +30,7 @@
     ],
     "strictNullChecks": true,
     "noImplicitAny": false,
+     "strictFunctionTypes": false
   },
   "include": [
     "next-env.d.ts",

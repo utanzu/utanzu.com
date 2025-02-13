@@ -47,7 +47,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
         // Assume your API returns { messages: MessageType[] } including sender and receiver details.
         setMessages(data.messages)
       } catch (error) {
-        setToast({ type: 'error', message: error.message })
+        setToast({ type: 'error', message: (error as Error).message })
       } finally {
         setLoading(false)
       }
@@ -123,7 +123,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
         setMessages(data2.messages)
       }
     } catch (error) {
-      setToast({ type: 'error', message: error.message })
+      setToast({ type: 'error', message: (error as Error).message })
     }
   }
 

@@ -146,7 +146,7 @@ const InterviewPageSection = () => {
         const updated = [...prev]
         updated[updated.length - 1] = {
           role: 'assistant',
-          content: 'Error: ' + error.message,
+          content: 'Error: ' + (error as Error).message,
         }
         return updated
       })

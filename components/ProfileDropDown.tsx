@@ -1,6 +1,7 @@
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { Link } from './ui/link'
 
 type User = {
   id?: string
@@ -55,20 +56,22 @@ const ProfileDropDown: React.FC<ProfileDropDownProps> = ({ user }) => {
         <hr className="my-2 dark:border-gray-500" />
 
         {/* My Learning */}
-        <button
+        <Link
+          href="/courses/my-learning"
           role="menuitem"
           className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-primary-50 hover:text-primary-900 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           📚 <span>My Learning</span>
-        </button>
+        </Link>
 
         {/* Help */}
-        <button
+        <Link
+          href="/"
           role="menuitem"
           className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-primary-50 hover:text-primary-900 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           ❓ <span>Help</span>
-        </button>
+        </Link>
 
         <hr className="my-2 dark:border-gray-500" />
 

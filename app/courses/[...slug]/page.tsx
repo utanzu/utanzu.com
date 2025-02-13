@@ -27,7 +27,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   }
 
   if (!course) {
-    return <div>Career not found</div>
+    return <div>Course not found</div>
   }
   return (
     <>

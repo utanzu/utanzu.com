@@ -4,11 +4,20 @@ import { Button } from '@headlessui/react'
 import { useState } from 'react'
 import Select from 'react-select'
 import Toast from './Toast'
-import { useRouter } from 'next/navigation'
 import { useTheme } from 'next-themes'
 
 type Props = {
-  user
+  user: {
+    id: string
+    name: string
+    email: string
+    image: string
+  }
+}
+
+type ExpertiseOption = {
+  value: string
+  label: string
 }
 
 const MentorForm: React.FC<Props> = ({ user }) => {
@@ -22,48 +31,28 @@ const MentorForm: React.FC<Props> = ({ user }) => {
   const [profileImage, setProfileImage] = useState<File | null>(null)
   const [profileImageUrl, setProfileImageUrl] = useState(user.image || '') // Set URL if exists
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
-  const router = useRouter()
   const { theme } = useTheme()
 
   // Define expertise options
-  const expertiseOptions = [
+  const expertiseOptions: ExpertiseOption[] = [
     { value: 'Network Security', label: 'Network Security' },
-    { value: 'Penetration Testing', label: 'Penetration Testing' },
     { value: 'Cloud Security', label: 'Cloud Security' },
-    { value: 'Incident Response', label: 'Incident Response' },
     { value: 'Application Security', label: 'Application Security' },
-    { value: 'IAM & Access Management', label: 'IAM & Access Management' },
-    { value: 'Threat Intelligence', label: 'Threat Intelligence' },
-    { value: 'Risk Management', label: 'Risk Management' },
-    { value: 'Digital Forensics', label: 'Digital Forensics' },
-    { value: 'Security Operations (SOC)', label: 'Security Operations (SOC)' },
-    { value: 'Red Teaming & Ethical Hacking', label: 'Red Teaming & Ethical Hacking' },
-    { value: 'DevSecOps', label: 'DevSecOps' },
-    { value: 'Industrial Control Systems (ICS) Security', label: 'ICS Security' },
-    { value: 'Zero Trust Architecture', label: 'Zero Trust Architecture' },
-    { value: 'Cloud Identity & Access Management', label: 'Cloud IAM' },
     { value: 'API Security', label: 'API Security' },
-    { value: 'Security Awareness & Training', label: 'Security Awareness & Training' },
-    { value: 'Security Compliance & Governance', label: 'Security Compliance & Governance' },
-    { value: 'Cyber Threat Hunting', label: 'Cyber Threat Hunting' },
-    { value: 'Endpoint Security', label: 'Endpoint Security' },
-    { value: 'SIEM & Log Analysis', label: 'SIEM & Log Analysis' },
-    {
-      value: 'Malware Analysis & Reverse Engineering',
-      label: 'Malware Analysis & Reverse Engineering',
-    },
-    { value: 'Blockchain Security', label: 'Blockchain Security' },
-    { value: 'IoT Security', label: 'IoT Security' },
-    { value: 'Artificial Intelligence & Cybersecurity', label: 'AI & Cybersecurity' },
-    { value: 'Dark Web Intelligence', label: 'Dark Web Intelligence' },
-    { value: 'Privacy & Data Protection', label: 'Privacy & Data Protection' },
-    { value: 'Cybersecurity Strategy & Leadership', label: 'Cybersecurity Strategy & Leadership' },
-    { value: 'Supply Chain Security', label: 'Supply Chain Security' },
     { value: 'Mobile Security', label: 'Mobile Security' },
-    {
-      value: 'Social Engineering & Psychological Security',
-      label: 'Social Engineering & Psychological Security',
-    },
+    { value: 'Identity & Access', label: 'Identity & Access' },
+    { value: 'Penetration Testing', label: 'Penetration Testing' },
+    { value: 'Red Teaming', label: 'Red Teaming' },
+    { value: 'Threat Intelligence', label: 'Threat Intelligence' },
+    { value: 'Incident Response', label: 'Incident Response' },
+    { value: 'Digital Forensics', label: 'Digital Forensics' },
+    { value: 'DevSecOps', label: 'DevSecOps' },
+    { value: 'Zero Trust', label: 'Zero Trust' },
+    { value: 'Risk Management', label: 'Risk Management' },
+    { value: 'Governance & Compliance', label: 'Governance & Compliance' },
+    { value: 'AI & Cybersecurity', label: 'AI & Cybersecurity' },
+    { value: 'IoT Security', label: 'IoT Security' },
+    { value: 'Blockchain Security', label: 'Blockchain Security' },
   ]
 
   const handleExpertiseChange = (selectedOptions) => {
@@ -96,6 +85,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
     formData.append('title', title)
     formData.append('linkedin', linkedin)
     formData.append('description', description)
+    // @ts-ignore
     formData.append('expertise', JSON.stringify(selectedExpertise.map((e) => e.value))) // Convert to JSON
 
     // Append profile image - either a file or a URL
@@ -322,6 +312,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
           >
             Expertise Area*
           </label>
+          {/* @ts-ignore*/}
           <Select
             id="mentorExpertise"
             options={expertiseOptions}

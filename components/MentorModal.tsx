@@ -20,9 +20,10 @@ type ModalProps = {
 
 const MentorModal: React.FC<ModalProps> = ({ isOpenMentor, onRequestCloseMentor, mentor }) => {
   return (
+    // @ts-ignore
     <ReactModal
       isOpen={isOpenMentor}
-      onRequestCloseMentor={onRequestCloseMentor}
+      onRequestClose={onRequestCloseMentor}
       className="max-h-full w-full overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:w-1/2 sm:rounded-xl lg:w-1/3"
       overlayClassName="inset-0 fixed bg-[rgba(0,_0,_0,_0.75)] flex items-center justify-center"
       appElement={

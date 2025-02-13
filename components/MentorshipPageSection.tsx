@@ -11,6 +11,16 @@ import { faUserPlus, faLightbulb, faEnvelope, faHandshake } from '@fortawesome/f
 import MentorForm from './MentorForm'
 import MentorConnections from './MentorConnections'
 import MentorshipMessages from './MentorshipMessages'
+import Toast from './Toast'
+
+type User = {
+  id?: string
+  name?: string
+  username?: string
+  email?: string
+  role?: string
+  image?: string
+}
 
 const MentorshipPageSection = () => {
   interface Mentor {
@@ -30,12 +40,12 @@ const MentorshipPageSection = () => {
   const [mentors, setMentors] = useState<Mentor[]>([])
   const [filteredMentors, setFilteredMentors] = useState<Mentor[]>(mentors)
   const [loadingMentors, setLoadingMentors] = useState(true)
-  const [fetchError, setFetchError] = useState(null)
   const router = useRouter()
   const { loading, user } = useAuth()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [isMentor, setIsMentor] = useState<boolean | null>(null)
   const [checkingMentorStatus, setCheckingMentorStatus] = useState(true)
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
   // Fetch all mentors from API
   useEffect(() => {
@@ -50,7 +60,7 @@ const MentorshipPageSection = () => {
         setFilteredMentors(data.mentors) // Default to showing all
       } catch (error) {
         console.error('Error fetching mentors:', error)
-        setFetchError(error.message)
+        setToast({ type: 'error', message: (error as Error).message })
       } finally {
         setLoadingMentors(false)
       }
@@ -61,6 +71,7 @@ const MentorshipPageSection = () => {
 
   // Fetch user's mentorship connections and mark connected mentors
   useEffect(() => {
+    if (!user?.id) return
     const checkUserMentors = async () => {
       if (!user) return
 
@@ -160,6 +171,7 @@ const MentorshipPageSection = () => {
 
   return (
     <>
+      {toast && <Toast type={toast.type} message={toast.message} />}
       <div className="flex flex-col md:flex-row">
         {/* Sidebar for Larger Screens */}
         <aside className="hidden w-64 flex-shrink-0 rounded-md border-r border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:block">
@@ -247,9 +259,10 @@ const MentorshipPageSection = () => {
                   className="w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
                 />
               </div>
-
-              {/* Mentor Cards */}
-              <MentorCard mentors={filteredMentors} user={user} openAuthModal={openAuthModal} />
+              {user && (
+                //@ts-ignore
+                <MentorCard mentors={filteredMentors} user={user} openAuthModal={openAuthModal} />
+              )}
             </>
           )}
           {activeTab === 'become-mentor' && (
@@ -324,6 +337,7 @@ const MentorshipPageSection = () => {
                     <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
                       Become a Mentor Today
                     </h3>
+                    {/* @ts-ignore*/}
                     <MentorForm user={user} />
                   </section>
                 )
@@ -346,9 +360,11 @@ const MentorshipPageSection = () => {
             </div>
           )}
 
-          {activeTab === 'connections' && <MentorConnections user={user} />}
+          {/* @ts-ignore*/}
+          {activeTab === 'connections' && user && <MentorConnections user={user} />}
 
-          {activeTab === 'messages' && <MentorshipMessages user={user} />}
+          {/* @ts-ignore*/}
+          {activeTab === 'messages' && user && <MentorshipMessages user={user} />}
         </div>
       </div>
       <AuthModal

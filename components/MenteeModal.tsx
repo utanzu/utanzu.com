@@ -27,6 +27,7 @@ type ModalProps = {
 
 const MenteeModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, mentor, user }) => {
   return (
+    // @ts-ignore
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}

@@ -20,14 +20,7 @@ interface Props {
   summary: string
 }
 
-export default function CoursePageSection({
-  title,
-  category,
-  image,
-  level,
-  topics,
-  summary,
-}: Props) {
+export default function CoursePageSection({ title, topics }: Props) {
   const { user, loading } = useAuth()
   const [selectedSubtopic, setSelectedSubtopic] = useState('')
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null)
@@ -57,7 +50,7 @@ export default function CoursePageSection({
 
         setCheckedSubtopics(newCheckedState)
       } catch (error) {
-        console.error(`Network Error: ${error.message}`)
+        console.error(`Network Error: ${(error as Error).message}`)
       }
     },
     [topics]
@@ -128,10 +121,9 @@ export default function CoursePageSection({
           console.error(`Error: ${errorData.message}`)
           return
         }
-        const data = await response.json()
         //console.log(`Success: ${data.message}`)
       } catch (error) {
-        console.error(`Network Error: ${error.message}`)
+        console.error(`Network Error: ${(error as Error).message}`)
       }
     }
   }
