@@ -61,7 +61,7 @@ export const GET = async (req: NextRequest) => {
             }
         );
     } catch (error) {
-        console.error("Error fetching mentors:", error);
+        //console.error("Error fetching mentors:", error);
         return new NextResponse(
             JSON.stringify({ success: false, message: "Internal Server Error" }),
             {

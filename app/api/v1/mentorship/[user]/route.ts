@@ -66,7 +66,7 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error fetching mentorships:", error);
+        //console.error("Error fetching mentorships:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 };

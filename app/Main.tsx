@@ -4,17 +4,21 @@ import Image from 'next/image'
 export default function Main() {
   return (
     <>
-      <div className="mx-2 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
-        <div className="flex basis-2/5 items-center justify-center">
+      <div className="mx-2 flex flex-col items-center divide-y divide-gray-100 dark:divide-gray-800 md:mx-0 md:flex-row md:divide-y-0">
+        {/* Image Section */}
+        <div className="flex w-full items-center justify-center md:basis-2/5">
           <Image
             alt="Take Charge"
             src="/static/images/home.png"
             width={300}
             height={300}
             className="h-auto max-w-full"
+            priority={true}
           />
         </div>
-        <div className="flex basis-3/5 flex-col items-center justify-center space-y-4 text-center">
+
+        {/* Text Content Section */}
+        <div className="flex w-full flex-col items-center justify-center space-y-4 text-center md:basis-3/5">
           <h1 className="text-2xl font-extrabold leading-8 tracking-tight text-primary-400 dark:text-primary-500 max-[375px]:text-xl sm:text-2xl sm:leading-9 md:py-4 md:text-4xl md:leading-12 lg:text-5xl">
             Join, Learn & Thrive
           </h1>
@@ -30,7 +34,7 @@ export default function Main() {
           </Link>
         </div>
       </div>
-      <div className="mx-2 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
+      <div className="mx-2 mt-4 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
         <div className="space-y-2 pb-4 pt-6 md:space-y-5 xl:pt-6">
           <h1 className="text-xl font-bold leading-8 tracking-tight text-gray-700 dark:text-gray-100 max-[375px]:text-lg sm:text-xl sm:leading-8 md:text-2xl md:leading-10 lg:text-3xl">
             Why Utanzu?
@@ -52,6 +56,7 @@ export default function Main() {
                 width={200}
                 height={200}
                 className="h-auto max-w-full"
+                priority={true}
               />
             </div>
           </div>

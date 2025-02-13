@@ -54,7 +54,7 @@ export const GET = async (req: NextRequest, { params }: { params: Promise<{ user
 
         return NextResponse.json({ messages: userMessages }, { status: 200 });
     } catch (error) {
-        console.error("Error fetching messages:", error);
+        // console.error("Error fetching messages:", error);
         return NextResponse.json(
             { message: 'Internal Server Error', error: (error as Error).message },
             { status: 500 }

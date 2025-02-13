@@ -29,6 +29,7 @@ export default function AuthorLayout({ children, content }: Props) {
                   width={192}
                   height={192}
                   className="h-30 w-30 rounded-full p-5"
+                  priority={true}
                 />
               </div>
             )}
