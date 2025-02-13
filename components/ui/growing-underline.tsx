@@ -14,7 +14,7 @@ export function GrowingUnderline({
   active?: boolean
   className?: string
   duration?: number
-  [key: string]: any
+  [key: string]: unknown
 }) {
   return (
     <Component

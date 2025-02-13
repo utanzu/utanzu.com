@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { signIn } from 'next-auth/react'
-import { Link } from './ui/link'
+import Link from 'next/link'
 import { Button } from '@headlessui/react'
 
 type ModalProps = {

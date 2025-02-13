@@ -1,6 +1,5 @@
 'use client'
 import Image from './Image'
-import Link from './Link'
 import { Button } from '@headlessui/react'
 import { useRouter } from 'next/navigation'
 

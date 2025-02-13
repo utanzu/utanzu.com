@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Button } from '@headlessui/react'
 import Toast from './Toast'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

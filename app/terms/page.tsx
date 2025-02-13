@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { genPageMetadata } from 'app/seo'
-import { Link } from '@/components/ui/link'
+import Link from '@/components/Link'
 
 export const metadata = genPageMetadata({ title: 'Terms of Use' })
 const TermsPage = () => {

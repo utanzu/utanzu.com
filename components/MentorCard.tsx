@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Image from '@/components/Image'
-import { Link } from '@/components/ui/link'
+import Link from '@/components/Link'
 import { Button } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEye, faCheckCircle } from '@fortawesome/free-solid-svg-icons'

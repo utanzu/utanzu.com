@@ -10,16 +10,17 @@ export const GET = async (req: NextRequest) => {
         const limit = parseInt(searchParams.get("limit") || "10", 10);
         const expertiseFilter = searchParams.get("expertise");
 
+
         // Ensure pagination values are valid
         const validPage = Math.max(1, page);
         const validLimit = Math.min(Math.max(1, limit), 50); // Limit max results per request
 
         // Construct query filters
-        const whereClause: any = {};
+        const whereClause: { expertise?: { contains: string, mode: "insensitive" } } = {};
         if (expertiseFilter) {
             whereClause.expertise = {
                 contains: expertiseFilter,
-                mode: "insensitive", // Case-insensitive filtering
+                mode: "insensitive",
             };
         }
 

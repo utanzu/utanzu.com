@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { faArrowRight, faClose } from '@fortawesome/free-solid-svg-icons'
-import { Link } from '@/components/ui/link'
+import Link from '@/components/Link'
 
 type ModalProps = {
   isOpenMentor: boolean

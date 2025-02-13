@@ -7,7 +7,7 @@ export function useAuth() {
     name?: string
     username?: string
     email?: string
-    role?: number
+    role?: string
     image?: string
   }>(null)
   const [loading, setLoading] = useState(true)
@@ -20,11 +20,11 @@ export function useAuth() {
         if (session?.user) {
           setUser({
             id: session?.user?.id,
-            name: session?.user?.name,
-            username: session?.user?.username,
-            email: session?.user?.email,
-            role: session?.user?.role,
-            image: session?.user?.image,
+            name: session?.user?.name ?? '',
+            username: session?.user?.username ?? '',
+            email: session?.user?.email ?? '',
+            role: session?.user?.role ?? 'user',
+            image: session?.user?.image ?? '',
           })
         }
       } catch (error) {

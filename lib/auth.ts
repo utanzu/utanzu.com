@@ -49,7 +49,9 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 // Check if the user has a username
-                let existingUser = await prisma.user.findUnique({ where: { email: user.email } });
+                let existingUser = user.email
+                    ? await prisma.user.findUnique({ where: { email: user.email } })
+                    : null;
 
                 if (!existingUser) {
                     // If the user does not exist, create a new one
@@ -63,12 +65,12 @@ export const authOptions: NextAuthOptions = {
                     });
                 }
 
-                token.id = existingUser.id;
-                token.username = existingUser.username;
-                token.name = existingUser.name;
-                token.image = existingUser.image;
-                token.email = existingUser.email;
-                token.role = existingUser.role ?? 'user';
+                token.id = existingUser.id as string;
+                token.username = existingUser.username ?? '';
+                token.name = existingUser.name ?? '';
+                token.image = existingUser.image ?? '';
+                token.email = existingUser.email ?? '';
+                token.role = existingUser.role?.toString() ?? 'user';
             }
             return token
         },

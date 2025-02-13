@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { Link } from './ui/link'
 import Toast from './Toast'
+import Link from 'next/link'
 
 type Mentor = {
   id: string

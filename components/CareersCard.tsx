@@ -4,7 +4,7 @@ import type { BrandsMap } from 'components/ui/brand'
 import { Brand } from 'components/ui/brand'
 import { GradientBorder } from 'components/ui/gradient-border'
 import { GrowingUnderline } from 'components/ui/growing-underline'
-import { Link } from 'components/ui/link'
+import Link from 'components/Link'
 import { TiltedGridBackground } from 'components/ui/tilted-grid-background'
 import type { CoreContent } from 'types/data'
 

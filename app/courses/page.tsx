@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Suspense } from 'react'
 import { genPageMetadata } from 'app/seo'
 import { allCourses } from 'contentlayer/generated'
 import CourseSearch from '@/components/CourseSearch'
@@ -29,7 +30,9 @@ const AllCourses = () => {
             Cybersecurity Courses
           </h1>
           <hr className="border-t-1 my-3 border-gray-300 dark:border-gray-600"></hr>
-          <CourseSearch courses={transformedCourses} />
+          <Suspense fallback={<div>Loading courses...</div>}>
+            <CourseSearch courses={transformedCourses} />
+          </Suspense>
         </div>
       </section>
     </>
