@@ -54,16 +54,23 @@ export const authOptions: NextAuthOptions = {
                     : null;
 
                 if (!existingUser) {
-                    // If the user does not exist, create a new one
+                    // Check if the user has a username
                     existingUser = await prisma.user.create({
                         data: {
                             email: user.email,
                             name: user.name,
                             image: user.image,
-                            username: uniqueUsernameGenerator(config), // Generate a username
+                            username: uniqueUsernameGenerator(config) || `user_${Date.now()}`,
                         },
                     });
+                } else if (!existingUser.username) {
+                    // If user exists but has no username, update it
+                    existingUser = await prisma.user.update({
+                        where: { email: user.email as string },
+                        data: { username: uniqueUsernameGenerator(config) || `user_${Date.now()}` },
+                    });
                 }
+
 
                 token.id = existingUser.id as string;
                 token.username = existingUser.username ?? '';
