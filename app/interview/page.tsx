@@ -1,7 +1,11 @@
 import InterviewPageSection from '@/components/InterviewPageSection'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Cybersecurity Interview Preparation' })
+export const metadata = genPageMetadata({
+  title: 'Cybersecurity Interview Preparation | Utanzu',
+  description:
+    'Explore our AI-powered tool designed to help you prepare for your upcoming cybersecurity interview with ease.',
+})
 
 export default function Mentorship() {
   return (

@@ -1,18 +1,18 @@
-import Head from 'next/head'
 import { genPageMetadata } from 'app/seo'
 import CareersCard from '@/components/CareersCard'
 import { allCareers } from 'contentlayer/generated'
 
-export const metadata = genPageMetadata({ title: 'Careers' })
+export const metadata = genPageMetadata({
+  title: 'Career Paths | Utanzu',
+  description:
+    'Explore cybersecurity career paths and build a successful career in your chosen field.',
+})
 
 const AllCareers = () => {
   const careers = allCareers // Fetching data directly as it's statically available
 
   return (
     <>
-      <Head>
-        <title>Career Paths | Utanzu</title>
-      </Head>
       <section className="flex flex-col">
         <div className="flex w-full flex-col pb-8">
           <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14 xl:col-span-2">

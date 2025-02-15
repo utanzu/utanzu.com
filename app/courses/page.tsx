@@ -4,7 +4,10 @@ import { genPageMetadata } from 'app/seo'
 import { allCourses } from 'contentlayer/generated'
 import CourseSearch from '@/components/CourseSearch'
 
-export const metadata = genPageMetadata({ title: 'Careers' })
+export const metadata = genPageMetadata({
+  title: 'Cybersecurity Courses | Utanzu',
+  description: 'Explore our courses to start building a strong fundation in cybersecurity.',
+})
 
 const AllCourses = () => {
   const transformedCourses = allCourses.map((course) => ({
@@ -21,9 +24,6 @@ const AllCourses = () => {
 
   return (
     <>
-      <Head>
-        <title>Courses | Utanzu</title>
-      </Head>
       <section className="flex flex-col">
         <div className="flex w-full flex-col pb-8">
           <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14 xl:col-span-2">
