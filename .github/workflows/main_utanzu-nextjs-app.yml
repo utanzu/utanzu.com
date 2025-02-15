@@ -61,7 +61,6 @@ jobs:
       name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for JWT authentication
       contents: read # This is required for actions/checkout
 
     steps:
@@ -71,20 +70,14 @@ jobs:
           name: nextjs-app
           path: deploy/
 
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
-
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App using Publish Profile
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: "utanzu-nextjs-app"
           slot-name: "Production"
           package: deploy/
+          publish-profile: ${{ secrets.APP_PUBLISH_PROFILE }}
 
       - name: Health Check After Deployment
         run: |
