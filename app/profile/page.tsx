@@ -1,6 +1,4 @@
-import Head from 'next/head'
 import { genPageMetadata } from 'app/seo'
-import Avatar from '@/components/Avatar'
 import ProfileCard from '@/components/ProfileCard'
 export const metadata = genPageMetadata({ title: 'User Profile ' })
 
