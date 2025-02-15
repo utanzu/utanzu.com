@@ -46,7 +46,6 @@ jobs:
           mkdir deploy
           cp -R .next package.json yarn.lock public deploy/
           cp -R node_modules deploy/
-          cp -R prisma deploy/
 
       - name: Upload Artifact for Deployment
         uses: actions/upload-artifact@v4
@@ -74,11 +73,6 @@ jobs:
         run: |
           cd deploy
           yarn install --production --immutable
-
-      - name: Apply Database Migrations (Prisma)
-        run: |
-          cd deploy
-          yarn prisma migrate deploy
 
       - name: Deploy to Azure Web App using Publish Profile
         id: deploy-to-webapp
