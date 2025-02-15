@@ -73,7 +73,7 @@ jobs:
       - name: Install Dependencies on Server
         run: |
           cd deploy
-          yarn install --production --frozen-lockfile
+          yarn install --production --immutable
 
       - name: Apply Database Migrations (Prisma)
         run: |

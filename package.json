@@ -32,6 +32,7 @@
     "contentlayer2": "0.5.3",
     "esbuild": "0.20.2",
     "github-slugger": "^2.0.0",
+    "glob": "9",
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "1.0.0",
@@ -59,6 +60,7 @@
     "remark-gfm": "^4.0.0",
     "remark-github-blockquote-alert": "^1.2.1",
     "remark-math": "^6.0.0",
+    "superagent": "9",
     "tailwindcss": "^3.4.14",
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0"
