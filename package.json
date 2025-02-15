@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production next dev",
+    "start": "NODE_ENV=production next start",
     "dev": "cross-env INIT_CWD=$PWD next dev",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "prisma generate"
   },
   "engines": {
     "node": "20.x"
@@ -45,8 +46,8 @@
     "pliny": "0.4.0",
     "postcss": "^8.4.24",
     "prisma": "^6.2.1",
-    "react": "rc",
-    "react-dom": "rc",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-modal": "^3.16.3",
     "react-select": "^5.10.0",
     "reading-time": "1.5.0",
