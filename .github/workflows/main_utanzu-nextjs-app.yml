@@ -10,12 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # This is required for actions/checkout
+      contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version and cache dependencies
+      - name: Set up Node.js with Yarn
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
@@ -31,24 +32,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies (if not cached)
+      - name: Install Dependencies
         run: yarn install --frozen-lockfile
-        if: steps.cache.outputs.cache-hit != 'true'
-
-      - name: Build Next.js App with Incremental Cache
-        run: yarn build
 
       - name: Generate Prisma Client
         run: yarn prisma generate
+
+      - name: Build Next.js App
+        run: yarn build
 
       - name: Prepare Deployment Artifact
         run: |
           mkdir deploy
           cp -R .next package.json yarn.lock public deploy/
           cp -R node_modules deploy/
-          cp -R prisma deploy/ # Include Prisma migrations if needed
+          cp -R prisma deploy/
 
-      - name: Upload artifact for deployment
+      - name: Upload Artifact for Deployment
         uses: actions/upload-artifact@v4
         with:
           name: nextjs-app
@@ -61,14 +61,24 @@ jobs:
       name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      contents: read # This is required for actions/checkout
+      contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download Artifact from Build Job
         uses: actions/download-artifact@v4
         with:
           name: nextjs-app
           path: deploy/
+
+      - name: Install Dependencies on Server
+        run: |
+          cd deploy
+          yarn install --production --frozen-lockfile
+
+      - name: Apply Database Migrations (Prisma)
+        run: |
+          cd deploy
+          yarn prisma migrate deploy
 
       - name: Deploy to Azure Web App using Publish Profile
         id: deploy-to-webapp
@@ -82,4 +92,7 @@ jobs:
       - name: Health Check After Deployment
         run: |
           sleep 5
-          curl -f https://${{ secrets.AZURE_APP_URL }}/api/health || echo "Health check failed"
+          for i in {1..5}; do
+            curl -f https://${{ secrets.AZURE_APP_URL }}/api/health && break || sleep 5;
+          done
+          echo "Health check failed"
