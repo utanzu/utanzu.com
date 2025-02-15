@@ -4,14 +4,10 @@ import { getServerSession } from 'next-auth/next'
 import { type NextAuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import { uniqueUsernameGenerator, Config, adjectives, nouns } from 'unique-username-generator'
+import { generateFromEmail, generateUsername } from 'unique-username-generator'
 import prisma from './prisma'
 
 const JWT_SECRET = process.env.NEXTAUTH_SECRET as string
-
-const config: Config = {
-    dictionaries: [adjectives, nouns],
-}
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -60,17 +56,16 @@ export const authOptions: NextAuthOptions = {
                             email: user.email,
                             name: user.name,
                             image: user.image,
-                            username: uniqueUsernameGenerator(config) || `user_${Date.now()}`,
+                            username: generateFromEmail(user.email as string, 3) || `user_${Date.now()}`,
                         },
                     });
                 } else if (!existingUser.username) {
                     // If user exists but has no username, update it
                     existingUser = await prisma.user.update({
                         where: { email: user.email as string },
-                        data: { username: uniqueUsernameGenerator(config) || `user_${Date.now()}` },
+                        data: { username: generateFromEmail(user.email as string, 3) || `user_${Date.now()}` },
                     });
                 }
-
 
                 token.id = existingUser.id as string;
                 token.username = existingUser.username ?? '';
