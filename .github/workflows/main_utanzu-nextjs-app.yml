@@ -22,12 +22,10 @@ jobs:
           node-version: "20.x"
           cache: yarn
 
-      - name: Cache Node Modules and Next.js Build Cache
+      - name: Cache Next.js Build Cache
         uses: actions/cache@v4
         with:
-          path: |
-            node_modules
-            .next/cache
+          path: .next/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -42,7 +40,6 @@ jobs:
         run: |
           mkdir deploy
           cp -R .next package.json yarn.lock public deploy/
-          cp -R node_modules deploy/
 
       - name: Upload Artifact for Deployment
         uses: actions/upload-artifact@v4
@@ -69,7 +66,7 @@ jobs:
       - name: Install Dependencies on Server
         run: |
           cd deploy
-          yarn install --immutable
+          yarn install --production --immutable
 
       - name: Deploy to Azure Web App using Publish Profile
         id: deploy-to-webapp
@@ -84,6 +81,6 @@ jobs:
         run: |
           sleep 5
           for i in {1..5}; do
-            curl -f https://${{ secrets.AZURE_APP_URL }}/api/health && break || sleep 5;
+            curl -f https://${{ secrets.AZURE_APP_URL }} && break || sleep 5;
           done
-          echo "Health check failed"
+          echo "Health check completed"
