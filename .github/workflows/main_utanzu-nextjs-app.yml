@@ -38,7 +38,7 @@ jobs:
           yarn build
 
       - name: Verify Dependencies
-        run: yarn list
+        run: yarn info --name-only
 
       - name: Prepare Deployment Artifact
         run: |
