@@ -1,0 +1,12 @@
+node_modules
+.next/cache
+.DS_Store
+.git
+.idea
+.vscode
+yarn-error.log
+Dockerfile
+.dockerignore
+.gitignore
+.next
+.env

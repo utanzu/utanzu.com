@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env PORT=8080 next start",
+    "start": "cross-env next start",
     "dev": "cross-env INIT_CWD=$PWD next dev",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "serve": "next start",
@@ -31,7 +31,6 @@
     "contentlayer2": "0.5.3",
     "esbuild": "0.20.2",
     "github-slugger": "^2.0.0",
-    "glob": "9",
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "1.0.0",
@@ -43,8 +42,8 @@
     "pliny": "0.4.0",
     "postcss": "^8.4.24",
     "prisma": "^6.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-modal": "^3.16.3",
     "react-select": "^5.10.0",
     "reading-time": "1.5.0",
@@ -69,7 +68,7 @@
     "@eslint/js": "^9.16.0",
     "@svgr/webpack": "^8.0.1",
     "@types/mdx": "^2.0.12",
-    "@types/react": "^18.2.73",
+    "@types/react": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.12.0",
     "@typescript-eslint/parser": "^8.12.0",
     "cross-env": "^7.0.3",
@@ -92,5 +91,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@1.22.22"
 }
