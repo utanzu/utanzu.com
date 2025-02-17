@@ -1,0 +1,49 @@
+---
+title: 'Best Practices'
+topic: 'Secure Software Development Life Cycle (SDLC)'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+To ensure security in SDLC, organizations should adopt the following best practices.
+
+#### 1. **Shift Security Left**
+
+- Integrate security early in the development process.
+- Identify vulnerabilities **before** deployment.
+
+#### 2. **Follow Secure Coding Guidelines**
+
+- Use **input validation** to prevent injection attacks.
+- Implement **proper error handling** to avoid information leaks.
+- Encrypt sensitive data **at rest and in transit**.
+
+#### 3. **Automate Security Testing**
+
+- Use **Static Application Security Testing (SAST)** to analyze source code.
+- Perform **Dynamic Application Security Testing (DAST)** to detect runtime vulnerabilities.
+
+#### 4. **Implement Secure DevOps (DevSecOps)**
+
+- Automate security checks in CI/CD pipelines.
+- Monitor applications using **Security Information and Event Management (SIEM)** tools.
+
+#### 5. **Enforce Least Privilege and Role-Based Access Control (RBAC)**
+
+- Users should only have the minimum permissions required.
+- Use **Multi-Factor Authentication (MFA)** for critical actions.
+
+### Example: Applying Best Practices in an E-Commerce Platform
+
+| Security Best Practice | Application |
+|-----------------------|-------------|
+| **Secure Input Validation** | Prevents SQL injection in search queries. |
+| **Role-Based Access Control** | Restricts admin privileges to authorized personnel. |
+| **Automated Security Scanning** | Detects vulnerabilities in checkout and payment APIs. |
+| **Logging & Monitoring** | Tracks suspicious login attempts in real-time. |
+
+### Further Reading
+
+- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

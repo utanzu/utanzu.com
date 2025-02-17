@@ -1,9 +1,0 @@
-Secure by Design is a key approach in building secure applications. It means making security a priority from the very beginning of the development process, instead of adding it as an afterthought.
-
-For example, when designing a web application, developers can build features like encryption for data protection, input validation to prevent attacks, and secure authentication systems right from the start. By doing this, we reduce the risk of vulnerabilities and create a stronger, more resilient system.
-
-But what happens if this principle isn’t followed? Take for instance an e-commerce app where developers don’t validate user inputs. This could allow attackers to insert malicious code, leading to a data breach or exposing sensitive customer information. Fixing such issues after the app is live can be expensive and damaging to the company’s reputation.
-
-The main idea behind Secure by Design is simple: it’s easier and more cost-effective to build security into the foundation of an application than to fix problems after they occur.
-
-In the next session, we’ll discuss common security threats and how to protect against them.

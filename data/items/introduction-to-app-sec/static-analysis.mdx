@@ -1,0 +1,48 @@
+---
+title: 'Static Analysis'
+topic: 'Secure Coding Practices'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Have you ever used spell check before submitting an essay? **Static Analysis Tools** act like spell check for your code, identifying potential security flaws before execution.
+
+### What is Static Analysis?
+
+**`Static Application Security Testing` (SAST)** is an automated method to analyze source code for security vulnerabilities **without running the application**.
+
+### Benefits of Static Analysis
+
+- **Early Detection**: Identifies vulnerabilities in the development phase.
+- **Faster Fixes**: Finds issues before deployment.
+- **Automated Security Checks**: Reduces human error.
+
+### Popular Static Analysis Tools
+
+| Tool          | Language Support               | Key Features                                    |
+| ------------- | ------------------------------ | ----------------------------------------------- |
+| **SonarQube** | Java, JavaScript, Python, etc. | Code quality and security analysis.             |
+| **Bandit**    | Python                         | Detects common security issues in Python code.  |
+| **Brakeman**  | Ruby on Rails                  | Scans for vulnerabilities in Ruby applications. |
+| **Checkmarx** | Multiple Languages             | Enterprise-grade SAST solution.                 |
+
+### Example: Running Static Analysis with SonarQube
+
+```bash
+# Scan Java project with SonarQube
+sonar-scanner -Dsonar.projectKey=my_project -Dsonar.sources=src
+```
+
+The tool will identify vulnerabilities like **hardcoded passwords**, **insecure API calls**, and **poor error handling**.
+
+### Best Practices for Using Static Analysis
+
+1. **Integrate SAST in CI/CD pipelines** for continuous scanning.
+2. **Use multiple tools** to increase detection accuracy.
+3. **Regularly update scanning rules** to catch new vulnerabilities.
+
+### Further Reading
+
+- [OWASP SAST Guide](https://owasp.org/www-community/Source_Code_Analysis_Tools)
+- [SonarQube Documentation](https://docs.sonarqube.org/latest/)

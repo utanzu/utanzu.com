@@ -1,0 +1,84 @@
+---
+title: 'Threat Model Example'
+topic: 'Threat Modeling'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Threat modeling helps identify security risks in applications before they can be exploited. It is a structured process that analyzes an application's security threats and designs measures to reduce them.
+
+### Approaches to Threat Modeling
+
+Several frameworks exist for threat modeling, including:
+
+1. **STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)** - Developed by Microsoft.
+2. **PASTA (Process for Attack Simulation and Threat Analysis)** - Risk-centric approach.
+3. **VAST (Visual, Agile, and Simple Threat Modeling)** - Scalable for enterprise systems.
+4. **Trike** - Security auditing framework with risk assessment.
+
+For this example, we will use the **STRIDE model**, as it is beginner-friendly and widely used in application security.
+
+### Sample Application: Online Banking System
+
+Imagine we are securing an **Online Banking Web Application** that allows users to:
+
+- Log in securely.
+- Transfer money to other accounts.
+- View account statements.
+
+#### **Step 1: Identify System Components**
+
+| Component | Description |
+|-----------|-------------|
+| Web Application | The online banking website. |
+| Database | Stores user data, accounts, and transactions. |
+| Authentication System | Handles user login and access control. |
+| API | Connects frontend with the backend database. |
+
+#### **Step 2: Identify Possible Threats Using STRIDE**
+
+| STRIDE Threat | Example in Banking Application | Possible Consequences | Mitigation Strategy |
+|--------------|--------------------------------|-----------------------|----------------------|
+| **Spoofing** (Impersonation) | Attacker pretends to be a bank customer. | Unauthorized transactions. | Implement multi-factor authentication (MFA). |
+| **Tampering** (Data Modification) | Modifying transaction details in transit. | Fraudulent transactions. | Use end-to-end encryption (TLS 1.2+). |
+| **Repudiation** (Denying Actions) | A customer denies making a transaction. | Disputes and financial loss. | Implement logging and digital signatures. |
+| **Information Disclosure** (Data Leakage) | Exposing account details due to weak access controls. | Identity theft and fraud. | Use strong access controls and data encryption. |
+| **Denial of Service (DoS)** | Attacker floods the server with requests. | Service unavailability. | Implement rate limiting and DDoS protection. |
+| **Elevation of Privilege** | A user gains admin privileges through a flaw. | Full control over the system. | Enforce role-based access control (RBAC). |
+
+#### **Step 3: Create a Data Flow Diagram (DFD)**
+
+A **Data Flow Diagram (DFD)** helps visualize how data moves through the system and where threats might exist.
+
+**Example DFD for Online Banking System:**
+
+```plaintext
+[User] → [Login Page] → [Authentication System] → [Database]
+[User] → [Transaction Page] → [API] → [Database]
+```
+
+- The **Login Page** interacts with the **Authentication System** to validate user credentials.
+- The **Transaction Page** interacts with the **API** to request money transfers.
+- The **Database** stores all user information securely.
+
+#### **Step 4: Implement Security Controls**
+
+After identifying threats, the next step is applying security controls to mitigate them.
+
+| Security Control | Protection Against | Implementation |
+|-----------------|------------------|---------------|
+| Multi-Factor Authentication (MFA) | Spoofing | Require users to enter a one-time code. |
+| TLS Encryption | Tampering, Information Disclosure | Encrypt all sensitive data in transit. |
+| Role-Based Access Control (RBAC) | Elevation of Privilege | Restrict user permissions based on roles. |
+| Web Application Firewall (WAF) | Denial of Service | Detect and block malicious traffic. |
+
+#### **Step 5: Review and Improve**
+
+Threat modeling is an **ongoing process**. Regular security audits, penetration testing, and continuous monitoring should be performed to detect new threats.
+
+### Further Reading
+
+- [Microsoft STRIDE Model](https://docs.microsoft.com/en-us/azure/security/develop/threat-modeling-tool)
+- [OWASP Threat Modeling](https://owasp.org/www-project-threat-modeling/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

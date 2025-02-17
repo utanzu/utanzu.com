@@ -1,0 +1,36 @@
+---
+title: 'Code Reviews'
+topic: 'Secure Coding Practices'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine publishing a book without proofreading—typos, errors, and inconsistencies would ruin it! The same principle applies to code. Code reviews **catch security flaws before they reach production**.
+
+### Why Conduct Code Reviews?
+
+- **Early Detection of Bugs**: Identify issues before deployment.
+- **Security Improvements**: Catch vulnerabilities like **SQL injection** or **hardcoded credentials**.
+- **Knowledge Sharing**: Developers learn from each other’s mistakes.
+
+### Effective Secure Code Review Process
+
+| Step                           | Description                                                          |
+| ------------------------------ | -------------------------------------------------------------------- |
+| **1. Set Code Review Goals**   | Define what to check (e.g., security, performance, maintainability). |
+| **2. Use Automated Tools**     | Use linters and static analysis tools for faster reviews.            |
+| **3. Perform Peer Reviews**    | Another developer examines the code for security flaws.              |
+| **4. Document Issues & Fixes** | Track changes and provide constructive feedback.                     |
+| **5. Re-test and Approve**     | Ensure fixes are properly implemented before merging.                |
+
+### Common Security Issues Found in Code Reviews
+
+- **Hardcoded credentials** in code (`password = "admin123"`).
+- **Insecure API calls** (e.g., unencrypted HTTP requests).
+- **Missing input validation** allowing **XSS and SQL injection**.
+
+### Further Reading
+
+- [Google Code Review Best Practices](https://google.github.io/eng-practices/review/)
+- [OWASP Code Review Guide](https://owasp.org/www-pdf-archive/OWASP_Code_Review_Guide_v2.pdf)

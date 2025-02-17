@@ -57,6 +57,7 @@ const Avatar = () => {
         src={user.image || '/static/images/avatar.png'}
         width={30}
         height={30}
+        unoptimized
         className="h-auto max-w-full cursor-pointer rounded-full"
         onClick={handleProfileClick}
       />

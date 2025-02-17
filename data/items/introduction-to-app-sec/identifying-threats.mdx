@@ -1,0 +1,44 @@
+---
+title: 'Identifying Threats'
+topic: 'Threat Modeling'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Threat identification is a critical first step in application security. It helps developers and security professionals recognize potential risks that could exploit vulnerabilities in a system.
+
+### What is a Threat?
+
+A **`threat`** is any circumstance or event that could harm an application by exploiting weaknesses. It can lead to unauthorized access, data breaches, system disruptions, or loss of integrity.
+
+#### Common Types of Security Threats
+
+| Threat Type                    | Description                                                                              |
+| ------------------------------ | ---------------------------------------------------------------------------------------- |
+| **Injection Attacks**          | Malicious code is injected into an application (e.g., SQL injection, command injection). |
+| **Cross-Site Scripting (XSS)** | Attackers inject scripts into web pages viewed by users.                                 |
+| **Broken Authentication**      | Weak authentication mechanisms allow attackers to gain unauthorized access.              |
+| **Denial of Service (DoS)**    | Overloading an application to make it unavailable to users.                              |
+| **Zero-Day Exploits**          | Attacks targeting previously unknown vulnerabilities.                                    |
+
+### Techniques for Identifying Threats
+
+- **Attack Surface Analysis**: Mapping all possible entry points for attackers.
+- **Threat Intelligence**: Using external sources to stay updated on emerging threats.
+- **Red Teaming**: Ethical hackers simulate real-world attacks.
+- **Threat Modeling Tools**: Microsoft Threat Modeling Tool, OWASP Threat Dragon.
+
+### Example: Identifying Threats in a Banking Application
+
+Consider an online banking system:
+
+- **Threat**: Unauthorized access to user accounts.
+- **Vulnerability**: Weak password policies.
+- **Possible Exploit**: Brute force attacks.
+- **Mitigation**: Implement multi-factor authentication (MFA).
+
+### Further Reading
+
+- [OWASP Threat Modeling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html)
+- [Microsoft Threat Modeling](https://aka.ms/threatmodeling)

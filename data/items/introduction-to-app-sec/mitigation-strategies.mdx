@@ -1,0 +1,59 @@
+---
+title: 'Mitigation Strategies'
+topic: 'Threat Modeling'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Mitigation strategies are security measures used to reduce the risk of threats exploiting vulnerabilities in an application.
+
+### Key Mitigation Techniques
+
+| Mitigation Strategy                      | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| **1. Least Privilege**                   | Grant users the minimum access required. |
+| **2. Encryption**                        | Protect data in transit and at rest.     |
+| **3. Multi-Factor Authentication (MFA)** | Adds an extra layer of authentication.   |
+| **4. Input Validation**                  | Prevents injection attacks.              |
+| **5. Security Patching**                 | Regular updates to fix vulnerabilities.  |
+
+### Key Security Controls
+
+#### **Secure Authentication and Authorization**
+
+- Use **MFA** to reduce credential theft risks.
+- Implement **role-based access control (RBAC)** to limit access.
+
+#### **Data Encryption**
+
+- Encrypt sensitive data using **AES-256** for storage.
+- Use **TLS 1.2+** for secure communication.
+
+#### **Input Validation and Secure Coding**
+
+- Implement **parameterized queries** to prevent SQL injection.
+- Validate user input to block XSS attacks.
+
+#### **Security Hardening**
+
+- Disable unnecessary services and ports.
+- Enforce strong security configurations.
+
+#### **Continuous Monitoring and Incident Response**
+
+- Deploy **Intrusion Detection Systems (IDS)** to detect threats.
+- Have a well-documented **Incident Response Plan** (IRP).
+
+### Example: Mitigating a Threat in a Cloud Application
+
+| Threat              | Vulnerability        | Mitigation Strategy            |
+| ------------------- | -------------------- | ------------------------------ |
+| Unauthorized Access | Weak password policy | Enforce strong passwords & MFA |
+| SQL Injection       | Unsecured queries    | Use prepared statements        |
+| DDoS Attack         | No rate limiting     | Implement traffic throttling   |
+
+### Further Reading
+
+- [CIS Security Controls](https://www.cisecurity.org/controls/)
+- [OWASP Top 10 Mitigation Guide](https://owasp.org/www-project-top-ten/)

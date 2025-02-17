@@ -1,7 +1,0 @@
-Let’s talk about the foundation of application security—the CIA triad: Confidentiality, Integrity, and Availability.
-
-Confidentiality ensures sensitive data is only accessed by authorized users. For example, online banking apps use encryption to keep your account details private. On the other hand, Integrity ensures that data remains accurate and unaltered. Imagine sending a document via email—file integrity checks make sure it hasn’t been tampered with.
-
-Finally, Availability ensures applications and data are accessible when needed. For instance, cloud services use backup servers to keep your data available even during a hardware failure.
-
-By following these principles, we create secure, reliable applications that protect users and businesses. In the next session, we’ll explore the Principle of Least Privilege and how it strengthens security. Stay tuned!

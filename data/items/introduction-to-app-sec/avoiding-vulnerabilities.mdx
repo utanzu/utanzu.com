@@ -1,0 +1,53 @@
+---
+title: 'Avoiding Vulnerabilities'
+topic: 'Secure Coding Practices'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Have you ever left your front door open and walked away? That’s what leaving vulnerabilities in your code is like—an open invitation for attackers. Writing secure code is about **closing doors before hackers even try to enter**.
+
+### Common Software Vulnerabilities
+
+| Vulnerability | Description | Example Attack |
+|--------------|-------------|---------------|
+| **SQL Injection** | Injecting malicious SQL into database queries. | `' OR '1'='1' --` |
+| **Cross-Site Scripting (XSS)** | Injecting scripts into web pages viewed by users. | `<script>alert('hacked')</script>` |
+| **Broken Authentication** | Weak login mechanisms allow unauthorized access. | Brute force attacks on weak passwords. |
+| **Insecure Deserialization** | Manipulating serialized data to execute malicious code. | Tampering with JSON or XML payloads. |
+
+### How to Avoid These Vulnerabilities
+
+#### 1. **Sanitize Input and Use Parameterized Queries**
+
+Never trust user input! Always sanitize and validate it before processing.
+
+```python
+# Bad (Vulnerable to SQL Injection)
+cursor.execute("SELECT * FROM users WHERE username = '" + user_input + "'")
+
+# Good (Using Parameterized Queries)
+cursor.execute("SELECT * FROM users WHERE username = ?", (user_input,))
+```
+
+#### 2. **Escape and Validate User Input for XSS Prevention**
+
+```html
+<!-- Vulnerable to XSS -->
+<p>Welcome, <?php echo $_GET["name"]; ?></p>
+
+<!-- Secure Approach -->
+<p>Welcome, <?php echo htmlspecialchars($_GET["name"], ENT_QUOTES, 'UTF-8'); ?></p>
+```
+
+#### 3. **Enforce Strong Authentication**
+
+- Require **Multi-Factor Authentication (MFA)**.
+- Enforce **strong password policies**.
+- Implement **account lockout mechanisms** to prevent brute force attacks.
+
+### Further Reading
+
+- [OWASP Top 10 Security Risks](https://owasp.org/www-project-top-ten/)
+- [NIST Password Guidelines](https://pages.nist.gov/800-63-3/)

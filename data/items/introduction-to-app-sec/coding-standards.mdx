@@ -1,0 +1,55 @@
+---
+title: 'Coding Standards'
+topic: 'Secure Coding Practices'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine you’re building a bridge. Would you randomly place beams and cables without following a blueprint? Of course not! The same applies to software development—secure coding standards serve as the blueprint to ensure that applications are **structured, secure, and maintainable**.
+
+### Why Do Coding Standards Matter?
+
+- **Consistency**: Ensures that all developers write code in a uniform way.
+- **Security**: Reduces vulnerabilities caused by poor coding habits.
+- **Readability**: Makes it easier for teams to review and maintain code.
+- **Compliance**: Aligns with security regulations like GDPR and PCI-DSS.
+
+### Common Secure Coding Standards
+
+| Standard | Description |
+|----------|-------------|
+| **OWASP Secure Coding Practices** | Guidelines for secure web application development. |
+| **CERT Coding Standards** | Best practices for secure C, C++, and Java coding. |
+| **MISRA** | Focuses on security for embedded systems. |
+| **NIST Secure Coding Guidelines** | Security requirements for U.S. government systems. |
+
+### Example: Secure Coding in Action
+
+A developer writes this **unsafe** SQL query:
+
+```sql
+SELECT * FROM users WHERE username = '" + user_input + "'";
+```
+
+A hacker can inject malicious SQL (`' OR '1'='1' --`) and **gain unauthorized access**!
+
+A secure coding standard recommends **parameterized queries**:
+
+```sql
+SELECT * FROM users WHERE username = ?
+```
+
+Now, even if an attacker tries SQL injection, the query remains secure.
+
+### Best Practices for Secure Coding
+
+- Follow established coding standards like **OWASP** and **CERT**.
+- **Always validate user input** to prevent security risks.
+- **Write self-explanatory code** that is easy to review and maintain.
+- **Use secure libraries and frameworks** rather than reinventing security mechanisms.
+
+### Further Reading
+
+- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices/)
+- [CERT Secure Coding](https://www.securecoding.cert.org/)

@@ -1,0 +1,39 @@
+---
+title: 'Risk Assessment'
+topic: 'Threat Modeling'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Risk assessment is the process of identifying, analyzing, and prioritizing security risks to determine their potential impact on an application.
+
+### Why Perform Risk Assessment?
+
+- **Prioritizes Security Fixes**: Focus on critical vulnerabilities first.
+- **Minimizes Financial Losses**: Reduces costs associated with breaches.
+- **Ensures Compliance**: Meets industry standards like GDPR, PCI-DSS.
+
+### Steps in Risk Assessment
+
+| Step            | Description |
+|----------------|-------------|
+| **`Identify Assets`** | Determine what needs protection (e.g., databases, user credentials). |
+| **`Analyze Threats`** | List potential threats that could affect assets. |
+| **`Evaluate Vulnerabilities`** | Find weaknesses that threats can exploit. |
+| **`Determine Impact`** | Assess how severe the consequences of an attack would be. |
+| **`Calculate Risk Level`** | Use a risk matrix to categorize risks (High, Medium, Low). |
+
+### Example: Risk Assessment for an E-commerce Website
+
+- **Asset**: Customer payment data.
+- **Threat**: Data breach via SQL injection.
+- **Vulnerability**: Unsecured database queries.
+- **Impact**: Financial losses, regulatory fines.
+- **Risk Level**: High.
+- **Mitigation**: Implement prepared statements and input validation.
+
+## Further Reading
+
+- [NIST Risk Management Framework](https://csrc.nist.gov/publications/detail/sp/800-37/rev-2/final)
+- [OWASP Risk Assessment Guide](https://owasp.org/www-community/Threat_Risk_Modeling)
