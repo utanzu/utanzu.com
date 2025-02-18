@@ -20,7 +20,7 @@ interface Props {
   summary: string
 }
 
-export default function CoursePageSection({ title, topics }: Props) {
+export default function CoursePageSection({ title, topics, summary }: Props) {
   const { user, loading } = useAuth()
   const [selectedSubtopic, setSelectedSubtopic] = useState('')
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null)
@@ -155,6 +155,7 @@ export default function CoursePageSection({ title, topics }: Props) {
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
+        <p className="py-2 text-base font-semibold text-gray-600 dark:text-gray-400">{summary}</p>
         <div className="flex flex-col gap-6 py-6 md:flex-row-reverse">
           {/* Sidebar on the right */}
           <aside
@@ -228,7 +229,7 @@ export default function CoursePageSection({ title, topics }: Props) {
                 <h2 className="mb-4 text-2xl font-bold text-primary-600 dark:text-primary-400">
                   {selectedSubtopic}
                 </h2>
-                <div className="prose flex max-w-full flex-col dark:prose-dark">
+                <div className="prose flex max-w-full flex-col dark:prose-dark prose-p:my-2">
                   {subtopicContent && (
                     <MDXLayoutRenderer
                       code={subtopicContent}

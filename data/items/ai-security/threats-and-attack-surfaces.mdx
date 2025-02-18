@@ -1,0 +1,55 @@
+---
+title: 'Threats and Attack Surfaces'
+topic: 'Introduction to AI Security'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+AI-powered applications introduce **new attack surfaces** that traditional cybersecurity practices **do not fully address**. Let’s explore how attackers exploit AI vulnerabilities.
+
+### Key AI Security Threats
+
+#### **Scenario 1: Data Poisoning Attack**
+
+A **self-driving car** relies on an AI model trained on traffic sign images. Attackers **alter a few training images**, causing the AI to **misclassify stop signs as speed limit signs**.
+
+- **Impact**: The AI makes **dangerous driving decisions**, posing a safety risk.
+- **Prevention**: Use **secure datasets, anomaly detection, and adversarial training** to make AI models robust.
+
+#### **Scenario 2: Adversarial Attacks**
+
+A **facial recognition system** is deployed at an airport for passport verification. Attackers **wear specialized glasses with subtle patterns** that trick the AI into **misidentifying them as someone else**.
+
+- **Impact**: Attackers bypass **identity verification**, leading to **potential security breaches**.
+- **Prevention**: Use **defensive AI techniques** like **adversarial training** to detect manipulated inputs.
+
+#### **Scenario 3: AI Model Theft**
+
+A startup develops a **proprietary AI model** for detecting insider threats. **Hackers exploit an API vulnerability** to extract the model’s parameters and **replicate it for their own use**.
+
+- **Impact**: Intellectual property theft **destroys competitive advantage**.
+- **Prevention**: Encrypt model files, restrict API access, and use **model watermarking**.
+
+### AI Attack Surface
+
+| Attack Surface       | Description                                             | Example                                                     |
+| -------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
+| **Data**             | Poisoning, tampering, or exposing sensitive datasets.   | Modifying AI training data to introduce bias.               |
+| **Model**            | Stealing, manipulating, or exploiting AI models.        | Extracting model weights from an exposed API.               |
+| **Inference**        | Exploiting real-time AI decisions.                      | Fooling an AI system into making incorrect classifications. |
+| **API & Deployment** | Attacking AI interfaces to leak data or alter behavior. | Exploiting a chatbot to extract private user data.          |
+
+### How to Defend Against AI Attacks
+
+1. **Secure AI Training Data** – Use **trusted sources and anomaly detection** to **prevent poisoning**.
+2. **Defend Against Adversarial Inputs** – Train models with **adversarial examples** to **improve robustness**.
+3. **Encrypt AI Models** – Use **obfuscation and access controls** to **prevent model theft**.
+4. **Implement AI-Specific Monitoring** – Detect unusual behavior in **AI decision-making**.
+
+Understanding **AI security threats** helps **anticipate attacks and build more resilient AI systems**.
+
+### Further Reading
+
+- [MITRE ATLAS - AI Threat Framework](https://atlas.mitre.org/)
+- [AI Adversarial Attacks and Defenses](https://arxiv.org/)
