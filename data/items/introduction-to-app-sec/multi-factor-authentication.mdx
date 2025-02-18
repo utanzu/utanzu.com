@@ -1,0 +1,62 @@
+---
+title: 'Multi-Factor Authentication'
+topic: 'Authentication and Authorization'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine your bank account requires **just a password** to access. Now, what if a hacker **steals that password**? They’d have full control over your account. This is why **Multi-Factor Authentication (MFA)** is crucial—it adds extra layers of security.
+
+### What is Multi-Factor Authentication (MFA)?
+
+**Multi-Factor Authentication (MFA)** is a security system that requires users to provide **two or more verification factors** to gain access to an application.
+
+### How MFA Works
+
+MFA uses at least **two different types** of authentication factors:
+
+1. **Something You Know** – Password, PIN, Security Questions.
+2. **Something You Have** – Mobile device, security token, smart card.
+3. **Something You Are** – Biometrics (fingerprint, facial recognition).
+
+### Types of MFA Implementations
+
+#### **1. SMS and Email-Based OTPs**
+
+- Users receive a **one-time password (OTP)** via SMS or email.
+- **Common but vulnerable** to phishing and SIM-swapping attacks.
+
+#### **2. Authentication Apps (TOTP-based MFA)**
+
+- Apps like **Google Authenticator** and **Microsoft Authenticator** generate time-based OTPs.
+- More secure than SMS OTPs.
+
+#### **3. Biometric MFA**
+
+- Uses **fingerprints, facial recognition, retina scans**.
+- Found in **smartphones and secure banking apps**.
+
+#### **4. Hardware Security Keys**
+
+- **Physical USB security keys** (e.g., YubiKey, Titan Security Key).
+- Highly secure as they **cannot be phished**.
+
+### Example: Enabling MFA for a Cloud Service
+
+A company **secures employee accounts** by enabling MFA:
+
+1. Employees enter their **passwords**.
+2. They receive a **one-time password (OTP) via an authentication app**.
+3. After entering the OTP, they **gain access to their account**.
+
+### Best Practices for MFA Implementation
+
+- **Use authentication apps instead of SMS-based MFA**.
+- **Enforce MFA for high-risk accounts** (admin accounts, financial transactions).
+- **Combine MFA with adaptive authentication** (e.g., block logins from suspicious locations).
+
+### Further Reading
+
+- [NIST MFA Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html)
+- [OWASP Multi-Factor Authentication Guide](https://owasp.org/www-community/authentication/multi-factor_authentication)

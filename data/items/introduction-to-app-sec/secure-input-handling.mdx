@@ -1,0 +1,83 @@
+---
+title: 'Secure Input Handling'
+topic: 'Input Validation and Data Sanitization'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine you're a cashier at a grocery store. A customer hands you a fake bill. Do you just accept it? No, you check it under UV light, feel its texture, and confirm its authenticity. In the digital world, handling user input securely works the same way—you need to verify its legitimacy before processing it.
+
+### Why Secure Input Handling is Critical
+
+If applications accept any input without validation, attackers can inject malicious data, crash systems, or steal sensitive information.
+
+#### **Common Risks of Poor Input Handling**
+
+| Risk                           | Description                                        | Example                                              |
+| ------------------------------ | -------------------------------------------------- | ---------------------------------------------------- |
+| **SQL Injection**              | Attackers manipulate database queries.             | `SELECT * FROM users WHERE username = '' OR '1'='1'` |
+| **Cross-Site Scripting (XSS)** | Users inject malicious scripts into web pages.     | `<script>alert('Hacked!')</script>`                  |
+| **Buffer Overflow**            | Attackers send oversized inputs to crash a system. | Entering 10,000 characters in a name field.          |
+| **File Inclusion Attacks**     | Hackers execute unauthorized files.                | Uploading a malicious PHP file to a web server.      |
+
+### How to Handle Input Securely
+
+#### **1. Validate Input Before Processing**
+
+- **Enforce Expected Formats**: Use regular expressions to allow only valid data.
+- **Restrict Length**: Avoid excessively long input that may cause buffer overflows.
+- **Check Data Types**: Ensure numeric fields accept only numbers.
+
+**Example:** Ensuring a valid email format in Python.
+
+```python
+import re
+
+def is_valid_email(email):
+    pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+    return bool(re.match(pattern, email))
+
+print(is_valid_email("user@example.com"))  # ✅ Valid
+print(is_valid_email("invalid-email@com"))  # ❌ Invalid
+```
+
+#### **2. Use Allow Lists Instead of Block Lists**
+
+- **Allow Lists** define what is permitted. Example: Only allowing alphanumeric usernames.
+- **Block Lists** try to filter out bad input but can be bypassed.
+
+```python
+# Bad (Block List Approach - Can be bypassed)
+user_input = input("Enter username: ")
+if "<script>" in user_input or "DROP TABLE" in user_input:
+    print("Invalid input")
+
+# Good (Allow List Approach)
+import re
+
+if re.match(r"^[a-zA-Z0-9_]{5,20}$", user_input):
+    print("Valid username")
+else:
+    print("Invalid username")
+```
+
+#### **3. Sanitize Input Before Storing or Displaying**
+
+- Use **HTML escaping** to prevent Cross-Site Scripting (XSS).
+- Remove unexpected characters that could be used in an attack.
+
+```python
+import html
+
+user_input = "<script>alert('Hacked!')</script>"
+safe_input = html.escape(user_input)
+print(safe_input)  # Output: &lt;script&gt;alert('Hacked!')&lt;/script&gt;
+```
+
+By implementing secure input handling, you significantly reduce the risk of cyber attacks and ensure a safer application environment.
+
+### Further Reading
+
+- [OWASP Input Validation Guide](https://owasp.org/www-community/Input_Validation)
+- [NIST Secure Coding Guidelines](https://csrc.nist.gov/)

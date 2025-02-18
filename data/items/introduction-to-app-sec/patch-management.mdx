@@ -1,0 +1,60 @@
+---
+title: 'Patch Management'
+topic: 'Vulnerability Management'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Think of your smartphone. You get frequent software updates to fix security flaws and improve performance. In cybersecurity, **patch management** ensures systems and applications are **regularly updated to fix vulnerabilities**.
+
+### What is Patch Management?
+
+Patch management is the process of updating software, applications, and systems to fix security vulnerabilities and improve performance.
+
+### Why is Patch Management Critical?
+
+- **Reduces Attack Surface**: Prevents hackers from exploiting known vulnerabilities.
+- **Ensures System Stability**: Fixes bugs and enhances performance.
+- **Maintains Compliance**: Meets security standards (e.g., ISO 27001, PCI-DSS).
+
+### Patch Management Process
+
+| Step            | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| **1. Identify** | Track software versions and security patches.                |
+| **2. Assess**   | Evaluate the risk and impact of missing patches.             |
+| **3. Test**     | Apply patches in a controlled environment before deployment. |
+| **4. Deploy**   | Implement patches in production systems.                     |
+| **5. Monitor**  | Verify patch success and track new vulnerabilities.          |
+
+### Best Practices for Effective Patch Management
+
+#### **1. Automate Patch Deployment**
+
+- Use tools like **WSUS, SCCM, or Ansible** to automate patch distribution.
+
+#### **2. Prioritize Critical Patches**
+
+- Apply **emergency patches** immediately to prevent exploits.
+- Example: The **Log4j vulnerability (CVE-2021-44228)** required urgent patching.
+
+#### **3. Test Before Deploying**
+
+- Always test patches in a **staging environment** to avoid breaking systems.
+
+#### **4. Keep an Inventory of Software and Systems**
+
+- Maintain a **list of all applications** to track patch updates.
+
+### Example: Patch Management in a Corporate Network
+
+1. A security team identifies **Windows servers missing updates**.
+2. They test the patches in a sandbox environment.
+3. They deploy patches across production servers in a phased rollout.
+4. They monitor systems to ensure the patches do not disrupt services.
+
+### Further Reading
+
+- [Microsoft Patch Management Guide](https://learn.microsoft.com/en-us/windows-server/administration/windows-server-update-services/get-started/windows-server-update-services-wsus)
+- [NIST Patch Management Guide](https://csrc.nist.gov/publications/detail/sp/800-40/rev-3/final)

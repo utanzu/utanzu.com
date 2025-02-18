@@ -1,0 +1,62 @@
+---
+title: 'Remediation Strategies'
+topic: 'Vulnerability Management'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Picture this: You find a leak in your house. Do you ignore it or fix it immediately? In cybersecurity, **vulnerability remediation** is like fixing a leak—it prevents bigger disasters.
+
+### What is Remediation?
+
+**Remediation** is the process of addressing security vulnerabilities by eliminating, mitigating, or reducing the risk they pose.
+
+### Approaches to Remediation
+
+| Strategy                  | Description                                                        |
+| ------------------------- | ------------------------------------------------------------------ |
+| **Patching**              | Updating software to remove vulnerabilities.                       |
+| **Configuration Changes** | Modifying system settings to enhance security.                     |
+| **Network Segmentation**  | Restricting access to limit the spread of threats.                 |
+| **Compensating Controls** | Implementing security measures when direct fixes are not possible. |
+
+### Steps in Vulnerability Remediation
+
+1. **Identify the Vulnerability**
+
+   - Use **security scans** or **manual testing** to detect issues.
+
+2. **Assess the Risk Level**
+
+   - Determine **how severe the vulnerability is** (e.g., High, Medium, Low).
+
+3. **Select a Remediation Strategy**
+
+   - **Patch the vulnerability** if a fix is available.
+   - **Apply a workaround** (e.g., disable a vulnerable feature).
+   - **Implement additional security controls** (e.g., Web Application Firewalls).
+
+4. **Deploy the Fix and Test**
+
+   - Ensure the remediation **does not break functionality**.
+
+5. **Monitor for Reoccurrence**
+   - Continuous **security monitoring** to detect new threats.
+
+### Example: Remediation for a Cloud-Based Application
+
+**Scenario:** A **remote code execution vulnerability** (CVE-2022-1234) is found in a cloud-based web application.
+
+| Step          | Action                                                            |
+| ------------- | ----------------------------------------------------------------- |
+| **Identify**  | Security team detects vulnerability in a dependency.              |
+| **Assess**    | The risk is **critical**, as attackers could gain system control. |
+| **Remediate** | Apply vendor patch and update the affected libraries.             |
+| **Test**      | Run penetration tests to confirm the issue is fixed.              |
+| **Monitor**   | Enable logging and alerts for similar attacks.                    |
+
+### Further Reading
+
+- [OWASP Vulnerability Remediation](https://owasp.org/www-community/Vulnerability_Management)
+- [CISA Remediation Strategies](https://www.cisa.gov/remediation-best-practices)

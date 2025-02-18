@@ -1,0 +1,41 @@
+---
+title: 'Sanitization Methods'
+topic: 'Input Validation and Data Sanitization'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine handling raw food in a restaurant. Before serving, you **wash, peel, and cook** it to remove harmful bacteria. **Sanitization in cybersecurity** follows the same principle—it cleans incoming data to remove harmful elements.
+
+### Techniques for Data Sanitization
+
+| Method | Purpose | Example |
+|--------|---------|---------|
+| **Encoding** | Converts special characters into safe formats. | Escaping HTML characters. |
+| **Filtering** | Removes unwanted characters from input. | Removing non-numeric characters from phone numbers. |
+| **Validation** | Ensures input matches expected formats. | Checking email formats before processing. |
+
+#### **Example: Encoding User Input to Prevent XSS**
+
+```python
+import html
+
+user_input = "<script>alert('Hacked!')</script>"
+safe_input = html.escape(user_input)
+
+print(safe_input)  # Output: &lt;script&gt;alert('Hacked!')&lt;/script&gt;
+```
+
+### Best Practices for Sanitization
+
+- **Sanitize both client-side and server-side**.
+- **Normalize input before processing** (e.g., convert uppercase to lowercase).
+- **Log rejected inputs** for analysis and security monitoring.
+
+Proper sanitization ensures applications **process only clean and secure data**, preventing security breaches.
+
+### Further Reading
+
+- [OWASP Data Sanitization Guide](https://owasp.org/www-community/Sanitization)
+- [NIST Secure Data Handling](https://csrc.nist.gov/publications)
