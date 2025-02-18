@@ -1,0 +1,68 @@
+---
+title: 'System Hardening'
+topic: 'Secure Configuration Management'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine leaving your house with all the doors open and no locks. That’s what an **unhardened system** is like—an easy target for attackers. **System hardening** is the process of reducing vulnerabilities in an application, operating system, or network.
+
+### Why System Hardening is Important
+
+- **Reduces Attack Surfaces**: Removes unnecessary services and features.
+- **Prevents Exploits**: Eliminates known vulnerabilities.
+- **Enhances Compliance**: Meets industry standards like CIS, NIST, and ISO 27001.
+
+### Key Steps in System Hardening
+
+#### **1. Remove Unnecessary Services and Software**
+
+- Disable **unused ports, services, and applications**.
+- Uninstall **default applications** that are not required.
+
+```shell
+# Check running services (Linux)
+systemctl list-units --type=service
+
+# Disable an unnecessary service
+sudo systemctl disable cups.service
+```
+
+#### **2. Apply Security Patches and Updates**
+
+- Enable **automatic security updates**.
+- Use a **patch management system** to track missing patches.
+
+```shell
+# Ubuntu: Update and upgrade system packages
+sudo apt update && sudo apt upgrade -y
+```
+
+#### **3. Implement Least Privilege Access**
+
+- Restrict **admin privileges**.
+- Use **role-based access control (RBAC)** to manage permissions.
+
+```shell
+# Linux: Restrict user privileges
+usermod -L user_name  # Lock user account
+chmod 750 /var/www/html  # Limit access to web directory
+```
+
+#### **4. Disable Unused Network Protocols**
+
+- Disable **Telnet, FTP, and SMBv1** if not in use.
+- Use **SSH instead of Telnet** for remote access.
+
+```shell
+# Disable Telnet service (Linux)
+sudo systemctl disable telnet.socket
+```
+
+System hardening **reduces the attack surface**, making it harder for attackers to exploit weaknesses.
+
+### Further Reading
+
+- [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/)
+- [NIST System Hardening Guide](https://csrc.nist.gov/publications/)

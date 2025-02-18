@@ -1,0 +1,44 @@
+---
+title: 'Automation Tools'
+topic: 'DevSecOps Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Security automation is a key principle of DevSecOps. By integrating automated security tools into the CI/CD pipeline, organizations can identify vulnerabilities and enforce security policies **without manual intervention**.
+
+### Types of Security Automation Tools
+
+| Tool Category                             | Purpose                                              | Example Tools                        |
+| ----------------------------------------- | ---------------------------------------------------- | ------------------------------------ |
+| **Static Analysis (SAST)**                | Scan source code for vulnerabilities                 | SonarQube, Snyk                      |
+| **Dynamic Analysis (DAST)**               | Test running applications for security flaws         | OWASP ZAP, Burp Suite                |
+| **Software Composition Analysis (SCA)**   | Detect vulnerabilities in dependencies               | Snyk, Dependabot                     |
+| **Infrastructure as Code (IaC) Security** | Scan Terraform, Kubernetes, and cloud configurations | Checkov, KICS                        |
+| **Secrets Management**                    | Prevent hardcoded credentials                        | HashiCorp Vault, AWS Secrets Manager |
+
+#### Example: Automating Security in CI/CD with GitHub Actions
+
+```yaml
+name: Security Scan
+
+on: push
+
+jobs:
+  sast_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run Snyk SAST Scan
+        run: snyk test --all-projects
+```
+
+Automating security reduces human error and ensures **consistent security enforcement** across all projects.
+
+### Further Reading
+
+- [OWASP SAST Tools Guide](https://owasp.org/www-community/Source_Code_Analysis_Tools)
+- [GitHub Actions for Security](https://docs.github.com/en/actions)

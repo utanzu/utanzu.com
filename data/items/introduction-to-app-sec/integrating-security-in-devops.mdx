@@ -1,0 +1,40 @@
+---
+title: 'Integrating Security in DevOps'
+topic: 'DevSecOps Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+DevSecOps is the practice of **integrating security into every phase** of the software development lifecycle (SDLC), rather than treating it as an afterthought. This approach ensures that applications are **secure by design** and not just secured after deployment.
+
+### Why Security Needs to Be Part of DevOps
+
+- **Early detection of vulnerabilities** reduces security risks.
+- **Automated security checks** ensure compliance without slowing development.
+- **Continuous security monitoring** helps detect and respond to threats.
+
+### The DevSecOps Workflow
+
+| DevOps Phase | Security Integration                                        |
+| ------------ | ----------------------------------------------------------- |
+| **Plan**     | Define security requirements and threat models.             |
+| **Develop**  | Implement secure coding practices and static code analysis. |
+| **Build**    | Scan dependencies for vulnerabilities (SCA).                |
+| **Test**     | Conduct automated security testing (SAST, DAST).            |
+| **Release**  | Implement security policies for deployment.                 |
+| **Monitor**  | Continuously detect threats and misconfigurations.          |
+
+#### Example: Secure Code Review in DevSecOps
+
+```shell
+# Run a static analysis scan with SonarQube
+sonar-scanner -Dsonar.projectKey=my_project -Dsonar.sources=src
+```
+
+Integrating security into DevOps enables **faster, more secure software delivery**, ensuring that vulnerabilities are addressed **before deployment**.
+
+### Further Reading
+
+- [OWASP DevSecOps Guide](https://owasp.org/www-project-devsecops-maturity-model/)
+- [NIST DevSecOps Framework](https://csrc.nist.gov/)

@@ -1,0 +1,56 @@
+---
+title: 'Hashing and Digital Signatures'
+topic: 'Cryptography Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Think of hashing as a **fingerprint** for data. Once created, it cannot be reversed. Digital signatures, on the other hand, act like a **notary stamp**, verifying that data hasn’t been tampered with.
+
+### 1. What is Hashing?
+
+Hashing **converts input data into a fixed-length string** that uniquely represents the original data.
+
+#### **Common Hashing Algorithms**
+
+| Algorithm   | Output Size | Use Case                                         |
+| ----------- | ----------- | ------------------------------------------------ |
+| **MD5**     | 128-bit     | File integrity checks (not secure for passwords) |
+| **SHA-256** | 256-bit     | Secure password hashing                          |
+| **Bcrypt**  | Variable    | Secure user authentication                       |
+
+**Example: Hashing a Password in Python**
+
+```python
+import hashlib
+
+password = "SecurePassword123"
+hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+print(hashed_password)
+```
+
+### 2. What are Digital Signatures?
+
+Digital signatures verify **data integrity and authenticity**.
+
+### **How Digital Signatures Work**
+
+1. A sender **creates a digital signature** by hashing the message and encrypting it with their **private key**.
+2. The recipient **verifies the signature** using the sender’s **public key**.
+
+```plaintext
+[Sender] --(Sign with Private Key)--> [Signature] --(Verify with Public Key)--> [Recipient]
+```
+
+#### **Example: Digital Signature Usage**
+
+- **Signed emails** ensure that the sender is authentic.
+- **Software updates** use digital signatures to prevent tampering.
+
+Hashing and digital signatures **ensure that data has not been altered**, preventing attacks such as data forgery.
+
+### Further Reading
+
+- [Digital Signature Standards](https://csrc.nist.gov/publications/detail/fips/186/4/final)

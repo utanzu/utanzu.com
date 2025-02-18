@@ -1,0 +1,34 @@
+---
+title: 'API Vulnerabilities'
+topic: 'API Security'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+APIs (Application Programming Interfaces) are the backbone of modern applications, enabling seamless communication between different services. However, if not properly secured, APIs can introduce serious security risks that attackers exploit to gain unauthorized access, steal data, or disrupt services.
+
+### Common API Vulnerabilities
+
+APIs often expose sensitive functions and data, making them attractive targets for attackers. Here are some of the most critical vulnerabilities:
+
+| Vulnerability                                | Description                                               | Example                                                              |
+| -------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Broken Authentication**                    | Weak authentication mechanisms allow unauthorized access. | API keys exposed in URLs.                                            |
+| **Insecure Direct Object References (IDOR)** | Users can access objects they shouldn’t.                  | Changing `user_id=123` to `user_id=124` to view another user's data. |
+| **Excessive Data Exposure**                  | APIs return more data than necessary.                     | Returning full user details, including passwords, in responses.      |
+| **Rate Limiting Bypass**                     | Attackers flood APIs with automated requests.             | API allows unlimited login attempts without blocking.                |
+| **Lack of Encryption**                       | Data is transmitted in plaintext.                         | API communicates over HTTP instead of HTTPS.                         |
+
+### How Attackers Exploit API Vulnerabilities
+
+- **Token Theft**: Attackers steal API keys or OAuth tokens to access accounts.
+- **Man-in-the-Middle Attacks**: Intercepting API traffic when encryption is weak.
+- **Automated Attacks**: Bots abuse APIs to scrape data or perform credential stuffing.
+
+Understanding these vulnerabilities is the first step toward securing APIs effectively.
+
+### Further Reading
+
+- [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)
+- [NIST API Security Guidelines](https://csrc.nist.gov/)

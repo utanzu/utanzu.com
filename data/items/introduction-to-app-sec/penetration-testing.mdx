@@ -1,0 +1,48 @@
+---
+title: 'Penetration Testing'
+topic: 'Testing and Security Assessment'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Penetration testing (or **ethical hacking**) is a security assessment technique used to **simulate real-world attacks** on applications, networks, and systems. The goal is to identify security weaknesses before attackers can exploit them.
+
+### Why is Penetration Testing Important?
+
+- **Identifies vulnerabilities** in applications before they are exploited.
+- **Validates security controls** and ensures compliance with standards.
+- **Helps organizations understand real-world threats** to their systems.
+
+### Phases of a Penetration Test
+
+| Phase                            | Description                                                            |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| **1. Planning & Reconnaissance** | Gather information about the target system (domains, IPs, open ports). |
+| **2. Scanning**                  | Identify potential entry points using tools like Nmap.                 |
+| **3. Exploitation**              | Attempt to exploit vulnerabilities to gain access.                     |
+| **4. Post-Exploitation**         | Maintain access, escalate privileges, or extract sensitive data.       |
+| **5. Reporting & Remediation**   | Document findings and recommend fixes.                                 |
+
+### Example: Performing a Basic Network Scan with Nmap
+
+```shell
+# Scan a target for open ports and services
+nmap -sV -A example.com
+```
+
+### Tools Used in Penetration Testing
+
+| Tool           | Purpose                          |
+| -------------- | -------------------------------- |
+| **Metasploit** | Exploitation framework           |
+| **Burp Suite** | Web application security testing |
+| **Wireshark**  | Network traffic analysis         |
+| **Nmap**       | Port scanning and reconnaissance |
+
+Penetration testing is an essential part of any security program, ensuring that vulnerabilities are **discovered and patched** before attackers can exploit them.
+
+### Further Reading
+
+- [OWASP Penetration Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [NIST Security Testing Framework](https://csrc.nist.gov/)

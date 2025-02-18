@@ -1,0 +1,70 @@
+---
+title: 'Configuration Audits'
+topic: 'Secure Configuration Management'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine driving a car without ever **checking the brakes or oil levels**. Configuration audits serve the same purpose for IT security—ensuring that **systems follow security best practices**.
+
+### What are Configuration Audits?
+
+Configuration audits review system settings and security policies to **identify misconfigurations, vulnerabilities, and policy violations**.
+
+### Why Perform Configuration Audits?
+
+- **Detect Security Misconfigurations**: Identify **open ports, weak passwords, and outdated software**.
+- **Ensure Compliance**: Meet standards like **ISO 27001, NIST, PCI-DSS**.
+- **Prevent Breaches**: Reduce the risk of unauthorized access and data leaks.
+
+### Steps in a Configuration Audit
+
+#### **1. Define Security Baselines**
+
+- Use **CIS Benchmarks** or **NIST guidelines** as a reference.
+- Establish **security configuration templates**.
+
+#### **2. Scan for Misconfigurations**
+
+- Use automated tools to detect security weaknesses.
+
+```shell
+# Scan Linux system for misconfigurations
+lynis audit system
+```
+
+#### **3. Review User and Access Controls**
+
+- Identify **inactive accounts and privilege escalations**.
+- Ensure **multi-factor authentication (MFA)** is enabled.
+
+#### **4. Validate Network and Firewall Rules**
+
+- Block **unnecessary open ports**.
+- Allow only **trusted IPs** to access critical services.
+
+```shell
+# List open ports in Linux
+sudo netstat -tulpn
+```
+
+#### **5. Report and Fix Issues**
+
+- Generate audit reports and prioritize fixes.
+- Implement **continuous monitoring**.
+
+### Configuration Audit Tools
+
+| Tool         | Purpose                               |
+| ------------ | ------------------------------------- |
+| **Lynis**    | Linux system audit                    |
+| **OpenSCAP** | Security policy compliance            |
+| **Nessus**   | Vulnerability and compliance scanning |
+
+Regular configuration audits **strengthen security posture** and help organizations **detect weaknesses before attackers do**.
+
+### Further Reading
+
+- [CIS Configuration Guidelines](https://www.cisecurity.org/cis-benchmarks/)
+- [NIST Configuration Management Guide](https://csrc.nist.gov/publications/)

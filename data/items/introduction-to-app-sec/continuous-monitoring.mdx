@@ -1,0 +1,38 @@
+---
+title: 'Continuous Monitoring'
+topic: 'DevSecOps Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Continuous monitoring ensures that applications and infrastructure are **continuously observed** for security threats, misconfigurations, and compliance violations.
+
+### Why Continuous Monitoring Matters
+
+- **Detects security incidents in real-time.**
+- **Identifies misconfigurations** before they lead to breaches.
+- **Ensures compliance** with security policies.
+
+### Components of Continuous Monitoring
+
+| Component                                          | Purpose                                   | Example Tools                  |
+| -------------------------------------------------- | ----------------------------------------- | ------------------------------ |
+| **Log Management**                                 | Collect and analyze system logs           | ELK Stack, Splunk              |
+| **Intrusion Detection (IDS)**                      | Detect unauthorized activities            | Suricata, Snort                |
+| **Cloud Security Posture Management (CSPM)**       | Monitor cloud security configurations     | AWS Security Hub, Prisma Cloud |
+| **SIEM (Security Information & Event Management)** | Centralized threat detection and response | Splunk, IBM QRadar             |
+
+#### Example: Setting Up Security Monitoring with ELK
+
+```shell
+# Install Filebeat to forward logs to ELK
+sudo apt install filebeat
+```
+
+By integrating continuous monitoring into DevSecOps, teams can **detect and respond to threats before they cause harm**.
+
+### Further Reading
+
+- [AWS Security Monitoring Guide](https://aws.amazon.com/security/)
+- [ELK Stack Documentation](https://www.elastic.co/guide/en/)

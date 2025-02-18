@@ -1,0 +1,68 @@
+---
+title: 'Encryption Basics'
+topic: 'Cryptography Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Imagine sending a **secret message** to a friend. You don’t want anyone else to read it, so you decide to **scramble the words** using a secret pattern. Only your friend, who knows the pattern, can unscramble and read the message. This is exactly how encryption works!
+
+### What is Encryption?
+
+Encryption is a method of **`converting plain data into an unreadable format`** (ciphertext) so that only authorized users can access it.
+
+### Types of Encryption
+
+| Encryption Type           | Description                                                        | Example |
+| ------------------------- | ------------------------------------------------------------------ | ------- |
+| **Symmetric Encryption**  | Uses the same key for encryption and decryption.                   | AES     |
+| **Asymmetric Encryption** | Uses a public key for encryption and a private key for decryption. | RSA     |
+
+#### **1. Symmetric Encryption (Fast but Requires Key Sharing)**
+
+- A **single key** is used to encrypt and decrypt data.
+- **Best for** encrypting large amounts of data quickly.
+
+**Example: Encrypting with AES in Python**
+
+```python
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+message = b"Sensitive Data"
+encrypted = cipher.encrypt(message)
+print(encrypted)
+
+decrypted = cipher.decrypt(encrypted)
+print(decrypted.decode())
+```
+
+#### **2. Asymmetric Encryption (Secure but Slower)**
+
+- Uses a **public key** to encrypt data and a **private key** to decrypt it.
+- Used in **SSL/TLS encryption**, digital signatures, and secure email communication.
+
+**Example: RSA Encryption Workflow**
+
+1. The sender **encrypts a message** using the recipient’s **public key**.
+2. The recipient **decrypts the message** using their **private key**.
+
+```plaintext
+[Sender] --(Encrypt with Public Key)--> [Ciphertext] --(Decrypt with Private Key)--> [Recipient]
+```
+
+### When to Use Encryption
+
+- **Protecting stored passwords and credit card data.**
+- **Securing communication over the internet (HTTPS, VPNs).**
+- **Encrypting files and databases.**
+
+Encryption ensures that **even if attackers steal data, they cannot read it without the decryption key**.
+
+### Further Reading
+
+- [NIST Encryption Guidelines](https://csrc.nist.gov/)
+- [OWASP Cryptography Guide](https://owasp.org/www-project-cryptographic-storage-cheat-sheet/)

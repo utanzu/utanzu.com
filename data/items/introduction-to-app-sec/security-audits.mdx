@@ -1,0 +1,55 @@
+---
+title: 'Security Audits'
+topic: 'Testing and Security Assessment'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+A security audit is a **systematic review** of an organization's security policies, controls, and configurations to ensure compliance and identify risks.
+
+### Why Conduct Security Audits?
+
+- **Ensures compliance** with regulations like **ISO 27001, NIST, and PCI-DSS**.
+- **Identifies misconfigurations** and security gaps.
+- **Improves security posture** by enforcing best practices.
+
+### Types of Security Audits
+
+| Audit Type               | Purpose                                                        |
+| ------------------------ | -------------------------------------------------------------- |
+| **Configuration Audit**  | Verifies secure system and network settings.                   |
+| **Compliance Audit**     | Ensures adherence to industry regulations (e.g., GDPR, HIPAA). |
+| **Code Audit**           | Reviews application source code for vulnerabilities.           |
+| **Access Control Audit** | Assesses permissions and user access.                          |
+
+### Steps in a Security Audit
+
+1. **Define Scope** – Determine what systems and policies to review.
+2. **Assess Controls** – Evaluate security configurations and permissions.
+3. **Identify Gaps** – Document security weaknesses and risks.
+4. **Recommend Fixes** – Provide actionable security improvements.
+5. **Continuous Monitoring** – Regularly review and update security policies.
+
+#### Example: Checking System Security with Lynis
+
+```shell
+# Run a security audit on a Linux system
+lynis audit system
+```
+
+### Security Audit Tools
+
+| Tool         | Purpose                                 |
+| ------------ | --------------------------------------- |
+| **Lynis**    | Linux security auditing                 |
+| **OpenSCAP** | Compliance and configuration management |
+| **AuditD**   | Linux audit logging                     |
+| **Splunk**   | Security log analysis                   |
+
+Security audits help organizations **maintain strong security practices** and **reduce the risk of cyber threats**.
+
+### Further Reading
+
+- [CIS Security Auditing Guidelines](https://www.cisecurity.org/cis-benchmarks/)
+- [NIST Security Audit Framework](https://csrc.nist.gov/)

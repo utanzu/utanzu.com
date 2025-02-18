@@ -1,0 +1,63 @@
+---
+title: 'API Testing'
+topic: 'API Security'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Testing APIs for security vulnerabilities is a crucial step in application security. API testing ensures that endpoints behave as expected under different conditions and that they do not expose sensitive data or functions.
+
+### Types of API Security Testing
+
+#### **1. Authentication and Authorization Testing**
+
+- Verify that only **authorized users** can access certain endpoints.
+- Ensure API tokens and JWTs **expire and refresh correctly**.
+
+```python
+# Example: Testing API authentication with Python requests
+import requests
+
+url = "https://api.example.com/protected"
+headers = {"Authorization": "Bearer INVALID_TOKEN"}
+
+response = requests.get(url, headers=headers)
+print(response.status_code)  # Expected: 401 Unauthorized
+```
+
+#### **2. Input Validation Testing**
+
+- Send **malformed data** to check how the API handles it.
+- Test against **SQL injection, XSS, and command injection**.
+
+```python
+# Example: SQL injection test payload
+payload = {"username": "admin' --", "password": "password"}
+response = requests.post("https://api.example.com/login", json=payload)
+print(response.text)  # Should not return database errors
+```
+
+#### **3. Rate Limiting and Abuse Testing**
+
+- Simulate **brute-force attacks** and excessive requests.
+- Ensure APIs **block repeated failed login attempts**.
+
+```python
+# Example: Sending multiple login requests to test rate limiting
+for _ in range(50):
+    response = requests.post("https://api.example.com/login", json={"username": "test", "password": "wrong"})
+    print(response.status_code)  # Expected: 429 Too Many Requests
+```
+
+#### **4. API Security Scanning**
+
+- Use tools like **OWASP ZAP, Postman, and Burp Suite** to automate security testing.
+- Run **fuzzing tests** to check for unexpected input handling.
+
+By integrating security testing into API development, you can proactively fix vulnerabilities before attackers exploit them.
+
+### Further Reading
+
+- [API Security Testing with OWASP ZAP](https://www.zaproxy.org/)
+- [Postman API Testing Guide](https://learning.postman.com/)

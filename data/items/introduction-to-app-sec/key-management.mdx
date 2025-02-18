@@ -1,0 +1,48 @@
+---
+title: 'Key Management'
+topic: 'Cryptography Fundamentals'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Encryption is **only as strong as how well you protect the keys**. If an attacker gets access to the encryption key, they can **decrypt everything**.
+
+### Best Practices for Key Management
+
+| Practice                  | Description                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ |
+| **Use Strong Keys**       | Generate keys with at least 256-bit length for AES encryption.                 |
+| **Store Keys Securely**   | Use **Hardware Security Modules (HSMs)** or **Key Management Services (KMS)**. |
+| **Rotate Keys Regularly** | Change keys periodically to reduce exposure risks.                             |
+| **Limit Key Access**      | Restrict access using role-based access control (RBAC).                        |
+
+#### **1. Secure Key Storage**
+
+- **Never store encryption keys in source code.**
+- Use **environment variables** or **secure key vaults**.
+
+```python
+import os
+
+encryption_key = os.getenv("ENCRYPTION_KEY")  # Fetch key from a secure environment variable
+```
+
+### **2. Key Rotation**
+
+Regularly update encryption keys to **mitigate risk**. Many cloud providers offer **automated key rotation**.
+
+```shell
+aws kms rotate-key --key-id alias/my-key
+```
+
+#### **3. Hardware Security Modules (HSMs) and Key Management Services (KMS)**
+
+- **HSMs**: Dedicated hardware devices for securely storing and managing keys.
+- **KMS**: Cloud-based services like **AWS KMS**, **Azure Key Vault**, and **Google Cloud KMS**.
+
+Proper key management ensures that even **if data is stolen, it remains encrypted and inaccessible**.
+
+### Further Reading
+
+- [NIST Key Management Guide](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final)

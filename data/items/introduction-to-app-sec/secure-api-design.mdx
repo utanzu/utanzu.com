@@ -1,0 +1,68 @@
+---
+title: 'Secure API Design'
+topic: 'API Security'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+APIs power web, mobile, and cloud applications, making security a top priority. Secure API design ensures that APIs handle authentication, authorization, and data protection correctly to prevent security breaches.
+
+### Principles of Secure API Design
+
+#### **1. Use Strong Authentication and Authorization**
+
+- Implement **OAuth 2.0**, API keys, or JWTs for secure access.
+- Require **multi-factor authentication (MFA)** for sensitive API endpoints.
+- Enforce **role-based access control (RBAC)** to limit user permissions.
+
+```python
+# Example: Verifying JWT in a Python API
+from flask import request
+import jwt
+
+SECRET_KEY = "supersecretkey"
+
+def verify_token(token):
+    try:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return decoded  # Token is valid
+    except jwt.ExpiredSignatureError:
+        return "Token expired"
+    except jwt.InvalidTokenError:
+        return "Invalid token"
+```
+
+#### **2. Implement Rate Limiting and Throttling**
+
+- Prevent **DDoS attacks** by limiting API calls per minute.
+- Use **CAPTCHAs and bot detection** for public-facing APIs.
+
+```python
+# Flask-Limiter example to restrict API requests
+from flask_limiter import Limiter
+
+limiter = Limiter(key_func=lambda: request.remote_addr)
+
+@app.route("/api/data")
+@limiter.limit("10 per minute")  # Limit requests
+def get_data():
+    return "Secure Data"
+```
+
+#### **3. Encrypt API Traffic and Data**
+
+- Use **HTTPS with TLS 1.2+** to protect data in transit.
+- Encrypt sensitive data at rest using **AES-256**.
+
+#### **4. Validate and Sanitize User Input**
+
+- Protect APIs from **injection attacks (SQLi, XSS, XML attacks).**
+- Use **allow lists** to accept only expected input formats.
+
+A secure API architecture minimizes risks, ensuring data privacy and system integrity.
+
+### Further Reading
+
+- [OAuth 2.0 Guide](https://oauth.net/2/)
+- [OWASP API Security Best Practices](https://owasp.org/www-project-api-security/)

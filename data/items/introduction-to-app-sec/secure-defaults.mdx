@@ -1,0 +1,65 @@
+---
+title: 'Secure Defaults'
+topic: 'Secure Configuration Management'
+course: 'Introduction to Application Security'
+category: 'Application Security'
+duration: 1
+---
+
+Would you leave a **default password** like "admin123" on a new router? No! Secure defaults ensure that applications, systems, and devices start with **strong security settings**.
+
+### Why Secure Defaults Matter
+
+- **Prevents misconfigurations** that leave systems vulnerable.
+- **Blocks common attack vectors** by enforcing best practices.
+- **Simplifies security compliance** by applying safe settings from the start.
+
+### Secure Default Configuration Practices
+
+#### **1. Enforce Strong Default Passwords**
+
+- Require **complex passwords** (at least 12 characters, uppercase, lowercase, numbers, special characters).
+- Disable **default admin accounts** where possible.
+
+```shell
+# Change root password in Linux
+passwd root
+```
+
+#### **2. Enable Secure Communication Protocols by Default**
+
+- Disable **HTTP in favor of HTTPS**.
+- Use **TLS 1.2+** instead of outdated SSL versions.
+
+```shell
+# Enforce HTTPS in Apache (Linux)
+sudo a2enmod ssl
+sudo systemctl restart apache2
+```
+
+#### **3. Restrict Default Permissions**
+
+- Use **least privilege principles** by setting minimal permissions.
+- Deny **public access to critical resources**.
+
+```shell
+# Secure file permissions in Linux
+chmod 600 /etc/ssh/sshd_config
+```
+
+#### **4. Enable Logging and Monitoring by Default**
+
+- Enable **audit logging** for security events.
+- Configure **log rotation** to prevent disk space exhaustion.
+
+```shell
+# View system logs in Linux
+journalctl -xe
+```
+
+Secure defaults ensure that **new systems are not vulnerable from the start**, reducing security risks significantly.
+
+### Further Reading
+
+- [OWASP Secure Configuration](https://owasp.org/www-project-application-security-verification-standard/)
+- [NIST Secure Configuration Guidelines](https://csrc.nist.gov/publications/)
