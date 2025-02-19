@@ -6,47 +6,49 @@ category: 'AI Security'
 duration: 1
 ---
 
-# API Security
-
 APIs serve as **entry points** for AI models, making them **vulnerable to unauthorized access, data leaks, and adversarial attacks** if not properly secured. Organizations must implement **robust security measures** to protect AI-powered APIs from misuse and breaches.
 
-### **Scenario: AI-Powered Healthcare API Leak**
+#### **Scenario: AI-Powered Healthcare API Leak**
 
 A hospital deploys an **AI-driven diagnostic API** to analyze patient medical records. A researcher **accidentally exposes API keys** on a public GitHub repository, allowing attackers to **access and extract private patient data**.
 
-## Common API Security Threats
+### Common API Security Threats
 
-| Threat | Description | Example |
-|--------|------------|---------|
-| **Unauthorized Access** | Attackers gain access to AI models via exposed or weak API credentials. | A leaked API key gives full access to an AI chatbot service. |
-| **Injection Attacks** | Malicious data inputs manipulate AI predictions. | An attacker sends adversarial queries to a financial AI API, tricking it into approving fraudulent transactions. |
-| **Denial-of-Service (DoS) Attacks** | Overloading an AI API with excessive requests to disrupt services. | Sending millions of queries to an AI-powered stock trading bot to crash the system. |
-| **Model Extraction Attacks** | Querying an AI API repeatedly to reconstruct the underlying model. | A competitor reverse-engineers an AI-driven recommendation system. |
-| **Data Exposure** | Poorly secured API responses leak sensitive user data. | An AI assistant API returns personal email contents instead of general summaries. |
+| Threat                              | Description                                                             | Example                                                                                                          |
+| ----------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Unauthorized Access**             | Attackers gain access to AI models via exposed or weak API credentials. | A leaked API key gives full access to an AI chatbot service.                                                     |
+| **Injection Attacks**               | Malicious data inputs manipulate AI predictions.                        | An attacker sends adversarial queries to a financial AI API, tricking it into approving fraudulent transactions. |
+| **Denial-of-Service (DoS) Attacks** | Overloading an AI API with excessive requests to disrupt services.      | Sending millions of queries to an AI-powered stock trading bot to crash the system.                              |
+| **Model Extraction Attacks**        | Querying an AI API repeatedly to reconstruct the underlying model.      | A competitor reverse-engineers an AI-driven recommendation system.                                               |
+| **Data Exposure**                   | Poorly secured API responses leak sensitive user data.                  | An AI assistant API returns personal email contents instead of general summaries.                                |
 
-## Best Practices for Securing AI APIs
+### Best Practices for Securing AI APIs
 
-1. **Use Strong Authentication and Authorization**  
-   - Require **API keys, OAuth, or JWT-based authentication**.  
-   - Implement **role-based access control (RBAC)** to restrict API functionalities.  
+1. **Use Strong Authentication and Authorization**
 
-2. **Encrypt API Communications**  
-   - Use **TLS (HTTPS)** to encrypt data in transit.  
-   - Apply **end-to-end encryption** for sensitive AI responses.  
+   - Require **API keys, OAuth, or JWT-based authentication**.
+   - Implement **role-based access control (RBAC)** to restrict API functionalities.
 
-3. **Implement Rate Limiting and Throttling**  
-   - Restrict the **number of requests per user or IP** to prevent abuse.  
-   - Detect and block unusual traffic patterns **in real-time**.  
+2. **Encrypt API Communications**
 
-4. **Validate and Sanitize Inputs**  
-   - Prevent injection attacks by using **input validation techniques**.  
-   - Reject malformed or unauthorized API requests.  
+   - Use **TLS (HTTPS)** to encrypt data in transit.
+   - Apply **end-to-end encryption** for sensitive AI responses.
 
-5. **Monitor and Log API Activity**  
-   - Track **API usage logs** for suspicious activity.  
-   - Detect **abnormal request patterns** that indicate potential breaches.  
+3. **Implement Rate Limiting and Throttling**
 
-## Example: Securing an AI API with Token Authentication
+   - Restrict the **number of requests per user or IP** to prevent abuse.
+   - Detect and block unusual traffic patterns **in real-time**.
+
+4. **Validate and Sanitize Inputs**
+
+   - Prevent injection attacks by using **input validation techniques**.
+   - Reject malformed or unauthorized API requests.
+
+5. **Monitor and Log API Activity**
+   - Track **API usage logs** for suspicious activity.
+   - Detect **abnormal request patterns** that indicate potential breaches.
+
+#### Example: Securing an AI API with Token Authentication
 
 ```python
 from flask import Flask, request, jsonify
@@ -75,17 +77,17 @@ if __name__ == '__main__':
     app.run(ssl_context=('cert.pem', 'key.pem'))  # Enforce HTTPS
 ```
 
-## Summary
+### Summary
 
 Securing AI APIs is **critical to preventing unauthorized access, data leaks, and adversarial manipulation**. Organizations must apply **authentication, encryption, rate limiting, and real-time monitoring** to **ensure API security**.
 
-## Key Takeaways
+### Key Takeaways
 
-- **APIs are a major attack vector** for AI systems—proper security is essential.  
-- **Authentication, encryption, and rate limiting** reduce API risks.  
-- **Regular audits and monitoring** detect and prevent security breaches.  
+- **APIs are a major attack vector** for AI systems—proper security is essential.
+- **Authentication, encryption, and rate limiting** reduce API risks.
+- **Regular audits and monitoring** detect and prevent security breaches.
 
-## Further Reading
+### Further Reading
 
-- [OWASP API Security Guidelines](https://owasp.org/)  
-- [Google Cloud AI API Security Best Practices](https://cloud.google.com/security/)  
+- [OWASP API Security Guidelines](https://owasp.org/)
+- [Google Cloud AI API Security Best Practices](https://cloud.google.com/security/)

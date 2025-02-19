@@ -92,6 +92,41 @@ function createSearchIndex(allCourses) {
   }
 }
 
+export const Blog = defineDocumentType(() => ({
+  name: 'Blog',
+  filePathPattern: 'blog/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    authors: { type: 'list', of: { type: 'string' } },
+    layout: { type: 'string' },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -164,7 +199,7 @@ export const Items = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Authors, Careers, Courses, Items],
+  documentTypes: [Blog, Authors, Careers, Courses, Items],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -198,9 +233,12 @@ export default makeSource({
     const { allCareers } = await importData()
     const { allCourses } = await importData()
     const { allItems } = await importData()
+    const { allBlogs } = await importData()
     createTagCount(allCareers)
     createTagCount(allCourses)
     createTagCount(allItems)
     createSearchIndex(allCourses)
+    createTagCount(allBlogs)
+    createSearchIndex(allBlogs)
   },
 })

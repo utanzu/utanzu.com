@@ -170,6 +170,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                       height={40}
                       src={partnerImage}
                       alt={partnerName}
+                      unoptimized
                       className="h-10 w-10 rounded-full"
                     />
                     <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">
@@ -192,6 +193,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                                 height={32}
                                 src={partnerImage}
                                 alt={partnerName}
+                                unoptimized
                                 className="mr-2 h-8 w-8 rounded-full"
                               />
                             )}
@@ -220,6 +222,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                                 height={32}
                                 src={user.image}
                                 alt="You"
+                                unoptimized
                                 className="ml-2 h-8 w-8 rounded-full"
                               />
                             )}
@@ -234,6 +237,7 @@ const MentorshipMessages: React.FC<Props> = ({ user }) => {
                             height={40}
                             src={user.image}
                             alt="You"
+                            unoptimized
                             className="h-10 w-10 rounded-full"
                           />
                           <textarea
