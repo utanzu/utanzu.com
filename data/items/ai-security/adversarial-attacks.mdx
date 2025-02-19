@@ -1,0 +1,45 @@
+---
+title: 'Adversarial Attacks'
+topic: 'Adversarial Machine Learning'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+Artificial Intelligence (AI) models are not immune to attacks. **Adversarial attacks** exploit weaknesses in AI systems by feeding them **carefully crafted inputs** that mislead the model into making incorrect predictions.
+
+#### **Scenario: Tricking an AI-Based Surveillance System**
+
+Imagine a **bank security system** that uses AI-powered **facial recognition** to detect known criminals. Attackers apply **subtle pixel modifications** to their images, making the AI **fail to recognize them as threats**.
+
+This is an example of an **adversarial attack**, where an AI system is manipulated by **imperceptible changes** that **humans cannot detect, but AI misclassifies**.
+
+### Types of Adversarial Attacks
+
+| Attack Type             | Description                                                                               | Example                                                                                    |
+| ----------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Evasion Attacks**     | Inputs are slightly altered to fool the AI model.                                         | Changing a few pixels in a stop sign so a self-driving car reads it as a speed limit sign. |
+| **Poisoning Attacks**   | AI is trained on manipulated data, compromising future predictions.                       | Injecting fake reviews into a product rating AI to influence its recommendations.          |
+| **Exploratory Attacks** | Attackers probe AI models to understand their weaknesses.                                 | Querying an AI chatbot with thousands of inputs to extract sensitive training data.        |
+| **Backdoor Attacks**    | Hidden triggers in AI models cause them to behave unexpectedly under specific conditions. | A deep learning model that ignores fraud patterns when a secret marker is added.           |
+
+#### Case Study: Evasion Attacks on Image Classification
+
+Researchers modified an **image of a panda** by **adding minor pixel noise**. A human still sees a panda, but the AI model **incorrectly classifies it as a gibbon**.
+
+### Why Does This Happen?
+
+AI models rely on **patterns and statistical correlations** that can be **exploited with precise manipulations**.
+
+### Key Takeaways
+
+- **Adversarial attacks exploit AI model vulnerabilities**.
+- **Even minor alterations** can mislead AI into making critical errors.
+- **AI security must evolve** to detect and defend against such manipulations.
+
+### Further Reading
+
+- [MITRE ATLAS on Adversarial AI](https://atlas.mitre.org/)
+- [Google Research on AI Adversarial Robustness](https://ai.googleblog.com/)

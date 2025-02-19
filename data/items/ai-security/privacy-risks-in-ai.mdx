@@ -1,0 +1,51 @@
+---
+title: 'Privacy Risks in AI'
+topic: 'Data Security in AI'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+AI models often process **large amounts of personal data**, raising **serious privacy concerns**. Ensuring that AI respects user privacy is **critical** for compliance and trust.
+
+### Key Privacy Risks
+
+#### **Scenario 1: AI Chatbots Exposing Personal Data**
+
+An AI customer service bot **accidentally leaks private user information** in responses, exposing **sensitive financial or health data**.
+
+#### **Scenario 2: Facial Recognition and Surveillance**
+
+A city deploys **facial recognition AI** for security. However, the AI is **biased** and **incorrectly identifies** individuals, leading to **false arrests**.
+
+### Common Privacy Risks
+
+| Risk                             | Description                                                                                      | Example                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| **Data Breaches**                | Unauthorized access to AI-stored or processed personal data due to poor security controls.       | A hacker exploits a vulnerability in an AI-powered chatbot, leaking user conversations.           |
+| **Model Inversion Attacks**      | Attackers infer sensitive training data from an AI model’s outputs.                              | An adversary queries a facial recognition model to reconstruct images of training subjects.       |
+| **Membership Inference Attacks** | Attackers determine whether a specific individual’s data was used in training an AI model.       | A researcher queries a health prediction model to see if a patient’s medical record was included. |
+| **Data Poisoning**               | Malicious actors manipulate AI training data to introduce biases or vulnerabilities.             | Attackers insert fake reviews into an AI-based sentiment analysis system to skew results.         |
+| **Differential Privacy Risks**   | AI models trained with differential privacy may still leak aggregate insights over time.         | A machine learning model trained on location data reveals general travel patterns.                |
+| **Shadow AI Systems**            | Unregulated or unauthorized AI implementations that process sensitive data.                      | Employees use an AI-powered document summarizer without organizational approval.                  |
+| **Bias and Discrimination**      | AI models may reinforce societal biases, leading to privacy harms for marginalized groups.       | A hiring AI rejects resumes due to historical biases against certain demographic groups.          |
+| **Unintentional Data Retention** | AI models retain sensitive training data longer than necessary, increasing exposure risk.        | A voice assistant keeps user conversations longer than intended, exposing past interactions.      |
+| **Inference Attacks**            | Attackers infer private details about users based on AI-generated responses.                     | A language model’s responses reveal sensitive health conditions based on prior queries.           |
+| **Lack of Explainability**       | Users may not understand how AI processes their data, limiting their ability to protect privacy. | A loan application AI denies credit but cannot explain why, making appeals difficult.             |
+| **Re-identification Risks**      | Supposedly anonymized data can be reverse-engineered to identify individuals.                    | A dataset of ride-sharing trips is de-anonymized to reveal individual riders’ home addresses.     |
+| **Surveillance and Tracking**    | AI-powered surveillance systems increase the risk of mass privacy violations.                    | AI-enhanced CCTV tracks people’s movements without consent in public spaces.                      |
+
+### Privacy Protection Strategies
+
+1. **Data Anonymization** – Remove personally identifiable information (PII).
+2. **Differential Privacy** – Add noise to AI models to prevent data leaks.
+3. **Access Controls** – Restrict access to sensitive data.
+
+Protecting **privacy in AI** ensures compliance with laws like **GDPR, CCPA, and HIPAA**.
+
+### Further Reading
+
+- [GDPR Guidelines on AI Privacy](https://gdpr.eu/)
+- [NIST AI Privacy Framework](https://www.nist.gov/)

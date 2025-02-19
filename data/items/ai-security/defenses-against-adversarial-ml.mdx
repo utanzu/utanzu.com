@@ -1,0 +1,63 @@
+---
+title: 'Defenses Against Adversarial ML'
+topic: 'Adversarial Machine Learning'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+Defending against adversarial attacks **requires AI models to detect, resist, and recover from manipulated inputs**.
+
+#### **Scenario: AI-Based Malware Classifier Defense**
+
+A cybersecurity firm deploys an **AI model to detect malware**. Attackers generate **adversarial examples** that **disguise malware as normal software**. Without adversarial defenses, **the AI misclassifies threats as safe**, allowing malware infections.
+
+### Key Defense Strategies
+
+| Defense Method | Description | Example |
+|---------------|-------------|---------|
+| **Adversarial Training** | Exposing AI to adversarial examples during training. | Training AI to recognize manipulated images. |
+| **Input Preprocessing** | Removing adversarial perturbations from inputs. | Applying noise reduction to images before classification. |
+| **Gradient Masking** | Obscuring AI model gradients to prevent adversarial optimization. | Making AI learning paths harder for attackers to exploit. |
+| **Model Ensemble Methods** | Using multiple AI models to make predictions more robust. | Combining multiple AI classifiers for improved accuracy. |
+
+### Adversarial Training: Strengthening AI Resilience
+
+Adversarial training **helps AI recognize attacks by learning from adversarial examples**.
+
+### **Implementation: Defending AI with Adversarial Training**
+
+```python
+def adversarial_training(model, data, labels, epsilon=0.1):
+    adversarial_examples = generate_adversarial_example(model, data, labels, epsilon)
+    combined_data = torch.cat((data, adversarial_examples), dim=0)
+    combined_labels = torch.cat((labels, labels), dim=0)
+    model.train(combined_data, combined_labels)
+
+# AI learns to identify adversarial modifications.
+```
+
+### Practical Applications of Adversarial Defenses
+
+- **Self-driving cars**: Detecting adversarial attacks on traffic signs.  
+- **Facial recognition**: Identifying manipulated facial images.  
+- **Medical AI**: Preventing misdiagnosis caused by adversarial noise.  
+
+### Future of AI Security
+
+- **Hybrid defense mechanisms** combining **AI threat detection and human oversight**.  
+- **Regulatory requirements** enforcing **AI robustness standards**.  
+- **Industry adoption** of adversarial-resistant AI models.  
+
+### Key Takeaways
+
+- **Adversarial attacks pose a serious security risk** in AI applications.
+- **Defensive techniques like adversarial training improve AI robustness**.
+- **Continuous monitoring and updates** are essential to **stay ahead of new attack methods**.
+
+### Further Reading
+
+- [Adversarial Machine Learning - MITRE ATLAS](https://atlas.mitre.org/)  
+- [Defensive Strategies in Adversarial ML](https://arxiv.org/)  

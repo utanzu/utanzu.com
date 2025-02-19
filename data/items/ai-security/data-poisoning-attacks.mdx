@@ -1,0 +1,43 @@
+---
+title: 'Data Poisoning Attacks'
+topic: 'Data Security in AI'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+AI models **learn from the data** they are trained on. If attackers **poison the training data**, they can **alter the AI’s decision-making process**, creating **biased, insecure, or ineffective models**.
+
+### What is a Data Poisoning Attack?
+
+#### **Scenario 1: Compromising a Spam Filter**
+
+An attacker **adds thousands of spam emails** labeled as **"not spam"** into the training dataset of an AI spam filter. Over time, the AI **learns to allow spam emails**, making the spam filter ineffective.
+
+#### **Scenario 2: Misleading AI in Autonomous Vehicles**
+
+Hackers **alter road signs** with **small, imperceptible changes** that make an AI-powered **self-driving car** misclassify a **STOP sign as a SPEED LIMIT sign**, creating **safety hazards**.
+
+### Types of Data Poisoning Attacks
+
+| Type                  | Description                                                               | Example                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Label Flipping**    | Changing the labels of training data to mislead the AI.                   | Labeling malware as "safe software" to evade detection.                                                       |
+| **Feature Injection** | Introducing abnormal patterns to train the AI incorrectly.                | Making a fraud detection AI ignore certain fraud indicators.                                                  |
+| **Backdoor Attacks**  | Embedding hidden patterns in training data to trigger incorrect behavior. | A facial recognition AI always allowing access to a **specific person**, regardless of their actual identity. |
+
+### How to Defend Against Data Poisoning
+
+1. **Use Trusted Data Sources** – Train AI on **verified datasets**.
+2. **Monitor Data for Anomalies** – Detect irregularities in training data.
+3. **Adversarial Training** – Teach AI models to resist **poisoned data**.
+4. **Implement Access Controls** – Restrict who can modify training datasets.
+
+By understanding **data poisoning attacks**, AI developers can **build models resistant to adversarial manipulation**.
+
+### Further Reading
+
+- [MITRE ATLAS - Adversarial AI Threats](https://atlas.mitre.org/)
+- [NIST AI Security Standards](https://www.nist.gov/)

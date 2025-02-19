@@ -1,0 +1,166 @@
+---
+title: 'Model Protection Techniques'
+topic: 'Securing AI Models'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+AI models are **valuable intellectual property**, often trained on **sensitive or proprietary data**. Attackers may attempt to **steal, tamper, or manipulate models** to gain **unauthorized access**, **bypass security controls**, or **compromise business operations**. Implementing **robust model protection techniques** ensures AI models remain **confidential, secure, and resistant to adversarial attacks**.
+
+#### **Scenario: AI Model Theft in Financial Fraud Detection**
+
+A fintech company develops an **AI-powered fraud detection system**. Competitors hire attackers to **extract the model's parameters**, allowing them to **replicate the model** and **compromise fraud detection techniques**. This **devalues the original AI system** and **exposes financial institutions to fraud risks**.
+
+### Why Protect AI Models?
+
+| Risk                    | Description                                            | Example                                                            |
+| ----------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ |
+| **Model Theft**         | Unauthorized extraction or replication of an AI model. | A competitor steals a trading algorithm AI.                        |
+| **Adversarial Attacks** | Manipulating AI inputs to alter predictions.           | A modified image fools facial recognition AI.                      |
+| **Inference Attacks**   | Extracting sensitive data used in model training.      | Reconstructing patient health records from a medical AI model.     |
+| **Backdoor Attacks**    | Embedding hidden behavior in AI models.                | An attacker implants a secret input that always bypasses security. |
+| **Model Tampering**     | Malicious modifications that degrade AI performance.   | An attacker injects bias into an AI hiring tool.                   |
+
+### Model Protection Techniques
+
+To mitigate **AI security threats**, organizations must implement **layered protection mechanisms**:
+
+#### **1. Model Encryption**
+
+Encrypting AI models ensures **they cannot be accessed in plaintext**, even if stolen.
+
+- **At-Rest Encryption**: Protects stored AI models.
+- **In-Memory Encryption**: Encrypts AI models **while running**.
+- **Homomorphic Encryption**: Enables AI to process encrypted data **without decryption**.
+
+#### **Example: Encrypting an AI Model Before Deployment**
+
+```python
+from cryptography.fernet import Fernet
+
+# Generate encryption key
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+# Encrypt model file
+with open("ai_model.pth", "rb") as file:
+    encrypted_model = cipher.encrypt(file.read())
+
+# Save encrypted model
+with open("ai_model_encrypted.pth", "wb") as file:
+    file.write(encrypted_model)
+```
+
+#### **2. Model Obfuscation**
+
+Obfuscation makes **AI model logic harder to reverse-engineer**.
+
+- **Weight Perturbation**: Slightly alters model parameters to prevent extraction.
+- **Code Obfuscation**: Hides AI logic behind **complicated or randomized functions**.
+
+#### **Case Study: Protecting AI with Model Obfuscation**
+
+A **self-driving car AI model** is encrypted and **obfuscated** to prevent attackers from **understanding its decision-making process**.
+
+#### **3. API Security for AI Models**
+
+Many AI models are deployed as **APIs**, exposing them to **query-based attacks**.
+
+| API Security Measure               | Description                                      | Example                                         |
+| ---------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
+| **Authentication & Authorization** | Restricts access to authorized users only.       | API keys & OAuth for AI APIs.                   |
+| **Rate Limiting & Throttling**     | Limits API queries to prevent model probing.     | Blocking excessive AI queries from a single IP. |
+| **Input Validation**               | Ensures inputs do not contain malicious content. | Preventing adversarial AI manipulation.         |
+
+#### **Example: Secure AI API Deployment with Rate Limiting**
+
+```python
+from flask import Flask, request, jsonify
+import time
+
+app = Flask(__name__)
+request_counts = {}
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    user_ip = request.remote_addr
+    current_time = time.time()
+
+    # Limit requests to 5 per minute per IP
+    if user_ip in request_counts and current_time - request_counts[user_ip] < 60:
+        return jsonify({"error": "Rate limit exceeded"}), 429
+
+    request_counts[user_ip] = current_time
+    data = request.json
+    prediction = model.predict(data)  # AI model inference
+    return jsonify({"prediction": prediction})
+
+if __name__ == '__main__':
+    app.run(ssl_context=('cert.pem', 'key.pem'))  # Enforce HTTPS
+```
+
+#### **4. Model Watermarking**
+
+Watermarking embeds **unique patterns in AI models** to track ownership.
+
+- **Active Watermarking**: The AI model responds with a specific output when queried with a **secret key**.
+- **Passive Watermarking**: Embedded patterns are detectable during **forensic analysis**.
+
+#### **Case Study: AI Watermarking in Content Creation**
+
+A **generative AI tool for image synthesis** embeds **invisible watermarks** to prevent **unauthorized image distribution**.
+
+#### **5. Differential Privacy**
+
+Differential privacy **adds noise to AI model outputs** to protect sensitive data.
+
+| Benefit                           | Description                                                                |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| **Privacy-Preserving AI**         | Prevents attackers from reconstructing training data.                      |
+| **Prevents Membership Inference** | Attackers cannot determine whether specific records were used in training. |
+| **Compliant with Regulations**    | Supports compliance with **GDPR, HIPAA, and CCPA**.                        |
+
+#### **Example: Implementing Differential Privacy in AI Training**
+
+```python
+import tensorflow as tf
+import tensorflow_privacy
+
+# Applying differential privacy to a deep learning model
+optimizer = tensorflow_privacy.DPGradientDescentGaussianOptimizer(
+    l2_norm_clip=1.0,
+    noise_multiplier=0.5,
+    num_microbatches=1,
+    learning_rate=0.15
+)
+
+model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
+```
+
+### Multi-Layered Security Strategy
+
+Combining **multiple protection techniques** enhances AI model security.
+
+| Protection Layer    | Defense Mechanism                | Example                                        |
+| ------------------- | -------------------------------- | ---------------------------------------------- |
+| **Data Protection** | Encryption, differential privacy | Encrypting AI training datasets.               |
+| **Model Security**  | Obfuscation, watermarking        | Hiding AI logic from attackers.                |
+| **API Defense**     | Authentication, rate limiting    | Restricting AI API access to authorized users. |
+
+### Summary
+
+AI models require **multi-layered protection** to prevent theft, tampering, and adversarial manipulation. Organizations must **encrypt models, control access, use watermarking, and implement differential privacy** to ensure **AI security and compliance**.
+
+### Key Takeaways
+
+- **AI models are valuable assets** and require **advanced protection techniques**.
+- **Encryption, obfuscation, and watermarking** prevent model extraction and theft.
+- **Differential privacy and API security measures** protect against **data leaks and adversarial attacks**.
+- **A multi-layered security approach** is essential to **prevent AI exploitation**.
+
+### Further Reading
+
+- [AI Model Security - OWASP Guidelines](https://owasp.org/)
+- [MITRE ATLAS on AI Threats](https://atlas.mitre.org/)
+- [Google AI Security Whitepaper](https://cloud.google.com/security/)

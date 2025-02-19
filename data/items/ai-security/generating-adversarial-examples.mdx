@@ -1,0 +1,59 @@
+---
+title: 'Generating Adversarial Examples'
+topic: 'Adversarial Machine Learning'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+Attackers generate **adversarial examples** by **adding subtle noise** to inputs that alter an AI model’s prediction while keeping it **visually or functionally identical** to human observers.
+
+#### **Scenario: AI-Powered CAPTCHA Bypass**
+
+An **AI-based CAPTCHA solver** is trained to **identify distorted text** to block bots. Attackers **slightly modify letters** by **adding imperceptible noise**, fooling the AI into misclassifying real CAPTCHA text.
+
+### Methods for Generating Adversarial Examples
+
+| Method                               | Description                                                          | Example                                                               |
+| ------------------------------------ | -------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Fast Gradient Sign Method (FGSM)** | A quick and effective way to slightly modify inputs using gradients. | Adding small noise to an image so an AI misclassifies a dog as a cat. |
+| **Projected Gradient Descent (PGD)** | An advanced FGSM technique with iterative refinements.               | Making AI systems consistently misidentify road signs.                |
+| **Carlini-Wagner (C&W) Attack**      | An attack that minimizes perturbations while fooling AI.             | Modifying voice commands to trick AI-powered voice assistants.        |
+
+### Implementation: Generating an Adversarial Example (FGSM)
+
+```python
+import torch
+import torch.nn.functional as F
+
+def generate_adversarial_example(model, image, label, epsilon=0.1):
+    image.requires_grad = True
+    output = model(image)
+    loss = F.nll_loss(output, label)
+    model.zero_grad()
+    loss.backward()
+    perturbation = epsilon * image.grad.sign()
+    adversarial_image = image + perturbation
+    return adversarial_image
+
+# Small changes to an image can mislead an AI classifier.
+```
+
+### How Adversarial Examples are Used
+
+- **Bypass AI-powered security systems** (e.g., evading facial recognition).
+- **Manipulate AI-generated decisions** (e.g., credit score fraud).
+- **Exploit AI vulnerabilities** in **self-driving cars, medical AI, and speech recognition**.
+
+### Key Takeaways
+
+- **AI models are vulnerable** to adversarial examples.
+- **Small modifications** can cause **large-scale errors** in AI predictions.
+- **Security teams must train AI with adversarial robustness techniques**.
+
+### Further Reading
+
+- [OpenAI’s Research on Adversarial ML](https://openai.com/research/)
+- [Adversarial AI Examples - Arxiv Papers](https://arxiv.org/)

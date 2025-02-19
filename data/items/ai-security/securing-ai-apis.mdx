@@ -1,0 +1,79 @@
+---
+title: 'Securing AI APIs'
+topic: 'Authentication and Access Control'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+# Securing AI APIs
+
+APIs are the **main gateway** to AI models, making them a prime target for attacks. Exposed or poorly secured APIs can lead to **unauthorized model access, data leakage, and adversarial manipulation**.
+
+### **Scenario: AI-Powered Fraud Detection API Exploited**
+
+A financial institution deploys an **AI-powered fraud detection API** that analyzes transaction patterns. Attackers reverse-engineer the API’s **response patterns**, allowing them to craft transactions that **bypass fraud detection**.
+
+## API Security Threats
+
+| Threat | Description | Example |
+|--------|------------|---------|
+| **Unauthorized Access** | Attackers exploit API endpoints to gain access to AI models. | A competitor extracts an AI recommendation model via unsecured API calls. |
+| **Input Manipulation** | Attackers send manipulated inputs to trick AI models. | An adversary modifies AI chatbot queries to extract private user data. |
+| **Denial-of-Service (DoS) Attacks** | Overloading APIs with requests to disrupt AI services. | Sending excessive requests to crash an AI-powered voice assistant. |
+| **Model Extraction Attacks** | Repeated API queries used to reconstruct an AI model. | A black-box attack that replicates an AI fraud detection system. |
+
+## Best Practices for Securing AI APIs
+
+1. **Implement Authentication and Authorization**  
+   - Require **API keys, OAuth tokens, or JWT authentication**.  
+   - Restrict **AI API access based on user roles**.  
+
+2. **Use Rate Limiting and Throttling**  
+   - Limit the **number of requests per user/IP** to prevent abuse.  
+
+3. **Encrypt API Communications**  
+   - Use **TLS (HTTPS) encryption** to prevent interception.  
+
+4. **Monitor and Log API Activity**  
+   - Detect **unusual request patterns** to identify possible API abuse.  
+
+## Example: Securing AI API with Authentication
+
+```python
+from flask import Flask, request, jsonify
+import jwt
+
+app = Flask(__name__)
+SECRET_KEY = "supersecurekey"
+
+def authenticate_token(token):
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    except:
+        return None
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    token = request.headers.get("Authorization")
+    if not token or not authenticate_token(token):
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    data = request.json
+    prediction = model.predict(data)
+    return jsonify({"prediction": prediction})
+
+if __name__ == '__main__':
+    app.run(ssl_context=('cert.pem', 'key.pem'))  # Enforce HTTPS
+```
+
+## Key Takeaways
+
+- **APIs are the main attack surface for AI models**—securing them is crucial.  
+- **Authentication, encryption, and rate limiting** help prevent unauthorized access.  
+- **Continuous monitoring** detects suspicious API activity and **prevents data leaks**.  
+
+## Further Reading
+
+- [OWASP API Security Best Practices](https://owasp.org/)  
+- [Google Cloud AI API Security Guide](https://cloud.google.com/security/)  

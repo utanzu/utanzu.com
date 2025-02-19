@@ -1,0 +1,52 @@
+---
+title: 'Detecting and Reducing Bias'
+topic: 'Bias, Fairness, and Ethics'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+Once bias is present in an AI model, it must be **detected and mitigated** to ensure fair outcomes. Organizations need methods to evaluate AI fairness and apply bias-reducing techniques.
+
+#### **Scenario: Racial Bias in Facial Recognition**
+
+A research study found that some facial recognition systems misidentified people of color at significantly higher rates than white individuals. The reason? The training dataset contained a disproportionate number of lighter-skinned faces.
+
+### Methods for Detecting Bias in AI
+
+| Method                        | Description                                                   | Example                                                                                               |
+| ----------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Statistical Parity**        | Checks if AI decisions are equally distributed across groups. | An AI hiring tool should select men and women at similar rates.                                       |
+| **Disparate Impact Analysis** | Identifies indirect discrimination in AI decisions.           | A loan approval AI assigns lower credit limits to minority applicants despite similar qualifications. |
+| **Counterfactual Testing**    | Alters specific features to test AI fairness.                 | Changing an applicant’s gender in a hiring AI and observing whether the outcome changes.              |
+| **Explainability Techniques** | Tools like SHAP and LIME reveal how AI makes decisions.       | Explaining why an AI denied a mortgage application.                                                   |
+
+### Strategies for Reducing AI Bias
+
+1. **Diverse and Representative Training Data**
+
+   - Ensure datasets include a wide range of demographics and real-world scenarios.
+   - Use synthetic data to fill representation gaps.
+
+2. **Bias-Aware Model Training**
+
+   - Apply fairness constraints to prevent biased predictions.
+   - Implement adversarial debiasing techniques.
+
+3. **Post-Processing Fairness Adjustments**
+
+   - Use re-ranking algorithms to adjust predictions after training.
+
+4. **Human Oversight and Auditing**
+   - Regular AI fairness audits ensure ongoing fairness.
+
+### Key Takeaways
+
+- AI bias detection methods help identify unfair AI decision-making.
+- Diverse training data and fairness-aware models reduce bias.
+- AI fairness should be **continuously monitored and audited**.
+
+### Further Reading
+
+- [IBM AI Fairness 360 Toolkit](https://aif360.mybluemix.net/)
+- [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai)

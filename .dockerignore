@@ -10,3 +10,4 @@ Dockerfile
 .gitignore
 .next
 .env
+.env.local

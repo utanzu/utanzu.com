@@ -1,0 +1,45 @@
+---
+title: 'Model Inversion Attacks'
+topic: 'Securing AI Models'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+**Model inversion attacks** allow attackers to **extract sensitive information** from an AI model, even if they do not have direct access to the training data.
+
+#### **Scenario: Extracting Patient Data from a Medical AI**
+
+A hospital uses an AI model to diagnose diseases based on **X-ray images**. Attackers **query the AI multiple times** and **reverse-engineer outputs** to reconstruct **images of real patients** used in training. This leads to a **severe privacy breach**.
+
+### How Model Inversion Attacks Work
+
+1. **An attacker queries the AI model** using specific inputs.
+2. **The AI model returns outputs** based on patterns it learned.
+3. **By analyzing multiple outputs**, attackers can reconstruct original training data.
+
+| Attack Type                | Description                                                            | Example                                                          |
+| -------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Feature Reconstruction** | Attackers recover key features of training data.                       | Reconstructing faces from a facial recognition AI.               |
+| **Membership Inference**   | Attackers determine whether a specific record was part of AI training. | Verifying if a celebrity’s medical data was used in AI training. |
+| **Attribute Inference**    | Predicting sensitive attributes of a person.                           | Extracting personal income details from an AI financial model.   |
+
+### Mitigation Strategies
+
+- **Limit Model Access**: Restrict public access to sensitive AI models.
+- **Differential Privacy**: Add noise to AI outputs to **obfuscate original data**.
+- **Regularization Techniques**: Prevent models from **memorizing** sensitive data.
+- **Query Rate Limiting**: Restrict excessive queries to **prevent data reconstruction**.
+
+### Key Takeaways
+
+- **AI models can unintentionally reveal private information**, even when properly deployed.
+- **Attackers can reconstruct training data** by analyzing AI outputs over multiple queries.
+- **Data privacy techniques** such as **differential privacy** can **reduce risks**.
+
+### Further Reading
+
+- [AI Model Inversion Attacks - Arxiv Papers](https://arxiv.org/)
+- [Google AI Research on Privacy-Preserving AI](https://ai.googleblog.com/)

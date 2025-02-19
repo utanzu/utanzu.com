@@ -223,13 +223,13 @@ export default function CoursePageSection({ title, topics, summary }: Props) {
           </aside>
 
           {/* Content Section on the left */}
-          <main className="flex-1 rounded-md bg-white px-6 shadow-md dark:bg-gray-900">
+          <main className="flex-1 rounded-md bg-white shadow-md dark:bg-gray-900">
             {selectedSubtopic && (
               <>
                 <h2 className="mb-4 text-2xl font-bold text-primary-600 dark:text-primary-400">
                   {selectedSubtopic}
                 </h2>
-                <div className="prose flex max-w-full flex-col dark:prose-dark prose-p:my-2">
+                <div className="prose flex max-w-full flex-col dark:prose-dark prose-h3:my-4 prose-h3:text-secondary-600 prose-h4:my-2 prose-p:my-1 prose-table:my-3 dark:prose-h3:text-secondary-600">
                   {subtopicContent && (
                     <MDXLayoutRenderer
                       code={subtopicContent}

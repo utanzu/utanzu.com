@@ -1,0 +1,71 @@
+---
+title: 'Role-Based Access'
+topic: 'Authentication and Access Control'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+# Role-Based Access
+
+AI systems often handle **sensitive data and decisions**, requiring strict access control. Role-Based Access Control (RBAC) ensures that **only authorized users or systems** can access specific AI capabilities.
+
+### **Scenario: Preventing Unauthorized Access to an AI Medical Model**
+
+A hospital deploys an AI-powered **diagnostic tool**. Without proper access control, **any employee** can submit medical data for analysis. By implementing **RBAC**, only **doctors and approved medical personnel** can use the system.
+
+## How Role-Based Access Control (RBAC) Works
+
+RBAC assigns **different levels of access** based on user roles:
+
+| Role | Permissions |
+|------|------------|
+| **Admin** | Full control over AI models, training data, and API endpoints. |
+| **Data Scientist** | Can retrain models but cannot access sensitive data. |
+| **User** | Can only query AI models but cannot modify them. |
+
+## Implementing RBAC for AI Access
+
+1. **Define user roles and privileges** (e.g., Admin, AI User, Developer).  
+2. **Use authentication mechanisms** (OAuth, SSO, JWT) to verify user identity.  
+3. **Restrict access to sensitive AI features** based on user roles.  
+
+## Example: Role-Based Access Enforcement
+
+```python
+from flask import Flask, request, jsonify
+
+user_roles = {
+    "admin": ["train", "modify", "delete", "query"],
+    "developer": ["train", "query"],
+    "user": ["query"]
+}
+
+def check_permission(user_role, action):
+    return action in user_roles.get(user_role, [])
+
+@app.route('/access', methods=['POST'])
+def access_control():
+    data = request.json
+    user_role = data["role"]
+    action = data["action"]
+
+    if check_permission(user_role, action):
+        return jsonify({"status": "Access granted"})
+    else:
+        return jsonify({"status": "Access denied"}), 403
+
+if __name__ == '__main__':
+    app.run()
+```
+
+## Key Takeaways
+
+- **RBAC prevents unauthorized access** to AI models and APIs.  
+- **Each user role has a specific set of permissions** to ensure AI security.  
+- **Enforcing access control in AI deployments** enhances **security and compliance**.  
+
+## Further Reading
+
+- [NIST Guidelines on AI Access Control](https://www.nist.gov/)  
+- [Microsoft RBAC for AI Systems](https://docs.microsoft.com/)  

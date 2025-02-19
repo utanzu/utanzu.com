@@ -1,0 +1,42 @@
+---
+title: 'Model Security Risks'
+topic: 'Securing AI Models'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+AI models are increasingly used in **critical sectors** like **finance, healthcare, cybersecurity, and autonomous systems**. However, **poorly secured AI models can be exploited**, leading to **fraud, biased decisions, privacy leaks, and even system failures**.
+
+#### **Scenario: AI-Powered Credit Scoring System Under Attack**
+
+A financial institution uses an AI-powered **credit scoring system** to assess loan applications. Attackers discover that **submitting multiple slightly modified applications** results in **wildly different credit scores**. By exploiting this vulnerability, fraudsters manipulate their scores to obtain **high-value loans fraudulently**.
+
+### Key Security Risks in AI Models
+
+| Risk Category                         | Description                                             | Example                                                                            |
+| ------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Adversarial Manipulation**          | Attackers modify inputs to mislead AI models.           | A manipulated image causes facial recognition to misidentify a suspect.            |
+| **Model Theft & Reverse Engineering** | AI models are stolen or extracted for malicious use.    | Hackers extract a fraud detection AI model and use it to train AI-powered malware. |
+| **Bias and Discrimination**           | AI models inherit biases from training data.            | A hiring AI unfairly rejects candidates based on biased historical hiring data.    |
+| **Data Poisoning Attacks**            | Attackers inject false data into AI training.           | A recommendation engine is manipulated to promote fake product reviews.            |
+| **Inference Attacks**                 | Attackers infer sensitive data used to train AI models. | Predicting private patient health data from an AI healthcare system.               |
+
+### How Attackers Exploit AI Model Weaknesses
+
+- **Query-based Attacks**: Attackers repeatedly interact with an AI model to uncover patterns or weaknesses.
+- **API Exploits**: AI models exposed via APIs are vulnerable to unauthorized access and **data leaks**.
+- **Model Extraction**: Attackers use **black-box techniques** to replicate AI models **without direct access to the training data**.
+
+### Key Takeaways
+
+- **AI models can be manipulated** if they are not secured against **adversarial inputs and model extraction**.
+- **AI bias is a security risk** and must be addressed with **fairness and explainability techniques**.
+- **Robust model security measures** are needed to prevent AI model theft and exploitation.
+
+### Further Reading
+
+- [MITRE ATLAS - AI Security Risks](https://atlas.mitre.org/)
+- [NIST AI Risk Management Framework](https://www.nist.gov/)

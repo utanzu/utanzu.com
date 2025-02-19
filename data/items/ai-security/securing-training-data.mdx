@@ -1,0 +1,59 @@
+---
+title: 'Securing Training Data'
+topic: 'Data Security in AI'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+### Introduction
+
+Training data is the foundation of any AI model. If the data is compromised, the model itself becomes **unreliable, biased, or even dangerous**. Ensuring the security of training data is **critical** to maintaining trust in AI systems.
+
+### Why is Training Data Security Important?
+
+#### **Scenario 1: Manipulating a Medical AI Model**
+
+A healthcare AI is trained to detect **early-stage cancer** from X-ray images. Attackers **inject altered medical images** into the dataset, **misleading the model** into **misclassifying healthy patients as sick** and vice versa. This could lead to **incorrect diagnoses, putting lives at risk**.
+
+#### **Scenario 2: A Fraudulent AI Hiring System**
+
+A company uses an AI-powered hiring tool trained on **past hiring data**. Attackers **inject biased resumes** to **train the AI** into preferring **specific demographics** over others, creating **unethical hiring practices**.
+
+### Best Practices for Securing Training Data
+
+| Security Practice             | Description                                                          |
+| ----------------------------- | -------------------------------------------------------------------- |
+| **Access Control**            | Restrict access to training datasets to prevent tampering.           |
+| **Data Encryption**           | Encrypt datasets to prevent unauthorized access.                     |
+| **Data Integrity Checks**     | Use hashing to verify data authenticity.                             |
+| **Anomaly Detection**         | Detect suspicious patterns in the training data.                     |
+| **Synthetic Data Generation** | Use **privacy-preserving synthetic data** instead of real user data. |
+
+### Implementation Example: Data Integrity Check
+
+```python
+import hashlib
+
+# Generate hash for training data file
+def generate_hash(file_path):
+    with open(file_path, 'rb') as file:
+        data = file.read()
+        return hashlib.sha256(data).hexdigest()
+
+# Check data integrity
+original_hash = "e99a18c428cb38d5f260853678922e03"
+new_hash = generate_hash("training_data.csv")
+
+if original_hash == new_hash:
+    print("Data integrity verified!")
+else:
+    print("Warning: Data may have been tampered with!")
+```
+
+By **securing training data**, we ensure that AI models make **reliable and unbiased decisions**, reducing the risk of **manipulation and exploitation**.
+
+### Further Reading
+
+- [NIST Guidelines on Data Integrity](https://www.nist.gov/)
+- [Securing AI Training Data - MITRE ATLAS](https://atlas.mitre.org/)
