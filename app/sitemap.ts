@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { allCareers, allCourses } from 'contentlayer/generated'
+import { allBlogs, allCareers, allCourses } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
 
 export const dynamic = 'force-static'
@@ -23,6 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: course.date || new Date().toISOString().split('T')[0],
     }))
 
+  // Generate blog-specific routes
+  const blogRoutes = allBlogs
+    .filter((blog) => blog.slug)
+    .map((blog) => ({
+      url: `${siteUrl}/blog/${blog.slug}`,
+      lastModified: blog.date || new Date().toISOString().split('T')[0],
+    }))
+
   // Define standard static routes
   const staticRoutes = [
     '',
@@ -33,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'interview',
     'terms',
     'privacy',
+    'blog',
   ].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date().toISOString().split('T')[0], // Current date for static pages

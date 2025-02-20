@@ -1,0 +1,59 @@
+---
+title: 'Detecting AI Security Incidents'
+topic: 'Incident Response for AI'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+AI-driven applications process vast amounts of data, automate decision-making, and interact with users in real-time. This makes them **prime targets for cyber threats**. A security incident involving AI could range from **adversarial input manipulations** to **data poisoning** or **model evasion attacks**. Early detection is crucial to mitigating risks before they escalate.
+
+### Understanding AI Security Incidents
+
+An AI security incident refers to any malicious activity or anomaly that compromises the **confidentiality, integrity, or availability** of an AI system. These incidents can manifest in multiple ways:
+
+- **Model Tampering**: Attackers manipulate AI models, leading to incorrect outputs (e.g., changing a self-driving car's recognition of a stop sign).
+- **Data Poisoning**: Attackers inject **malicious training data** to distort model learning, causing AI failures.
+- **Adversarial Attacks**: AI models are **fooled by subtly modified inputs**, causing misclassifications (e.g., facial recognition misidentifying a criminal as an authorized user).
+
+### Key Indicators of AI Security Incidents
+
+Organizations should **actively monitor AI models** for suspicious activities, including:
+
+| Indicator                             | Possible Cause                               | Example                                                                        |
+| ------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Sudden Output Deviations**          | Model corruption or adversarial manipulation | AI chatbot starts producing offensive responses                                |
+| **Performance Degradation**           | Data poisoning or unauthorized API calls     | AI fraud detection model fails to detect fraudulent transactions               |
+| **Unusual API Calls**                 | Attempted unauthorized access                | High frequency of AI model API queries from unknown IPs                        |
+| **Unexpected Training Data Behavior** | Data manipulation                            | AI image classifier wrongly labels images due to biased injected training data |
+
+### Detection Strategies
+
+1. **Anomaly Detection Systems**
+
+   - Implement **real-time monitoring** using **behavioral analytics** to flag **unusual AI outputs**.
+   - Use **machine learning models** to detect anomalies in AI system logs.
+
+2. **Data Integrity Verification**
+
+   - Regularly check datasets for **unexpected modifications**.
+   - Maintain **checksums and cryptographic hashing** for training datasets.
+
+3. **Adversarial Testing**
+   - Simulate **adversarial attacks** to identify vulnerabilities.
+   - Use **AI fuzzing** techniques to detect weaknesses in decision trees and deep learning models.
+
+### Real-World Case Study: Adversarial AI in Healthcare
+
+A **medical AI model** trained to detect cancerous cells in X-ray images was found to misclassify images after adversaries subtly altered a small percentage of the dataset. The incident was detected when **doctors noticed discrepancies** between AI diagnoses and manual evaluations. Upon investigation, researchers found **adversarial noise** introduced in a fraction of training images, leading to a **14% drop in model accuracy**.
+
+### What We Can Learn
+
+- **AI security incidents require proactive detection mechanisms**.
+- **Real-time monitoring, anomaly detection, and adversarial testing** help identify potential security risks.
+- **Cross-verification of AI outputs with human analysis** remains a crucial safeguard.
+
+### Further Reading
+
+- [MITRE ATT&CK Framework for AI](https://attack.mitre.org/)
+- [NIST Cybersecurity Guidelines for AI](https://www.nist.gov/cyberframework)

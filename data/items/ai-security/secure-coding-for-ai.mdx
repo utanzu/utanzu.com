@@ -1,0 +1,75 @@
+---
+title: 'Secure Coding for AI'
+topic: 'Secure AI Development'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+AI applications are increasingly targeted by cyber threats, making **secure coding practices essential** in AI development. Unlike traditional applications, AI models rely heavily on **data-driven decision-making**, which introduces new security concerns.
+
+### Common Security Risks in AI Code
+
+| Vulnerability                | Risk                                          | Example                                       |
+| ---------------------------- | --------------------------------------------- | --------------------------------------------- |
+| **Hardcoded Credentials**    | Exposes AI model APIs to unauthorized access. | API keys embedded in Python scripts.          |
+| **Unvalidated Input**        | Enables injection attacks in AI pipelines.    | AI models accepting unfiltered user input.    |
+| **Weak Model Serialization** | Allows attackers to modify trained AI models. | Loading unverified `.pickle` or `.pkl` files. |
+
+### Best Practices for Secure AI Coding
+
+1. **Secure API Interactions**
+
+   - Always **authenticate and encrypt** API calls.
+   - Use **OAuth tokens** instead of embedding credentials in source code.
+
+2. **Protect Training and Inference Pipelines**
+
+   - Validate input data **before** feeding it into models.
+   - Use **sandbox environments** for executing untrusted AI models.
+
+3. **Model Security and Storage**
+   - Store AI models in **secure repositories with integrity checks**.
+   - Use **signature verification** to ensure models haven’t been tampered with.
+
+### Example: Securing a Machine Learning API
+
+Consider an AI model that detects fraudulent transactions. If an attacker **modifies input values** (e.g., altering transaction amounts), the model might be fooled into classifying fraud as legitimate.
+
+A **secure AI API implementation** should:
+
+```python
+from flask import Flask, request, jsonify
+import jwt
+
+app = Flask(__name__)
+SECRET_KEY = "securesecretkey"
+
+def verify_token(token):
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    except:
+        return None
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    token = request.headers.get("Authorization")
+    if not token or not verify_token(token):
+        return jsonify({"error": "Unauthorized"}), 403
+
+    data = request.json
+    # Secure model prediction logic here
+    return jsonify({"prediction": "Fraudulent" if data['amount'] > 10000 else "Legitimate"})
+
+if __name__ == '__main__':
+    app.run(ssl_context=('cert.pem', 'key.pem'))  # Enforce HTTPS
+```
+
+### Final Thoughts
+
+Secure coding for AI is **not just about writing better code**—it involves designing **trustworthy** and **attack-resistant** AI systems. Developers must integrate **security into AI pipelines** from day one.
+
+### Further Reading
+
+- [Google AI Security Best Practices](https://ai.google/research/)
+- [NVIDIA AI Security Guide](https://developer.nvidia.com/)

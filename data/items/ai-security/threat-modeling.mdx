@@ -1,0 +1,56 @@
+---
+title: 'Threat Modeling'
+topic: 'Secure AI Development'
+course: 'Mastering AI Security'
+category: 'AI Security'
+duration: 1
+---
+
+Threat modeling is a proactive approach used in **secure AI development** to identify and mitigate potential risks before they are exploited by attackers. AI systems, particularly machine learning models, introduce unique attack surfaces that must be accounted for during the development phase.
+
+### Why Threat Modeling Matters for AI
+
+Traditional software security threats—such as SQL injection or buffer overflows—are well understood, but AI-specific risks include:
+
+- **Model Inversion Attacks**: Attackers infer sensitive training data from the AI model's outputs.
+- **Data Poisoning**: Malicious actors inject **corrupted data** into the training set, influencing model behavior.
+- **Adversarial Attacks**: AI models are tricked into misclassifying inputs through carefully crafted perturbations.
+
+### Key Steps in AI Threat Modeling
+
+1. **Identify Assets**
+
+   - AI model weights, training data, inference APIs, and user data.
+   - What are attackers likely to target?
+
+2. **Define Threat Actors**
+
+   - Insiders, external hackers, or competing organizations.
+   - What are their motives (e.g., financial gain, sabotage, surveillance)?
+
+3. **Assess Attack Vectors**
+
+   - How could an attacker manipulate the AI system?
+   - Common attack surfaces include **data pipelines, model APIs, and storage environments**.
+
+4. **Implement Mitigations**
+   - Use **differential privacy** to protect training data.
+   - Apply **robust adversarial training** to make the model resilient against attacks.
+   - Use **model explainability tools** to detect bias and adversarial perturbations.
+
+### Example: Threat Modeling an AI-Powered Chatbot
+
+A **financial services company** is deploying an AI chatbot for customer inquiries. The team conducts a threat modeling session and identifies key risks:
+
+| Threat                  | Description                                                           | Mitigation                                      |
+| ----------------------- | --------------------------------------------------------------------- | ----------------------------------------------- |
+| **Data Poisoning**      | Attackers inject fake customer queries to alter chatbot responses.    | Implement input validation and monitoring.      |
+| **Adversarial Attacks** | Malicious inputs cause the AI to provide misleading financial advice. | Train the model with adversarial samples.       |
+| **API Abuse**           | Unauthorized users send automated queries to overload the chatbot.    | Implement API rate-limiting and authentication. |
+
+By incorporating **threat modeling early in development**, organizations can anticipate security risks and build more **robust AI systems**.
+
+### Further Reading
+
+- [MITRE ATLAS AI Threat Modeling](https://atlas.mitre.org/)
+- [OWASP AI Security Guidelines](https://owasp.org/)
