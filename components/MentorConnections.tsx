@@ -262,6 +262,7 @@ const MentorConnections: React.FC<Props> = ({ user }) => {
                         height={80}
                         src={connection.image}
                         alt={connection.name}
+                        unoptimized
                         className="h-10 w-10 rounded-full border border-gray-300 object-cover dark:border-gray-600"
                       />
                       <div>
@@ -302,9 +303,9 @@ const MentorConnections: React.FC<Props> = ({ user }) => {
                       <Image
                         width={80}
                         height={80}
-                        unoptimized
                         src={connection.image}
                         alt={connection.name}
+                        unoptimized
                         className="h-10 w-10 rounded-full border border-gray-300 object-cover dark:border-gray-600"
                       />
                       <div>
