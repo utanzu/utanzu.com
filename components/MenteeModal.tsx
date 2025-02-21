@@ -52,6 +52,7 @@ const MenteeModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, mentor, use
             src={mentor.profileImage || '/static/images/avatar.png'}
             width={80}
             height={80}
+            unoptimized
             className="rounded-full"
           />
           <div className="flex flex-col">

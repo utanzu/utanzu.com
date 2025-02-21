@@ -302,6 +302,7 @@ const MentorConnections: React.FC<Props> = ({ user }) => {
                       <Image
                         width={80}
                         height={80}
+                        unoptimized
                         src={connection.image}
                         alt={connection.name}
                         className="h-10 w-10 rounded-full border border-gray-300 object-cover dark:border-gray-600"
@@ -344,6 +345,7 @@ const MentorConnections: React.FC<Props> = ({ user }) => {
                 <Image
                   width={80}
                   height={80}
+                  unoptimized
                   src={
                     user.id === selectedMentorship.mentorId
                       ? selectedMentorship.mentee.image

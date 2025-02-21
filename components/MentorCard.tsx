@@ -80,6 +80,7 @@ const MentorCard: React.FC<Props> = ({ mentors, user, openAuthModal }) => {
               <Image
                 width={80}
                 height={80}
+                unoptimized
                 src={mentor.profileImage}
                 alt={mentor.fullName}
                 className="h-20 w-20 rounded-full border border-gray-200 object-cover shadow-md dark:border-gray-600"

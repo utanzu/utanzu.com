@@ -27,6 +27,7 @@ const ProfileCard = () => {
               height={100}
               className="mx-auto block h-24 rounded-full sm:mx-0 sm:shrink-0"
               src={user.image || '/static/images/avatar.png'}
+              unoptimized
               alt="User profile picture"
             />
             <div className="space-y-2 text-center sm:text-left">

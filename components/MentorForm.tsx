@@ -213,6 +213,7 @@ const MentorForm: React.FC<Props> = ({ user }) => {
               alt="Profile"
               width={100}
               height={100}
+              unoptimized
               className="h-24 w-24 rounded-full border border-gray-300 object-cover shadow-md dark:border-gray-600"
             />
             <input
