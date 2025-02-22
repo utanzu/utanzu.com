@@ -42,10 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'terms',
     'privacy',
     'blog',
+    'tags',
   ].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date().toISOString().split('T')[0], // Current date for static pages
   }))
 
-  return [...staticRoutes, ...careerRoutes, ...courseRoutes]
+  return [...staticRoutes, ...careerRoutes, ...courseRoutes, ...blogRoutes]
 }

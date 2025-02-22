@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Utanzu',
+  title: 'Utanzu Cybersecurity',
   author: 'Utanzu',
   avatar: '/static/images/avatar.png',
   headerTitle: 'Utanzu',
@@ -11,8 +11,10 @@ const siteMetadata = {
   siteUrl: 'https://utanzu.com',
   analyticsURL: 'https://cloud.umami.is/share/lxeHzEqpClO3j6rx/utanzu.com',
   siteRepo: 'https://github.com/utanzu/utanzu.com',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/avatar.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  // siteLogo: `${process.env.BASE_PATH || ''}/static/images/avatar.png`,
+  // socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  siteLogo: '/static/images/avatar.png',
+  socialBanner: '/static/images/twitter-card.png',
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'support@utanzu.com',
   github: 'https://github.com/utanzu/utanzu.com',
