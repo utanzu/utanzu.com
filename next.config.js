@@ -9,11 +9,20 @@ const isDev = process.env.NODE_ENV === 'development'
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://analytics.umami.is https://us.umami.is;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline'
+    https://www.googletagmanager.com
+    https://www.google-analytics.com
+    https://analytics.umami.is
+    https://us.umami.is;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src ${isDev ? "'self' http://localhost:3000" : '*.s3.amazonaws.com'};
-  connect-src 'self' https://analytics.umami.is https://us.umami.is https://api-gateway.umami.dev;
+  connect-src 'self'
+    https://www.google-analytics.com
+    https://www.googletagmanager.com
+    https://analytics.umami.is
+    https://us.umami.is
+    https://api-gateway.umami.dev;
   font-src 'self';
   frame-src giscus.app https://www.youtube.com https://youtube.com;
 `

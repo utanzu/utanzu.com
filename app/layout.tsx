@@ -1,9 +1,11 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
-
 import { Inter } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+// import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+// import { GoogleAnalytics } from '@next/third-parties/google'
+import { UmamiAnalytics } from '@/components/UmamiAnalytics'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
@@ -13,7 +15,6 @@ import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { Providers } from './providers'
 import NextBreadcrumb from '@/components/NextBreadcrumb'
-import Script from 'next/script'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -94,20 +95,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
           color="#5bbad5"
         />
+        <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-        <Script
-          async
-          data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
-          src="https://us.umami.is/script.js"
-        />
       </head>
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-900 dark:text-white">
         <Providers>
           <ThemeProviders>
-            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+            {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
+            <UmamiAnalytics websiteId={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId} />
+            <GoogleAnalytics
+              googleAnalyticsId={siteMetadata.analytics?.googleAnalytics?.googleAnalyticsId}
+            />
             <SectionContainer>
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
