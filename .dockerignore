@@ -9,5 +9,3 @@ Dockerfile
 .dockerignore
 .gitignore
 .next
-.env
-.env.local
