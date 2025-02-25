@@ -5,7 +5,7 @@ import { allCourses } from 'contentlayer/generated'
 import CourseSearch from '@/components/CourseSearch'
 
 export const metadata = genPageMetadata({
-  title: 'Cybersecurity Courses | Utanzu',
+  title: 'Cybersecurity Courses',
   description: 'Explore our courses to start building a strong fundation in cybersecurity.',
 })
 

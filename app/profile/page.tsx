@@ -1,6 +1,6 @@
 import { genPageMetadata } from 'app/seo'
 import ProfileCard from '@/components/ProfileCard'
-export const metadata = genPageMetadata({ title: 'User Profile ' })
+export const metadata = genPageMetadata({ title: 'Profile ' })
 
 const UserProfile = () => {
   return (

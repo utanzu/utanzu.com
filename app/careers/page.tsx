@@ -3,7 +3,7 @@ import CareersCard from '@/components/CareersCard'
 import { allCareers } from 'contentlayer/generated'
 
 export const metadata = genPageMetadata({
-  title: 'Career Paths | Utanzu',
+  title: 'Career Paths',
   description:
     'Explore cybersecurity career paths and build a successful career in your chosen field.',
 })

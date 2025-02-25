@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { genPageMetadata } from 'app/seo'
 import Link from '@/components/Link'
 
-export const metadata = genPageMetadata({ title: 'Privacy and Cookie Policy' })
+export const metadata = genPageMetadata({ title: 'Privacy Policy' })
 
 const PrivacyPage = () => {
   return (
