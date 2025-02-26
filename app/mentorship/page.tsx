@@ -2,7 +2,7 @@ import MentorshipPageSection from '@/components/MentorshipPageSection'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
-  title: 'Mentorship | Utanzu',
+  title: 'Mentorship',
   description:
     'Get a mentor to help you in your cybersecurity journey or become a mentor to give back to the community',
 })
