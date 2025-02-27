@@ -1,9 +1,9 @@
 {
-  "secure-development": 1,
-  "application-security": 1,
+  "ai": 1,
+  "ai-security": 1,
+  "beginner": 2,
   "cybersecurity-career": 1,
   "mentorship": 1,
-  "beginner": 2,
-  "ai": 1,
-  "ai-security": 1
+  "secure-development": 1,
+  "application-security": 1
 }
