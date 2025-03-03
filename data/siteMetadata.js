@@ -1,11 +1,11 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Utanzu Cybersecurity',
+  title: 'Utanzu Cybersecurity Community',
   author: 'Utanzu',
   avatar: '/static/images/avatar.png',
   headerTitle: 'Utanzu',
   description:
-    'Utanzu is a community-driven platform empowering individuals to grow their skills and expertise in cybersecurity, like a branch extending knowledge and opportunities.',
+    'Utanzu is a community-driven platform empowering individuals to grow their skills and expertise in cybersecurity, just like a branch extending knowledge.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://utanzu.com',

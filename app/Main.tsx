@@ -36,9 +36,9 @@ export default function Main() {
       </div>
       <div className="mx-2 mt-4 flex divide-y divide-gray-100 dark:divide-gray-800 md:mx-0">
         <div className="space-y-2 pb-4 pt-6 md:space-y-5 xl:pt-6">
-          <h1 className="text-xl font-bold leading-8 tracking-tight text-gray-700 dark:text-gray-100 max-[375px]:text-lg sm:text-xl sm:leading-8 md:text-2xl md:leading-10 lg:text-3xl">
+          <h2 className="text-xl font-bold leading-8 tracking-tight text-gray-700 dark:text-gray-100 max-[375px]:text-lg sm:text-xl sm:leading-8 md:text-2xl md:leading-10 lg:text-3xl">
             Why Utanzu?
-          </h1>
+          </h2>
           <div className="flex flex-col md:flex-row">
             <div className="w-full pr-4 md:w-3/5">
               <p className="mt-4 leading-7 text-gray-500 dark:text-gray-400 md:text-xl">
