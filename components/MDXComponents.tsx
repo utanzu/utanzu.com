@@ -4,6 +4,7 @@ import type { MDXComponents } from 'mdx/types'
 import Image from './Image'
 import CourseVideo from './CourseVideo'
 import CourseContent from './CourseContent'
+import Members from './Members'
 
 export const components: MDXComponents = {
   Image,
@@ -11,4 +12,5 @@ export const components: MDXComponents = {
   BlogNewsletterForm,
   CourseVideo,
   CourseContent,
+  Members,
 }

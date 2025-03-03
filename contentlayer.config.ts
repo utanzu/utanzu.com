@@ -145,6 +145,8 @@ export const Authors = defineDocumentType(() => ({
     github: { type: 'string' },
     devto: { type: 'string' },
     youtube: { type: 'string' },
+    contributor: { type: 'boolean' },
+    volunteer: { type: 'boolean' },
     layout: { type: 'string' },
   },
   computedFields,

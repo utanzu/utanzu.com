@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import Link from 'next/link'
 
 interface Props {
   children: ReactNode
@@ -9,7 +10,8 @@ interface Props {
 }
 
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, summary, qualifications, email, youtube, linkedin, github } = content
+  const { name, avatar, occupation, summary, qualifications, email, youtube, linkedin, github } =
+    content
 
   return (
     <>
@@ -33,7 +35,7 @@ export default function AuthorLayout({ children, content }: Props) {
                 />
               </div>
             )}
-            <div>
+            <div className="flex flex-col items-center text-center">
               <h3 className="pb-2 pt-4 text-3xl font-bold leading-8 tracking-tight xl:text-2xl">
                 {name}
               </h3>
