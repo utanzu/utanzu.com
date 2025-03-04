@@ -1,4 +1,5 @@
 import Link from '@/components/Link'
+import Typing from '@/components/Typing'
 import Image from 'next/image'
 
 export default function Main() {
@@ -20,7 +21,10 @@ export default function Main() {
         {/* Text Content Section */}
         <div className="flex w-full flex-col items-center justify-center space-y-4 text-center md:basis-3/5">
           <h1 className="text-2xl font-extrabold leading-8 tracking-tight text-primary-400 dark:text-primary-500 max-[375px]:text-xl sm:text-2xl sm:leading-9 md:py-4 md:text-4xl md:leading-12 lg:text-5xl">
-            Join, Learn & Thrive
+            Join,&nbsp;
+            <span className="block lg:inline">
+              <Typing />
+            </span>
           </h1>
           <h3 className="text-base font-medium text-gray-600 dark:text-gray-300 sm:text-lg md:text-xl">
             Unlock your potential with a community that guides you through every step of your

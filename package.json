@@ -60,6 +60,7 @@
     "remark-math": "^6.0.0",
     "superagent": "9",
     "tailwindcss": "^3.4.14",
+    "typed.js": "^2.0.16",
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0"
   },
