@@ -26,6 +26,7 @@ const ProfileDropDown: React.FC<ProfileDropDownProps> = ({ user }) => {
   // If no user, return null (hides dropdown)
   if (!user) return null
 
+  console.log(user)
   return (
     <div className="absolute right-0 z-10 mt-2 w-48 rounded-lg border border-gray-200 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800">
       <ul
@@ -40,6 +41,7 @@ const ProfileDropDown: React.FC<ProfileDropDownProps> = ({ user }) => {
                 src={user.image}
                 width={30}
                 height={30}
+                unoptimized
                 className="rounded-full"
                 alt="Profile Picture"
               />
@@ -54,6 +56,17 @@ const ProfileDropDown: React.FC<ProfileDropDownProps> = ({ user }) => {
         )}
 
         <hr className="my-2 dark:border-gray-500" />
+
+        {/* Admin Button (Only for Role 1) */}
+        {user.role === '1' && (
+          <Link
+            href="/admin"
+            role="menuitem"
+            className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-primary-50 hover:text-primary-900 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            🛠️ <span>Administrator</span>
+          </Link>
+        )}
 
         {/* My Learning */}
         <Link
