@@ -1,5 +1,5 @@
 'use client'
-//import { genPageMetadata } from 'app/seo'
+import { genPageMetadata } from 'app/seo'
 import { components } from '@/components/MDXComponents'
 import Link from 'next/link'
 import { useState } from 'react'
