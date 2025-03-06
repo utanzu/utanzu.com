@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { Suspense } from 'react'
 import { genPageMetadata } from 'app/seo'
 import { allCourses } from 'contentlayer/generated'
