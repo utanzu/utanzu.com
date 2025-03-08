@@ -15,7 +15,7 @@ const AdminPageSection = () => {
       case 'users':
         return <h2 className="text-xl font-semibold">User Management Section</h2>
       case 'settings':
-        return <h2 className="text-xl font-semibold">Settings Panel</h2>
+        return <h2 className="text-xl font-semibold">Courses Panel</h2>
       default:
         return <h2 className="text-xl font-semibold">Welcome to Admin Dashboard</h2>
     }
@@ -75,7 +75,7 @@ const AdminPageSection = () => {
               }`}
             >
               <FontAwesomeIcon icon={faCog} />
-              {isSidebarExpanded && <span>Settings</span>}
+              {isSidebarExpanded && <span>Courses</span>}
             </button>
           </li>
         </ul>
