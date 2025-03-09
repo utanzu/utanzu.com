@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTachometerAlt, faUsers, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faTachometerAlt, faUsers, faBook, faCog } from '@fortawesome/free-solid-svg-icons'
 
 const AdminPageSection = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true) // Expanded by default on desktop
@@ -69,13 +69,24 @@ const AdminPageSection = () => {
           </li>
           <li>
             <button
+              onClick={() => setActiveTab('courses')}
+              className={`flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 ${
+                activeTab === 'courses' ? 'bg-gray-300 dark:bg-gray-700' : ''
+              }`}
+            >
+              <FontAwesomeIcon icon={faBook} />
+              {isSidebarExpanded && <span>Courses</span>}
+            </button>
+          </li>
+          <li>
+            <button
               onClick={() => setActiveTab('settings')}
               className={`flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 ${
                 activeTab === 'settings' ? 'bg-gray-300 dark:bg-gray-700' : ''
               }`}
             >
               <FontAwesomeIcon icon={faCog} />
-              {isSidebarExpanded && <span>Courses</span>}
+              {isSidebarExpanded && <span>Settings</span>}
             </button>
           </li>
         </ul>
