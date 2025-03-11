@@ -54,3 +54,4 @@ public/Uploads
 certs/DigiCertGlobalRootCA.crt.pem
 
 .vscode
+.idea
