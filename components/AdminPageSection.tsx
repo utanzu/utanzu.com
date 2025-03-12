@@ -2,8 +2,13 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTachometerAlt, faUsers, faBook, faCog } from '@fortawesome/free-solid-svg-icons'
+import { useAuth } from 'app/hooks/useAuth'
 
 const AdminPageSection = () => {
+  const { user } = useAuth()
+  if (!user) {
+    window.location.href = '/'
+  }
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true) // Expanded by default on desktop
   const [activeTab, setActiveTab] = useState('dashboard') // Track active section
 
