@@ -24,7 +24,7 @@ const AdminPageSection = () => {
       case 'settings':
         return <h2 className="text-xl font-semibold">Settings Panel</h2>
       default:
-        return <h2 className="text-xl font-semibold">Welcome to Admin Dashboard</h2>
+        return <h2 className="text-xl font-semibold">Welcome to Admin</h2>
     }
   }
 
