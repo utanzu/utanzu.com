@@ -23,6 +23,8 @@ const AdminPageSection = () => {
         return <h2 className="text-xl font-semibold">Courses Panel</h2>
       case 'settings':
         return <h2 className="text-xl font-semibold">Settings Panel</h2>
+      case 'interviews':
+        return <h2 className="text-xl font-semibold">Interviews Panel</h2>
       default:
         return <h2 className="text-xl font-semibold">Welcome to Admin Dashboard</h2>
     }
