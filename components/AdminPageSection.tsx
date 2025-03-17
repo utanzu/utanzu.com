@@ -1,13 +1,22 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTachometerAlt, faUsers, faBook, faCog } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBars,
+  faTachometerAlt,
+  faUsers,
+  faBook,
+  faCog,
+  faBriefcase,
+} from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from 'app/hooks/useAuth'
 
 const AdminPageSection = () => {
+  const router = useRouter()
   const { user } = useAuth()
   if (!user) {
-    window.location.href = '/'
+    router.push('/')
   }
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true) // Expanded by default on desktop
   const [activeTab, setActiveTab] = useState('dashboard') // Track active section
@@ -85,6 +94,17 @@ const AdminPageSection = () => {
             >
               <FontAwesomeIcon icon={faBook} />
               {isSidebarExpanded && <span>Courses</span>}
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setActiveTab('interviews')}
+              className={`flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 ${
+                activeTab === 'interviews' ? 'bg-gray-300 dark:bg-gray-700' : ''
+              }`}
+            >
+              <FontAwesomeIcon icon={faBriefcase} />
+              {isSidebarExpanded && <span>Interviews</span>}
             </button>
           </li>
           <li>
