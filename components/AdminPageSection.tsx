@@ -14,8 +14,8 @@ import { useAuth } from 'app/hooks/useAuth'
 
 const AdminPageSection = () => {
   const router = useRouter()
-  const { user } = useAuth()
-  if (!user) {
+  const { loading, user } = useAuth()
+  if (!loading && !user) {
     router.push('/')
   }
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true) // Expanded by default on desktop
