@@ -24,7 +24,7 @@ To run a development environment locally, run:
 
 ## Contributing to the project
 
-Pull Requests are welcome!
+Pull requests are welcome!
 
 <!-- Built With shields -->
 
