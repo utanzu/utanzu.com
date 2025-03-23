@@ -29,13 +29,13 @@ const AdminPageSection = () => {
       case 'users':
         return <h2 className="text-xl font-semibold">User Management</h2>
       case 'courses':
-        return <h2 className="text-xl font-semibold">Courses Panel</h2>
+        return <h2 className="text-xl font-semibold">Courses</h2>
       case 'interviews':
         return <h2 className="text-xl font-semibold">Interviews Panel</h2>
       case 'settings':
         return <h2 className="text-xl font-semibold">Settings Panel</h2>
       default:
-        return <h2 className="text-xl font-semibold">Welcome to Dashboard</h2>
+        return <h2 className="text-xl font-semibold">Welcome to Admin Dashboard</h2>
     }
   }
 
@@ -45,7 +45,7 @@ const AdminPageSection = () => {
       <div
         className={`fixed inset-y-0 left-0 z-50 ${
           isSidebarExpanded ? 'w-64' : 'w-16'
-        } bg-white shadow-md transition-all dark:bg-gray-800 md:relative md:w-64`}
+        } bg-white shadow-md transition-all md:relative md:w-64 dark:bg-gray-800`}
       >
         {/* Sidebar Toggle Button */}
         <div className="flex justify-between p-4">
@@ -122,7 +122,7 @@ const AdminPageSection = () => {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 bg-white p-6 text-gray-900 dark:bg-gray-800 dark:text-gray-100 md:ml-10">
+      <main className="flex-1 bg-white p-6 text-gray-900 md:ml-10 dark:bg-gray-800 dark:text-gray-100">
         {renderContent()}
       </main>
     </div>
