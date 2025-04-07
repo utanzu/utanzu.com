@@ -25,13 +25,13 @@ const AdminPageSection = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <h2 className="text-xl font-semibold">Admin Dasboard</h2>
+        return <h2 className="text-xl font-semibold">Admin</h2>
       case 'users':
         return <h2 className="text-xl font-semibold">User Management Panel</h2>
       case 'courses':
-        return <h2 className="text-xl font-semibold">Courses Panel</h2>
+        return <h2 className="text-xl font-semibold">Courses</h2>
       case 'interviews':
-        return <h2 className="text-xl font-semibold">Interviews Panel</h2>
+        return <h2 className="text-xl font-semibold">Interviews</h2>
       case 'settings':
         return <h2 className="text-xl font-semibold">Settings Panel</h2>
       default:
