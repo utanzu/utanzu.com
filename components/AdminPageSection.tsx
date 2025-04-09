@@ -29,7 +29,7 @@ const AdminPageSection = () => {
       case 'users':
         return <h2 className="text-xl font-semibold">User Management Panel</h2>
       case 'courses':
-        return <h2 className="text-xl font-semibold">Courses</h2>
+        return <h2 className="text-xl font-semibold">Courses Pane;</h2>
       case 'interviews':
         return <h2 className="text-xl font-semibold">Interviews</h2>
       case 'settings':
